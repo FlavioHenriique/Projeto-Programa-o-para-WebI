@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LugarDao implements Dao<Lugar> {
 
@@ -74,6 +76,33 @@ public class LugarDao implements Dao<Lugar> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
         return stmt.execute();
+    }
+
+    public List<Lugar> buscarMeusLugares(String email) throws SQLException {
+
+        String sql = "SELECT * FROM lugar WHERE emailUsuario = ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet result = stmt.executeQuery();
+
+        List<Lugar> lugares = new ArrayList<>();
+
+        while (result.next()) {
+
+            Lugar l = new Lugar();
+            l.setCidade(result.getString("cidade"));
+            l.setDescricao(result.getString("descricao"));
+            l.setEmailUsuario(result.getString("emailUsuario"));
+            l.setEstado(result.getString("estado"));
+            l.setNome(result.getString("nome"));
+            l.setNumero(result.getInt("numero"));
+            l.setRua(result.getString("rua"));
+            l.setIdentificacao(result.getInt("identificacao"));
+
+            lugares.add(l);
+        }
+        return lugares;
     }
 
 }

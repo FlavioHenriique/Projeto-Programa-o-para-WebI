@@ -13,7 +13,7 @@ public class Lugar {
     private int numero;
     private String emailUsuario;
 
-    public Lugar(String descricao, String nome,String rua,
+    public Lugar(String descricao, String nome, String rua,
             String cidade, String estado, int numero, String emailUsuario) {
         this.descricao = descricao;
         this.nome = nome;
@@ -24,7 +24,7 @@ public class Lugar {
         this.emailUsuario = emailUsuario;
     }
 
-    public Lugar(String descricao, String nome,  String rua,String cidade,
+    public Lugar(String descricao, String nome, String rua, String cidade,
             String estado, int numero, String emailUsuario, int identificacao) {
         this.descricao = descricao;
         this.nome = nome;
@@ -35,8 +35,11 @@ public class Lugar {
         this.numero = numero;
         this.emailUsuario = emailUsuario;
     }
-    
-    
+
+    public Lugar() {
+
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -55,6 +58,10 @@ public class Lugar {
 
     public int getIdentificacao() {
         return identificacao;
+    }
+
+    public void setIdentificacao(int identificacao) {
+        this.identificacao = identificacao;
     }
 
     public String getRua() {

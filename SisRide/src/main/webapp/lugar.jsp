@@ -37,7 +37,8 @@
             </center>
         </td>
         <td width="50%">
-
+            <label align="top">Lugares cadastrados por mim</label>
+            <br>
         </td>
     </tr>
 </table>
