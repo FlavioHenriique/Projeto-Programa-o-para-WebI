@@ -5,7 +5,7 @@ $('.datepicker').pickadate({
     weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
     weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
     selectMonths: true,
-    selectYears: 20, 
+    selectYears: 40, 
     today: 'Hoje',
     clear: 'Limpar',
     close: 'Ok',
