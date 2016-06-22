@@ -38,7 +38,6 @@ public class UsuarioServlet extends HttpServlet {
 
     public void command(HttpServletRequest request, HttpServletResponse response) throws ServletException {
        
-        System.out.println(request.getParameter("command"));
         
         try {
 

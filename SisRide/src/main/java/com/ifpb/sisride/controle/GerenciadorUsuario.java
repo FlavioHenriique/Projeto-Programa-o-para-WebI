@@ -31,9 +31,9 @@ public class GerenciadorUsuario {
     }
 
     public boolean atualizaUsuario(String email, String senha, String nome,
-            LocalDate nascimento, String profissao, String cidade, String sexo)
+            LocalDate nascimento, String profissao, String cidade, String sexo,InputStream foto)
             throws SQLException {
-        Usuario u = new Usuario(email, senha, nome, nascimento, profissao, cidade, sexo);
+        Usuario u = new Usuario(email, senha, nome, nascimento, profissao, cidade, sexo,foto);
         return userDao.atualizar(u);
     }
 

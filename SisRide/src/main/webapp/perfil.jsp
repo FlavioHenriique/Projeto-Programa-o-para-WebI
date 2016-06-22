@@ -21,25 +21,27 @@
         <%@include file="menu.jsp"%>
     <center>
         <h3>Editar perfil</h3>
+
+
+
         <form method="post" action="usuario" enctype="multipart/form-data"  class="col s12 l4">
-
-
 
             <div class="row">
                 <div  class="input-field col l4  offset-l4">
 
-                    <input type="file" name="foto"  value="<%= atual.getFoto() %>"><br><br>
+                    <input type="file" name="foto2"><br><br>
+
                     <input type="text" class="validate" name="nome" placeholder="Nome"
-                           value ="<%= atual.getNome() %>"> <br>
+                           value ="<%= atual.getNome()%>"> <br>
 
                     <input type="hidden" value="AtualizaUsuario" name="command"><br>
-                    
+
                     <input type="password" class="validate" name="senha" placeholder="Senha"
-                           value="<%=  atual.getSenha() %>"><br><br>
+                           value="<%=  atual.getSenha()%>"><br><br>
                     <input type="text" name="cidade" class="validate" placeholder="Cidade"
-                           value="<%= atual.getCidade() %>"><br><br>
+                           value="<%= atual.getCidade()%>"><br><br>
                     <input type="text" class="validate" name="profissao" placeholder="Profissão"
-                           value="<%= atual.getProfissao() %>"><br><br>
+                           value="<%= atual.getProfissao()%>"><br><br>
                     <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
                 </div>
             </div>
@@ -57,8 +59,9 @@
                     Excluir conta</button></a>
             <a href="inicial.jsp"><button class="waves-effect waves-light btn s12">Cancelar</button></a>
         </div>
-    </center>
-    <br><br>
+
+</center>
+<br><br>
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

@@ -3,7 +3,9 @@ package com.ifpb.sisride.dao;
 import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.factory.ConFactory;
 import com.ifpb.sisride.modelo.Usuario;
-import com.sun.org.apache.xml.internal.security.utils.Base64;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -69,8 +71,7 @@ public class UsuarioDao implements Dao<Usuario> {
             String sql = "UPDATE USUARIO SET email=?, senha =?, nome=?,"
                     + " nascimento=?, profissão=?,cidade=?,sexo=? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-                
-            
+
             stmt.setString(1, obj.getEmail());
             stmt.setString(2, obj.getSenha());
             stmt.setString(3, obj.getNome());
@@ -79,8 +80,13 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(6, obj.getCidade());
             stmt.setString(7, obj.getSexo());
             stmt.setString(8, obj.getEmail());
-            
+
             stmt.execute();
+            
+            
+            if(obj.getFoto() instanceof FileInputStream){
+                setFoto(obj.getEmail(),obj.getFoto());
+            }
             return true;
         }
     }
@@ -107,5 +113,15 @@ public class UsuarioDao implements Dao<Usuario> {
             }
         }
         return false;
+    }
+    
+    public void setFoto(String email, InputStream foto) throws SQLException{
+            
+        String sql = "UPDATE Usuario SET foto = ? WHERE email = ?";
+        
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(2,email);
+        stmt.setBinaryStream(1, foto);
+        stmt.execute();
     }
 }

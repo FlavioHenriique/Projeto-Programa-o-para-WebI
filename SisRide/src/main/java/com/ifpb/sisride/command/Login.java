@@ -24,7 +24,7 @@ public class Login implements Command {
             throws ServletException {
 
         try {
-          
+            System.out.println("oi");
             GerenciadorUsuario g = new GerenciadorUsuario();
             if(g.autenticar(request.getParameter("email"), request.getParameter("senha"))){
               

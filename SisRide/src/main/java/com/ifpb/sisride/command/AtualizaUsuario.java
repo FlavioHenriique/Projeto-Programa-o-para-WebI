@@ -3,6 +3,7 @@ package com.ifpb.sisride.command;
 import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 public class AtualizaUsuario implements Command {
 
@@ -24,10 +26,14 @@ public class AtualizaUsuario implements Command {
 
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
-
+            
+            Part part = request.getPart("foto2");
+            InputStream input = part.getInputStream();
+            
+            System.out.println("FOto"+input.toString());
             if(g.atualizaUsuario(u.getEmail(), request.getParameter("senha"),
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
-                    request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"))){
+                    request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"),input)){
             
                 session.setAttribute("usuario", g.buscaUsuario(u.getEmail()));
                 
