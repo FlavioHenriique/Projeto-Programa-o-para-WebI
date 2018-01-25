@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConFactory {
 
-    private String url = "jdbc:postgresql://127.0.0.1:5432/AtividadePW1";
+    private String url = "jdbc:postgresql://127.0.0.1:5432/SisRide";
     private String user = "postgres";
     private String password = "flavio22";
 
