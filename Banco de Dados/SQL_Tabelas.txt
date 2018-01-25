@@ -1,0 +1,87 @@
+CREATE TABLE USUARIO(
+   Email VARCHAR(50) PRIMARY KEY,
+   Nome VARCHAR(50) NOT NULL,
+   Nascimento date NOT NULL,
+   Senha varchar(50) NOT NULL,
+   Profissão VARCHAR(60) NOT NULL,
+   Nota real,
+   Cidade VARCHAR(100)NOT NULL,
+   Sexo varchar(10) NOT NULL
+   
+);
+
+CREATE TABLE LUGAR(
+	Descricao VARCHAR(100) NOT NULL,
+	Nome VARCHAR(50) NOT NULL,
+	Identificacao  int PRIMARY KEY,
+	Rua VARCHAR(50) NOT NULL,
+	Cidade VARCHAR(50) NOT NULL,
+	Estado VARCHAR(50) NOT NULL,
+	Numero int,
+	EmailUsuario varchar(50),
+	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email)
+);
+
+CREATE TABLE CARRO(
+    Modelo VARCHAR(30) NOT NULL,
+    ArCondicionado boolean NOT NULL,
+    Ano int NOT NULL,
+    Codigo int PRIMARY KEY
+);
+
+CREATE TABLE VIAGEM(
+   Vagas int NOT NULL,
+   Data DATE NOT NULL,
+   Horario time not null,
+   Valor real not null,
+   Codigo int PRIMARY KEY,
+   Motorista VARCHAR(50),
+   Musica VARCHAR(100) NOT NULL,
+   Animais boolean,
+   Fumar boolean,
+   Conversa varchar(20),
+   Destino int,
+   Partida int,
+   CodCarro int,
+   FOREIGN KEY (Motorista) REFERENCES Usuario(Email),
+   FOREIGN KEY (Destino) REFERENCES Lugar(Identificacao),
+   FOREIGN KEY (Partida) REFERENCES Lugar(Identificacao),
+   FOREIGN KEY (CodCarro) REFERENCES Carro(Codigo)
+);
+
+CREATE TABLE AVALIACAO(
+   Codigo int PRIMARY KEY,
+   Comentario VARCHAR(140),
+   Hora time not null,
+   Data date not null,
+   Nota real,
+   UsuarioAvaliado varchar(50),
+   Avaliador varchar(50),
+   FOREIGN KEY (UsuarioAvaliado) REFERENCES Usuario(Email),
+   FOREIGN KEY (Avaliador) REFERENCES Usuario(Email)
+);
+
+CREATE TABLE SOLICITA_VIAGEM(
+	EmailUsuario VARCHAR(50),
+	CodViagem int,
+	PRIMARY KEY(EmailUsuario,CodViagem),
+	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
+	FOREIGN KEY (CodViagem) REFERENCES VIAGEM(Codigo)
+);
+
+CREATE TABLE AMIZADE(
+	EmailUsuario VARCHAR(50),
+	EmailAmigo VARCHAR(50),
+	PRIMARY KEY (EmailUsuario,EmailAmigo),
+	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
+	FOREIGN KEY (EmailAmigo) REFERENCES Usuario(Email)
+);
+
+CREATE TABLE MENSAGEM(
+	EmailUsuario VARCHAR(50),
+	EmailAmigo VARCHAR(50),
+	Mensagem VARCHAR(200),
+	PRIMARY KEY (EmailUsuario,EmailAmigo,Mensagem),
+	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
+	FOREIGN KEY (EmailAmigo) REFERENCES Usuario(Email)
+	);
