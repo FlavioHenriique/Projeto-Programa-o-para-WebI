@@ -15,13 +15,12 @@ public class Usuario {
     private String sexo;
 
     public Usuario(String email, String senha, String nome, LocalDate nascimento,
-            String profissao, float nota, String cidade, String sexo) {
+            String profissao,String cidade, String sexo) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.nascimento = nascimento;
         this.profissao = profissao;
-        this.nota = nota;
         this.cidade = cidade;
         this.sexo = sexo;
     }
