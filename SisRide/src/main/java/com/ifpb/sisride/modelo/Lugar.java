@@ -25,6 +25,18 @@ public class Lugar {
         this.numero = numero;
         this.emailUsuario = emailUsuario;
     }
+
+    public Lugar(String descricao, String nome,  String rua,String cidade,
+            String estado, int numero, String emailUsuario, int identificacao) {
+        this.descricao = descricao;
+        this.nome = nome;
+        this.identificacao = identificacao;
+        this.rua = rua;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.numero = numero;
+        this.emailUsuario = emailUsuario;
+    }
     
     
     public String getDescricao() {

@@ -17,11 +17,17 @@ public class Carro {
         this.codigo = ++quant;
     }
 
+    public Carro(String modelo, int ano, boolean ar_condicionado, int codigo) {
+        this.modelo = modelo;
+        this.ano = ano;
+        this.ar_condicionado = ar_condicionado;
+        this.codigo = codigo;
+    }
+
     public int getCodigo() {
         return codigo;
     }
-    
-    
+
     public String getModelo() {
         return modelo;
     }
@@ -81,7 +87,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Carro{" + "modelo=" + modelo + ", ano=" + ano + ", ar_condicionado=" + ar_condicionado + '}';
+        return "Carro{" + "modelo=" + modelo + ", ano=" + ano + ", ar_condicionado=" + ar_condicionado + ", codigo=" + codigo + '}';
     }
 
 }

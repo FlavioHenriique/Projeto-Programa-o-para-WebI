@@ -42,7 +42,8 @@ public class LugarDao implements Dao<Lugar> {
             Lugar lugar = new Lugar(resultado.getString("descricao"),
                     resultado.getString("nome"), resultado.getString("rua"),
                     resultado.getString("cidade"), resultado.getString("estado"),
-                    resultado.getInt("numero"), resultado.getString("emailusuario"));
+                    resultado.getInt("numero"), resultado.getString("emailusuario"),
+                    resultado.getInt("identificacao"));
             return lugar;
         }
         return null;
