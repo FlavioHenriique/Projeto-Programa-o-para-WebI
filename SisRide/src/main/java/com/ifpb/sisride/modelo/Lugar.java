@@ -47,7 +47,6 @@ public class Lugar {
         return identificacao;
     }
 
-
     public String getRua() {
         return rua;
     }

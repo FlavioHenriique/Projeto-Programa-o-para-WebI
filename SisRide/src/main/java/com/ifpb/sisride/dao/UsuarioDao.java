@@ -20,7 +20,7 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean salvar(Usuario obj) throws SQLException {
 
-        String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissao,"
+        String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
                 + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, obj.getEmail());
@@ -42,7 +42,7 @@ public class UsuarioDao implements Dao<Usuario> {
         if (resultado.next()) {
             Usuario u = new Usuario(resultado.getString("email"),
                     resultado.getString("senha"), resultado.getString("nome"),
-                    resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissao"),
+                    resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissão"),
                     resultado.getString("cidade"), resultado.getString("sexo"));
             return u;
         }
@@ -57,7 +57,7 @@ public class UsuarioDao implements Dao<Usuario> {
             return false;
         } else {
             String sql = "UPDATE USUARIO SET email=?, senha =?, nome=?,"
-                    + " nascimento=?, profissao=?,cidade=?,sexo=?";
+                    + " nascimento=?, profissão=?,cidade=?,sexo=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getEmail());
             stmt.setString(2, obj.getSenha());
