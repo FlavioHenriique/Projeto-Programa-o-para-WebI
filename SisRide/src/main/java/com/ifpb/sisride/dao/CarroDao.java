@@ -45,11 +45,12 @@ public class CarroDao implements Dao<Carro> {
     @Override
     public boolean atualizar(Carro obj) throws SQLException {
         if (buscar(obj.getCodigo()) != null) {
-            String sql = "UPDATE Carro Set modelo=?, ano = ?, arcondicionado=?";
+            String sql = "UPDATE Carro Set modelo=?, ano = ?, arcondicionado=? WHERE codigo =?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getModelo());
             stmt.setInt(2, obj.getAno());
             stmt.setBoolean(3, obj.isAr_condicionado());
+            stmt.setInt(4, obj.getCodigo());
             return stmt.execute();
         }
         return false;

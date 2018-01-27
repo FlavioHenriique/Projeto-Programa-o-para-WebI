@@ -16,3 +16,8 @@ begin
 	
 end $$
 language plpgsql
+
+create trigger calculaMedia
+after insert or update on avaliacao
+for each row
+execute procedure notausuario();

@@ -7,14 +7,12 @@ public class Carro {
     private String modelo;
     private int ano;
     private boolean ar_condicionado;
-    private static int quant;
     private int codigo;
 
     public Carro(String modelo, int ano, boolean ar_condicionado) {
         this.modelo = modelo;
         this.ano = ano;
         this.ar_condicionado = ar_condicionado;
-        this.codigo = ++quant;
     }
 
     public Carro(String modelo, int ano, boolean ar_condicionado, int codigo) {

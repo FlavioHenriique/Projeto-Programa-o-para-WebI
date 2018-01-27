@@ -12,13 +12,11 @@ public class Lugar {
     private String estado;
     private int numero;
     private String emailUsuario;
-    private static int quant;
 
     public Lugar(String descricao, String nome,String rua,
             String cidade, String estado, int numero, String emailUsuario) {
         this.descricao = descricao;
         this.nome = nome;
-        this.identificacao = ++quant;
         this.rua = rua;
         this.cidade = cidade;
         this.estado = estado;

@@ -53,7 +53,7 @@ public class LugarDao implements Dao<Lugar> {
     public boolean atualizar(Lugar obj) throws SQLException {
         if (buscar(obj.getIdentificacao()) != null) {
             String sql = "UPDATE LUGAR set descricao= ?, nome = ?, rua = ?, "
-                    + "cidade=?,estado=?,numero = ?, emailusuario = ?";
+                    + "cidade=?,estado=?,numero = ?, emailusuario = ? WHERE identificacao=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getDescricao());
             stmt.setString(2, obj.getNome());
@@ -62,6 +62,7 @@ public class LugarDao implements Dao<Lugar> {
             stmt.setString(5, obj.getEstado());
             stmt.setInt(6, obj.getNumero());
             stmt.setString(7, obj.getEmailUsuario());
+            stmt.setInt(8, obj.getIdentificacao());
             return stmt.execute();
         } else {
             return false;

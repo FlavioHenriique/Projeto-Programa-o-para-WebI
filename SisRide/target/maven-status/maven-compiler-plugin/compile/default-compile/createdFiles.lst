@@ -1,8 +1,11 @@
-com\ifpb\sisride\modelo\Usuario.class
 com\ifpb\sisride\factory\ConFactory.class
-com\ifpb\sisride\modelo\Avaliacao.class
+com\ifpb\sisride\factory\DaoFactory.class
 com\ifpb\sisride\modelo\Viagem.class
 com\ifpb\sisride\dao\UsuarioDao.class
 com\ifpb\sisride\dao\Dao.class
 com\ifpb\sisride\modelo\Lugar.class
+com\ifpb\sisride\modelo\Usuario.class
+com\ifpb\sisride\dao\CarroDao.class
+com\ifpb\sisride\modelo\Avaliacao.class
+com\ifpb\sisride\dao\LugarDao.class
 com\ifpb\sisride\modelo\Carro.class

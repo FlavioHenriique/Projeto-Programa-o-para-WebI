@@ -57,7 +57,7 @@ public class UsuarioDao implements Dao<Usuario> {
             return false;
         } else {
             String sql = "UPDATE USUARIO SET email=?, senha =?, nome=?,"
-                    + " nascimento=?, profissão=?,cidade=?,sexo=?";
+                    + " nascimento=?, profissão=?,cidade=?,sexo=? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getEmail());
             stmt.setString(2, obj.getSenha());
@@ -66,6 +66,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(5, obj.getProfissao());
             stmt.setString(6, obj.getCidade());
             stmt.setString(7, obj.getSexo());
+            stmt.setString(8, obj.getEmail());
             return stmt.execute();
         }
     }

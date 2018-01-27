@@ -12,7 +12,6 @@ public class Avaliacao {
     private String usuarioAvaliado;
     private String avaliador;
     private int codigo;
-    private static int quant;
 
     public Avaliacao(String comentario, String hora, LocalDate data,
             float nota, String usuarioAvaliado, String avaliador) {
@@ -22,7 +21,17 @@ public class Avaliacao {
         this.nota = nota;
         this.usuarioAvaliado = usuarioAvaliado;
         this.avaliador = avaliador;
-        this.codigo = ++quant;
+    }
+
+    public Avaliacao(String comentario, String hora, LocalDate data, float nota,
+            String usuarioAvaliado, String avaliador, int codigo) {
+        this.comentario = comentario;
+        this.hora = hora;
+        this.data = data;
+        this.nota = nota;
+        this.usuarioAvaliado = usuarioAvaliado;
+        this.avaliador = avaliador;
+        this.codigo = codigo;
     }
 
     public int getCodigo() {
@@ -124,7 +133,7 @@ public class Avaliacao {
 
     @Override
     public String toString() {
-        return "Avaliacao{" + "comentario=" + comentario + ", hora=" + hora + ", data=" + data + ", nota=" + nota + ", usuarioAvaliado=" + usuarioAvaliado + ", avaliador=" + avaliador + '}';
+        return "Avaliacao{" + "comentario=" + comentario + ", hora=" + hora + ", data=" + data + ", nota=" + nota + ", usuarioAvaliado=" + usuarioAvaliado + ", avaliador=" + avaliador + ", codigo=" + codigo + '}';
     }
 
 }

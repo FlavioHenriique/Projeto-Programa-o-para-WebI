@@ -18,7 +18,6 @@ public class Viagem {
     private int partida;
     private int codCarro;
     private int codigo;
-    private static int quant;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor, String motorista, String musica, boolean animais, boolean fumar, String conversa, int destino, int partida, int codCarro) {
         this.vagas = vagas;
@@ -33,7 +32,6 @@ public class Viagem {
         this.destino = destino;
         this.partida = partida;
         this.codCarro = codCarro;
-        this.codigo = ++quant;
     }
 
     public int getVagas() {
@@ -130,14 +128,6 @@ public class Viagem {
 
     public void setCodCarro(int codCarro) {
         this.codCarro = codCarro;
-    }
-
-    public static int getQuant() {
-        return quant;
-    }
-
-    public static void setQuant(int quant) {
-        Viagem.quant = quant;
     }
 
     public int getCodigo() {
