@@ -1,3 +1,5 @@
+import com.ifpb.sisride.controle.GerenciadorAvaliacao;
+import com.ifpb.sisride.controle.GerenciadorCarro;
 import com.ifpb.sisride.controle.GerenciadorLugar;
 import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.controle.GerenciadorViagem;
@@ -21,7 +23,8 @@ public class main {
 
         
         try {
-            
+            GerenciadorAvaliacao g = new GerenciadorAvaliacao();
+            g.removeAvaliacao(10);
         } catch (SQLException ex) {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

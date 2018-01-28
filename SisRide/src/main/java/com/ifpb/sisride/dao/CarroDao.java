@@ -18,12 +18,11 @@ public class CarroDao implements Dao<Carro> {
 
     @Override
     public boolean salvar(Carro obj) throws SQLException {
-        String sql = "INSERT INTO Carro (modelo,arcondicionado,ano,codigo) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO Carro (modelo,arcondicionado,ano) VALUES (?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, obj.getModelo());
         stmt.setBoolean(2, obj.isAr_condicionado());
         stmt.setInt(3, obj.getAno());
-        stmt.setInt(4, obj.getCodigo());
         return stmt.execute();
     }
 
