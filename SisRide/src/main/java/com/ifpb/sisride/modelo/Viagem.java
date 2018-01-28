@@ -19,7 +19,9 @@ public class Viagem {
     private int codCarro;
     private int codigo;
 
-    public Viagem(int vagas, LocalDate data, String hora, float valor, String motorista, String musica, boolean animais, boolean fumar, String conversa, int destino, int partida, int codCarro) {
+    public Viagem(int vagas, LocalDate data, String hora, float valor,
+            String motorista, String musica, boolean animais, boolean fumar,
+            String conversa, int destino, int partida, int codCarro) {
         this.vagas = vagas;
         this.data = data;
         this.hora = hora;
@@ -32,6 +34,24 @@ public class Viagem {
         this.destino = destino;
         this.partida = partida;
         this.codCarro = codCarro;
+    }
+
+    public Viagem(int vagas, LocalDate data, String hora, float valor, String 
+            motorista, String musica, boolean animais, boolean fumar, String 
+                    conversa, int destino, int partida, int codCarro, int codigo) {
+        this.vagas = vagas;
+        this.data = data;
+        this.hora = hora;
+        this.valor = valor;
+        this.motorista = motorista;
+        this.musica = musica;
+        this.animais = animais;
+        this.fumar = fumar;
+        this.conversa = conversa;
+        this.destino = destino;
+        this.partida = partida;
+        this.codCarro = codCarro;
+        this.codigo = codigo;
     }
 
     public int getVagas() {
