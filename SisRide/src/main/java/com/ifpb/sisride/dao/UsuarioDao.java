@@ -30,7 +30,8 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(5, obj.getProfissao());
         stmt.setString(6, obj.getCidade());
         stmt.setString(7, obj.getSexo());
-        return stmt.execute();
+        stmt.execute();
+        return true;
     }
 
     @Override

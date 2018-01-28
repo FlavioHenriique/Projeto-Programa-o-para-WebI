@@ -19,7 +19,7 @@ public class LugarDao implements Dao<Lugar> {
     @Override
     public boolean salvar(Lugar obj) throws SQLException {
         String sql = "INSERT INTO LUGAR (descricao,nome,rua,cidade,estado,"
-                + "numero,emailUsuario,identificacao) values (?,?,?,?,?,?,?,?)";
+                + "numero,emailUsuario) values (?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, obj.getDescricao());
         stmt.setString(2, obj.getNome());
@@ -28,7 +28,6 @@ public class LugarDao implements Dao<Lugar> {
         stmt.setString(5, obj.getEstado());
         stmt.setInt(6, obj.getNumero());
         stmt.setString(7, obj.getEmailUsuario());
-        stmt.setInt(8, obj.getIdentificacao());
         return stmt.execute();
     }
 
