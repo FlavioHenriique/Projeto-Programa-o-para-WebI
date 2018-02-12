@@ -38,4 +38,8 @@ public class GerenciadorUsuario {
     public Usuario buscaUsuario(String email) throws SQLException {
         return userDao.buscar(email);
     }
+    
+    public boolean autenticar(String email, String senha) throws SQLException{
+            return userDao.autenticar(email, senha);
+}
 }

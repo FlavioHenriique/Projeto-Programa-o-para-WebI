@@ -82,4 +82,17 @@ public class UsuarioDao implements Dao<Usuario> {
         }
         return false;
     }
+
+    public boolean autenticar(String email, String senha) throws SQLException {
+        if (email != "" && senha != "") {
+            String sql = "SELECT * FROM Usuario WHERE email = ? AND senha = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            if(stmt.executeQuery().next()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

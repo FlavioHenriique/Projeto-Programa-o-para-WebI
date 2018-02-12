@@ -1,23 +1,23 @@
 CREATE FUNCTION mediausuario(varchar)
-returns real as $$
-declare email alias for $1;
+RETURNS real as $$
+DECLARE email alias for $1;
 	media real;
-begin
+BEGIN
 	SELECT INTO media  AVG(nota) FROM AVALIACAO WHERE usuarioAvaliado = email;
 	return media;
-end $$
-language plpgsql;
+END $$
+LANGUAGE PLPGSQL;
 
-create function notausuario() 
-returns trigger as $$
-begin
+CREATE FUNCTION notausuario() 
+RETURNS TRIGGER as $$
+BEGIN
 	UPDATE USUARIO SET NOTA = mediausuario(new.usuarioAvaliado) where email = new.usuarioAvaliado;
 	return null;
 	
 end $$
-language plpgsql
+LANGUAGE PLPGSQL;
 
-create trigger calculaMedia
-after insert or update on avaliacao
-for each row
-execute procedure notausuario();
+CREATE TRIGGER calculaMedia
+AFTER INSERT OR UPDATE ON avaliacao
+FOR EACH ROW 
+EXECUTE PROCEDURE notausuario();
