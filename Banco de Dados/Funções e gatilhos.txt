@@ -1,4 +1,4 @@
-CREATE FUNCTION mediausuario(varchar)
+CREATE OR REPLACE FUNCTION mediausuario(varchar)
 RETURNS real as $$
 DECLARE email alias for $1;
 	media real;
@@ -8,10 +8,19 @@ BEGIN
 END $$
 LANGUAGE PLPGSQL;
 
-CREATE FUNCTION notausuario() 
+CREATE OR REPLACE FUNCTION notausuario() 
 RETURNS TRIGGER as $$
 BEGIN
-	UPDATE USUARIO SET NOTA = mediausuario(new.usuarioAvaliado) where email = new.usuarioAvaliado;
+	UPDATE USUARIO SET NOTA = mediausuario(NEW.usuarioAvaliado) where email = new.usuarioAvaliado;
+	return null;
+	
+end $$
+LANGUAGE PLPGSQL;
+
+CREATE OR REPLACE FUNCTION atualizanota() 
+RETURNS TRIGGER as $$
+BEGIN
+	UPDATE USUARIO SET NOTA = mediausuario(old.usuarioAvaliado) where email = old.usuarioAvaliado;
 	return null;
 	
 end $$
@@ -21,3 +30,8 @@ CREATE TRIGGER calculaMedia
 AFTER INSERT OR UPDATE ON avaliacao
 FOR EACH ROW 
 EXECUTE PROCEDURE notausuario();
+
+CREATE TRIGGER atualizaMedia
+AFTER DELETE ON avaliacao
+FOR EACH ROW 
+EXECUTE PROCEDURE atualizanota();
