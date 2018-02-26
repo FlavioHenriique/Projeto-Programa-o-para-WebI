@@ -8,26 +8,34 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>JSP Page</title>
+        <title>Tela de Login</title>
     </head>
     <body>
 
     <center>
         <br><br><br>
         <h1>SisRide - Login</h1>
-        <form>
+        <form method="post" action="usuario">
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" class="validate" placeholder="Email">
+                <input id="icon_prefix" type="text" class="validate" placeholder="Email" name="email">
             </div>
             <br><br>
             <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
-                <input id="icon_prefix" type="password" class="validate" placeholder="Senha">
+                <input id="icon_prefix" type="password" class="validate" placeholder="Senha" name="senha">
             </div>
-            <br><Br>
+            <br>
+            <input type="hidden" name="command" value="Login">
+            
+            <Br>
             <input type="submit" value="Login"  class="waves-effect waves-light btn">
+        </form>
+        
+        <form method="post" action="usuario">
+            <input type="text" name="cad">
+            <input type="submit">
         </form>
     </center>
 </body>
