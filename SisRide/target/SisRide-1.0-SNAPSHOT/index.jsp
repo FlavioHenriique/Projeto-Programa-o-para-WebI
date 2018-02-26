@@ -32,11 +32,6 @@
             <Br>
             <input type="submit" value="Login"  class="waves-effect waves-light btn">
         </form>
-        
-        <form method="post" action="usuario">
-            <input type="text" name="cad">
-            <input type="submit">
-        </form>
     </center>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

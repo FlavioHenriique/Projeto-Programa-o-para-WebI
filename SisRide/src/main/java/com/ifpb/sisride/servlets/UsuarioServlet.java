@@ -5,6 +5,7 @@
  */
 package com.ifpb.sisride.servlets;
 
+import com.ifpb.sisride.command.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -75,9 +76,16 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getParameter("email") != null && request.getParameter("senha") != null) {
-            Login login = new Login();
-            login.execute(request, response);
+        try {
+            Command command = (Command) Class.forName("com.ifpb.sisride.command." +
+                    request.getParameter("command")).newInstance();
+            command.execute(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

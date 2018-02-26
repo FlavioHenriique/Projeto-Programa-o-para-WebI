@@ -1,5 +1,5 @@
 
-package com.ifpb.sisride.servlets;
+package com.ifpb.sisride.command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

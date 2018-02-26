@@ -89,7 +89,7 @@ public class UsuarioDao implements Dao<Usuario> {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, senha);
-            if(stmt.executeQuery().next()){
+            if (stmt.executeQuery().next()) {
                 return true;
             }
         }

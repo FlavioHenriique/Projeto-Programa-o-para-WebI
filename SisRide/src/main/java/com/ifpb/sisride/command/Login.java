@@ -1,6 +1,7 @@
-package com.ifpb.sisride.servlets;
+package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorUsuario;
+import com.ifpb.sisride.exception.AutenticacaoException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -13,26 +14,24 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Login implements Command {
 
-    public Login(){}
-    
+    public Login() {
+    }
+
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException {
 
         try {
             PrintWriter out = response.getWriter();
             GerenciadorUsuario g = new GerenciadorUsuario();
             if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
-                out.print("Bem vindo");
+                out.print("Bem vindo!");
             } else {
                 out.print("Usuário não encontrado");
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException | IOException  ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
-
 }
