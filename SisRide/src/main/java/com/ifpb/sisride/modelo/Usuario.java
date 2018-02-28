@@ -24,7 +24,10 @@ public class Usuario {
         this.cidade = cidade;
         this.sexo = sexo;
     }
-
+    public Usuario(){
+        
+    }
+        
     public String getEmail() {
         return email;
     }

@@ -1,0 +1,45 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link rel="stylesheet" href="CSS/app.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+        <title>Cadastro de Usuário</title>
+    </head>
+    <body>
+    <center>
+
+        <h2 class="row">Cadastre-se aqui</h2>
+        <br>
+        <form method="post" action="usuario">
+            <div class="row">
+                <div class="input-field col l4  offset-l4">
+                    <input type="text" class="validate" name="nome" placeholder="Nome"> <br><br>
+                    <input type="text" class="validate" name="email" placeholder="Email"> <br><br>
+                    <input type="password" class="validate" name="senha" placeholder="Senha"><br><br>
+                    <input type="text" class="validate" name="profissao" placeholder="Profissão"><br><br>
+                    <input type="text" class="datepicker" placeholder="Data de nascimento"><br><br>
+                </div>
+            </div>
+            <input name="sexo" type="radio" id="masc" value="Masculino"/>
+            <label for="masc">Masculino</label>
+
+            <input name="sexo" type="radio" id="fem"  value="Feminino"/>
+            <label for="fem">Feminino</label><br><br>
+            <input type="hidden" value="CadastroUsuario" name="command" ><br>
+            <div>
+                <button type="submit" class="waves-effect waves-light btn s12">Cadastrar</button>
+                 <button class="waves-effect waves-light btn s12"><a  href="index.html">Voltar</a></button>
+            </div>
+        </form>
+       
+
+    </center>
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="JS/app.js"></script>
+</html>
