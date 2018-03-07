@@ -1,6 +1,7 @@
 package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorUsuario;
+import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class CadastroUsuario implements Command {
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
                     request.getParameter("profissao"),
                     request.getParameter("cidade"), request.getParameter("sexo"))) {
-             
+
                 response.sendRedirect("index.html");
             }
 
@@ -37,9 +38,9 @@ public class CadastroUsuario implements Command {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-                        
-        }
+        } catch (CadastroException ex) {
+            
+        } 
 
     }
 }

@@ -1,6 +1,7 @@
 package com.ifpb.sisride.controle;
 
 import com.ifpb.sisride.dao.UsuarioDao;
+import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
 import com.ifpb.sisride.modelo.Usuario;
@@ -19,7 +20,7 @@ public class GerenciadorUsuario {
 
     public boolean adicionaUsuario(String email, String senha, String nome,
             LocalDate nascimento, String profissao, String cidade, String sexo)
-            throws SQLException, Exception {
+            throws SQLException, CadastroException {
         Usuario u = new Usuario(email, senha, nome, nascimento, profissao, cidade, sexo);
         return userDao.salvar(u);
     }
