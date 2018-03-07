@@ -6,7 +6,7 @@ CREATE TABLE USUARIO(
    Profissão VARCHAR(60) NOT NULL,
    Nota_Motorista real,
    Nota_Passageiro real,
-   Foto VARCHAR,
+   Foto bytea,
    Cidade VARCHAR(100)NOT NULL,
    Sexo varchar(10) NOT NULL
    
