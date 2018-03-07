@@ -22,12 +22,13 @@ public class Login implements Command {
             throws ServletException {
 
         try {
-            PrintWriter out = response.getWriter();
+          
             GerenciadorUsuario g = new GerenciadorUsuario();
-            if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
-                out.print("Bem vindo!");
-            } else {
-                out.print("Usuário não encontrado");
+            if(g.autenticar(request.getParameter("email"), request.getParameter("senha"))){
+              response.sendRedirect("inicial.jsp");
+            }
+            else{
+                response.sendRedirect("index.html");
             }
         } catch (SQLException | ClassNotFoundException | IOException  ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
