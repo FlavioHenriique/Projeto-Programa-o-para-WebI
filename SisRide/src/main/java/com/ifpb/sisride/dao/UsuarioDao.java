@@ -18,8 +18,9 @@ public class UsuarioDao implements Dao<Usuario> {
     }
 
     @Override
-    public boolean salvar(Usuario obj) throws SQLException {
+    public boolean salvar(Usuario obj) throws SQLException, Exception {
 
+      
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
                 + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);

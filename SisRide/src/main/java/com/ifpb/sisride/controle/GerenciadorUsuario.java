@@ -19,7 +19,7 @@ public class GerenciadorUsuario {
 
     public boolean adicionaUsuario(String email, String senha, String nome,
             LocalDate nascimento, String profissao, String cidade, String sexo)
-            throws SQLException {
+            throws SQLException, Exception {
         Usuario u = new Usuario(email, senha, nome, nascimento, profissao, cidade, sexo);
         return userDao.salvar(u);
     }
