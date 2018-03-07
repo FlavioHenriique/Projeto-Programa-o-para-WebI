@@ -12,3 +12,4 @@ $('.datepicker').pickadate({
     closeOnSelect: false,
     format: 'dd/mm/yyyy'
 });
+

@@ -2,7 +2,7 @@ body{
     background-color: #ede7f6  ;
 }
 
-.row,.validate{
+.row,.validate,.active{
     color: #283593;
 }
 
