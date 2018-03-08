@@ -69,6 +69,8 @@ public class UsuarioDao implements Dao<Usuario> {
             String sql = "UPDATE USUARIO SET email=?, senha =?, nome=?,"
                     + " nascimento=?, profissão=?,cidade=?,sexo=? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
+                
+            
             stmt.setString(1, obj.getEmail());
             stmt.setString(2, obj.getSenha());
             stmt.setString(3, obj.getNome());
@@ -76,8 +78,10 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(5, obj.getProfissao());
             stmt.setString(6, obj.getCidade());
             stmt.setString(7, obj.getSexo());
-            stmt.setBinaryStream(8, obj.getFoto());
-            return stmt.execute();
+            stmt.setString(8, obj.getEmail());
+            
+            stmt.execute();
+            return true;
         }
     }
 

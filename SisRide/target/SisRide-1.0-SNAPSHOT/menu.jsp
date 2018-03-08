@@ -20,7 +20,7 @@
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">SisRide</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a >Tela inicial</a></li>
+            <li><a href="inicial.jsp">Página inicial</a></li>
             <li><a >Lugares</a></li>
             <li><a >Minhas caronas</a></li>
             <li><a>Amizades</a></li>

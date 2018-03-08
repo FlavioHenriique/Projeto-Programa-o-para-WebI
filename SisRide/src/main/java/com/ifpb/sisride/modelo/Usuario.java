@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     private String email;
     private String senha;
@@ -42,6 +42,17 @@ public class Usuario implements Serializable{
         this.cidade = cidade;
         this.sexo = sexo;
         this.foto2 = foto2;
+    }
+
+    public Usuario(String email, String senha, String nome, LocalDate nascimento,
+            String profissao, String cidade, String sexo) {
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.profissao = profissao;
+        this.cidade = cidade;
+        this.sexo = sexo;
     }
 
     public byte[] getFoto2() {
