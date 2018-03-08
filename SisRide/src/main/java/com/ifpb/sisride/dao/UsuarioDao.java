@@ -3,6 +3,7 @@ package com.ifpb.sisride.dao;
 import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.factory.ConFactory;
 import com.ifpb.sisride.modelo.Usuario;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -21,13 +22,13 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean salvar(Usuario obj) throws SQLException, CadastroException {
 
-        if(obj.getCidade()=="" || obj.getEmail()=="" || obj.getNascimento()== null 
-                || obj.getNome()=="" || obj.getProfissao()=="" || obj.getSenha()=="" || obj.getSexo()==""){
+        if (obj.getCidade() == "" || obj.getEmail() == "" || obj.getNascimento() == null
+                || obj.getNome() == "" || obj.getProfissao() == "" || obj.getSenha() == "" || obj.getSexo() == "") {
             throw new CadastroException("Preencha todos os campos");
         }
-        
+
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
-                + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?)";
+                + "Cidade,Sexo,foto) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, obj.getEmail());
         stmt.setString(2, obj.getNome());
@@ -36,7 +37,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(5, obj.getProfissao());
         stmt.setString(6, obj.getCidade());
         stmt.setString(7, obj.getSexo());
-        
+        stmt.setBinaryStream(8, obj.getFoto());
         stmt.execute();
         return true;
     }
@@ -47,11 +48,12 @@ public class UsuarioDao implements Dao<Usuario> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setObject(1, obj);
         ResultSet resultado = stmt.executeQuery();
+
         if (resultado.next()) {
             Usuario u = new Usuario(resultado.getString("email"),
                     resultado.getString("senha"), resultado.getString("nome"),
                     resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissão"),
-                    resultado.getString("cidade"), resultado.getString("sexo"));
+                    resultado.getString("cidade"), resultado.getString("sexo"), resultado.getBytes("foto"));
             return u;
         }
         return null;
@@ -74,7 +76,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(5, obj.getProfissao());
             stmt.setString(6, obj.getCidade());
             stmt.setString(7, obj.getSexo());
-            stmt.setString(8, obj.getEmail());
+            stmt.setBinaryStream(8, obj.getFoto());
             return stmt.execute();
         }
     }

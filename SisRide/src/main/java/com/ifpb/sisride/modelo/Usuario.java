@@ -1,9 +1,12 @@
 package com.ifpb.sisride.modelo;
 
+import java.io.InputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Serializable{
 
     private String email;
     private String senha;
@@ -13,9 +16,11 @@ public class Usuario {
     private float nota;
     private String cidade;
     private String sexo;
+    private InputStream foto;
+    private byte[] foto2;
 
     public Usuario(String email, String senha, String nome, LocalDate nascimento,
-            String profissao,String cidade, String sexo) {
+            String profissao, String cidade, String sexo, InputStream foto) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
@@ -23,11 +28,42 @@ public class Usuario {
         this.profissao = profissao;
         this.cidade = cidade;
         this.sexo = sexo;
+        this.foto = foto;
+
     }
-    public Usuario(){
-        
+
+    public Usuario(String email, String senha, String nome, LocalDate nascimento,
+            String profissao, String cidade, String sexo, byte[] foto2) {
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.nascimento = nascimento;
+        this.profissao = profissao;
+        this.cidade = cidade;
+        this.sexo = sexo;
+        this.foto2 = foto2;
     }
-        
+
+    public byte[] getFoto2() {
+        return foto2;
+    }
+
+    public void setFoto2(byte[] foto2) {
+        this.foto2 = foto2;
+    }
+
+    public Usuario() {
+
+    }
+
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -94,15 +130,16 @@ public class Usuario {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + Objects.hashCode(this.email);
-        hash = 11 * hash + Objects.hashCode(this.senha);
-        hash = 11 * hash + Objects.hashCode(this.nome);
-        hash = 11 * hash + Objects.hashCode(this.nascimento);
-        hash = 11 * hash + Objects.hashCode(this.profissao);
-        hash = 11 * hash + Float.floatToIntBits(this.nota);
-        hash = 11 * hash + Objects.hashCode(this.cidade);
-        hash = 11 * hash + Objects.hashCode(this.sexo);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.email);
+        hash = 83 * hash + Objects.hashCode(this.senha);
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.nascimento);
+        hash = 83 * hash + Objects.hashCode(this.profissao);
+        hash = 83 * hash + Float.floatToIntBits(this.nota);
+        hash = 83 * hash + Objects.hashCode(this.cidade);
+        hash = 83 * hash + Objects.hashCode(this.sexo);
+        hash = 83 * hash + Objects.hashCode(this.foto);
         return hash;
     }
 
@@ -142,12 +179,15 @@ public class Usuario {
         if (!Objects.equals(this.nascimento, other.nascimento)) {
             return false;
         }
+        if (!Objects.equals(this.foto, other.foto)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", nascimento=" + nascimento + ", profissao=" + profissao + ", nota=" + nota + ", cidade=" + cidade + ", sexo=" + sexo + '}';
+        return "Usuario{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", nascimento=" + nascimento + ", profissao=" + profissao + ", nota=" + nota + ", cidade=" + cidade + ", sexo=" + sexo + ", foto=" + foto + '}';
     }
 
 }
