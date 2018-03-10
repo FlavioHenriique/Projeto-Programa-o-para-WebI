@@ -4,7 +4,7 @@
 
 <%
     Usuario atual = (Usuario) session.getAttribute("usuario");
-    Usuario buscado = (Usuario) request.getAttribute("buscado");
+    Usuario buscado = (Usuario) session.getAttribute("buscado");
 %>
 
 <html>

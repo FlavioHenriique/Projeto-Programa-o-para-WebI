@@ -5,7 +5,6 @@ import com.ifpb.sisride.factory.ConFactory;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -128,26 +127,20 @@ public class UsuarioDao implements Dao<Usuario> {
 
     public Usuario buscaNome(String email) throws SQLException {
 
-        String sql = "SELECT * FROM Usuario WHERE nome ilike ?";
+        String sql = "SELECT email FROM Usuario WHERE nome ilike ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
 
         ResultSet result = stmt.executeQuery();
 
-        List<Usuario> lista = new ArrayList<>();
-
         if (result.next()) {
 
             Usuario u = new Usuario();
-            u.setCidade(result.getString("cidade"));
-            u.setEmail(result.getString("email"));
-            u.setFoto2(result.getBytes("foto"));
-            u.setNascimento(result.getDate("nascimento").toLocalDate());
-            u.setNome(result.getString("nome"));
-            u.setProfissao(result.getString("profissão"));
-            u.setSexo(result.getString("sexo"));
-                
+            Usuario u2 = this.buscar(result.getString("email"));
+
+            u = u2;
+            System.out.println(u.toString());
             return u;
         }
         return null;

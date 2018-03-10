@@ -14,6 +14,7 @@ public class FotoUsuario implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
+        
         HttpSession session = request.getSession();
         Usuario u = (Usuario) session.getAttribute("usuario");
         try {
@@ -21,7 +22,5 @@ public class FotoUsuario implements Command {
         } catch (IOException ex) {
             Logger.getLogger(FotoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }

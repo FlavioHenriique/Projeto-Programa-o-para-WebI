@@ -4,7 +4,6 @@
 
 <%
     Usuario atual = (Usuario) session.getAttribute("usuario");
-
 %>
 
 <html>
