@@ -1,4 +1,10 @@
+<%@page import="com.ifpb.sisride.modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+
+    Usuario atual = (Usuario) session.getAttribute("usuario");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,15 +35,19 @@
                             <input type="hidden" name="command" value="CadastroLugar"/>
                             <input type="text" name="estado" placeholder="Estado" class="validate"><br>
                             <textarea placeholder="Descrição do lugar" name="descricao" 
-                                      rows="5" class="validate"></textarea><br><br>
-                                      <button type="submit" class="waves-effect waves-light btn s12">Cadastrar</button>
+                                      rows="5" class="validate materialize-textarea""></textarea><br><br>
+                            <button type="submit" class="waves-effect waves-light btn s12">Cadastrar</button>
                         </div>
                     </div>
                 </form>
             </center>
         </td>
         <td width="50%">
-            <label align="top">Lugares cadastrados por mim</label>
+            <h3 align="top">Lugares cadastrados por mim </h3>
+            <% 
+                
+            %>
+
             <br>
         </td>
     </tr>

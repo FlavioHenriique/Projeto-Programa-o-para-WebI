@@ -17,11 +17,29 @@
     <body>
         <%@include file="menu.jsp"%>
         <br> 
-        <div>
-            <img src="foto" class="circle">
 
-            <label><%= atual.getNome()%></label>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="row">
+                        <img src="foto" class="circle">
+
+                        <label><%= atual.getNome()%></label>
+                    </div>            
+                </td>
+                <td>
+                    <div class="row">
+                        <div  class="input-field col s8">
+                            <input type="text" name="buscaUsuario" class="col 12" placeholder="Buscar usuários">
+                        </div>
+                        <div  class="input-field col ">
+                            <button type="submit" class="waves-effect waves-light btn s12">Buscar</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
         <br><br>
         <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button></a>
     </body>
