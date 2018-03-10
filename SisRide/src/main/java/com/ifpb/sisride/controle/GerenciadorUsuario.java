@@ -46,7 +46,7 @@ public class GerenciadorUsuario {
         return userDao.autenticar(email, senha);
     }
     
-    public List<Usuario> buscarNome(String nome) throws SQLException{
+    public Usuario buscarNome(String nome) throws SQLException{
         
         return userDao.buscaNome(nome);
     }

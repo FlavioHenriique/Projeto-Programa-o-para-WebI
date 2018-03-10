@@ -4,6 +4,7 @@
 
 <%
     Usuario atual = (Usuario) session.getAttribute("usuario");
+
 %>
 
 <html>
@@ -22,7 +23,7 @@
             <tr>
                 <td>
                     <div class="row">
-                        <img src="foto" class="circle">
+                        <img src="foto?command=FotoUsuario" class="circle">
 
                         <label><%= atual.getNome()%></label>
                     </div>            
@@ -39,6 +40,9 @@
                                 <button type="submit" class="waves-effect waves-light btn s12">Buscar</button>
                             </div>
                         </form>
+                    </div>
+                    <div>
+                        
                     </div>
                 </td>
             </tr>

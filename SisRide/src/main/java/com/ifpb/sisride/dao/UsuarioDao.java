@@ -126,7 +126,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.execute();
     }
 
-    public List<Usuario> buscaNome(String email) throws SQLException {
+    public Usuario buscaNome(String email) throws SQLException {
 
         String sql = "SELECT * FROM Usuario WHERE nome ilike ?";
 
@@ -147,10 +147,9 @@ public class UsuarioDao implements Dao<Usuario> {
             u.setNome(result.getString("nome"));
             u.setProfissao(result.getString("profissão"));
             u.setSexo(result.getString("sexo"));
-
-            lista.add(u);
-
+                
+            return u;
         }
-        return lista;
+        return null;
     }
 }
