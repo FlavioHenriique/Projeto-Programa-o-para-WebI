@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDao implements Dao<Usuario> {
 
@@ -82,10 +84,9 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(8, obj.getEmail());
 
             stmt.execute();
-            
-            
-            if(obj.getFoto() instanceof FileInputStream){
-                setFoto(obj.getEmail(),obj.getFoto());
+
+            if (obj.getFoto() instanceof FileInputStream) {
+                setFoto(obj.getEmail(), obj.getFoto());
             }
             return true;
         }
@@ -114,14 +115,42 @@ public class UsuarioDao implements Dao<Usuario> {
         }
         return false;
     }
-    
-    public void setFoto(String email, InputStream foto) throws SQLException{
-            
+
+    public void setFoto(String email, InputStream foto) throws SQLException {
+
         String sql = "UPDATE Usuario SET foto = ? WHERE email = ?";
-        
+
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(2,email);
+        stmt.setString(2, email);
         stmt.setBinaryStream(1, foto);
         stmt.execute();
+    }
+
+    public List<Usuario> buscaNome(String email) throws SQLException {
+
+        String sql = "SELECT * FROM Usuario WHERE nome ilike ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+
+        ResultSet result = stmt.executeQuery();
+
+        List<Usuario> lista = new ArrayList<>();
+
+        if (result.next()) {
+
+            Usuario u = new Usuario();
+            u.setCidade(result.getString("cidade"));
+            u.setEmail(result.getString("email"));
+            u.setFoto2(result.getBytes("foto"));
+            u.setNascimento(result.getDate("nascimento").toLocalDate());
+            u.setNome(result.getString("nome"));
+            u.setProfissao(result.getString("profissão"));
+            u.setSexo(result.getString("sexo"));
+
+            lista.add(u);
+
+        }
+        return lista;
     }
 }

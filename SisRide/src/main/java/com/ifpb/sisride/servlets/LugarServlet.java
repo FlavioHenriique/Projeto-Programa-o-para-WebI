@@ -3,6 +3,7 @@ package com.ifpb.sisride.servlets;
 import com.ifpb.sisride.command.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,15 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/lugar")
 public class LugarServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,6 +37,7 @@ public class LugarServlet extends HttpServlet {
     public void command(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         try {
+            request.setCharacterEncoding("UTF-8");
 
             Command command = (Command) Class.forName("com.ifpb.sisride.command."
                     + request.getParameter("command")).newInstance();
@@ -52,6 +45,8 @@ public class LugarServlet extends HttpServlet {
             command.execute(request, response);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(LugarServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

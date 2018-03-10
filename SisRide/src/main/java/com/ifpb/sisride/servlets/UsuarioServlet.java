@@ -3,6 +3,7 @@ package com.ifpb.sisride.servlets;
 import com.ifpb.sisride.command.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +20,7 @@ public class UsuarioServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        command(request,response);
+        command(request, response);
     }
 
     @Override
@@ -37,9 +38,9 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     public void command(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-       
-        
         try {
+
+            request.setCharacterEncoding("UTF-8");
 
             Command command = (Command) Class.forName("com.ifpb.sisride.command."
                     + request.getParameter("command")).newInstance();
@@ -47,8 +48,10 @@ public class UsuarioServlet extends HttpServlet {
             command.execute(request, response);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @Override

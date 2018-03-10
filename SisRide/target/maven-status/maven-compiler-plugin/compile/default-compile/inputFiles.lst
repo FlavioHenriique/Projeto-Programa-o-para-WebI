@@ -24,6 +24,7 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/factory/DaoFactoryBD.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Lugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Command.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/BuscaUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/ViagemDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/LugarDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/UsuarioDao.java

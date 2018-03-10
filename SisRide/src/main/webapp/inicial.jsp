@@ -29,12 +29,16 @@
                 </td>
                 <td>
                     <div class="row">
-                        <div  class="input-field col s8">
-                            <input type="text" name="buscaUsuario" class="col 12" placeholder="Buscar usuários">
-                        </div>
-                        <div  class="input-field col ">
-                            <button type="submit" class="waves-effect waves-light btn s12">Buscar</button>
-                        </div>
+                        <form method="get" action="usuario">
+
+                            <input type="hidden" name="command" value="BuscaUsuario">
+                            <div  class="input-field col s8">
+                                <input type="text" name="buscado" class="col 12" placeholder="Buscar usuários">
+                            </div>
+                            <div  class="input-field col ">
+                                <button type="submit" class="waves-effect waves-light btn s12">Buscar</button>
+                            </div>
+                        </form>
                     </div>
                 </td>
             </tr>

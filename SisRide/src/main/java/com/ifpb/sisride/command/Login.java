@@ -24,22 +24,23 @@ public class Login implements Command {
             throws ServletException {
 
         try {
-            System.out.println("oi");
             GerenciadorUsuario g = new GerenciadorUsuario();
-            if(g.autenticar(request.getParameter("email"), request.getParameter("senha"))){
-              
-                HttpSession session = request.getSession();
-                
-                Usuario atual = g.buscaUsuario(request.getParameter("email"));
-                
-                session.setAttribute("usuario", atual);
-                
+            HttpSession session = request.getSession();
+            Usuario u = (Usuario) session.getAttribute("usuario");
+
+            if (u != null) {
                 response.sendRedirect("inicial.jsp");
-            }
-            else{
+            } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
+
+                Usuario atual = g.buscaUsuario(request.getParameter("email"));
+
+                session.setAttribute("usuario", atual);
+
+                response.sendRedirect("inicial.jsp");
+            } else {
                 response.sendRedirect("index.html");
             }
-        } catch (SQLException | ClassNotFoundException | IOException  ex) {
+        } catch (SQLException | ClassNotFoundException | IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 
         }

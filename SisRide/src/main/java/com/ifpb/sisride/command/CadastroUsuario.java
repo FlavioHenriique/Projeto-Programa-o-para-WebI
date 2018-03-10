@@ -27,6 +27,7 @@ public class CadastroUsuario implements Command {
 
             Part part = request.getPart("foto");
             InputStream input = part.getInputStream();
+                
             
             if (g.adicionaUsuario(request.getParameter("email"), request.getParameter("senha"),
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),

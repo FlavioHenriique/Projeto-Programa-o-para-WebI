@@ -8,6 +8,7 @@ import com.ifpb.sisride.modelo.Usuario;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class GerenciadorUsuario {
 
@@ -43,6 +44,11 @@ public class GerenciadorUsuario {
 
     public boolean autenticar(String email, String senha) throws SQLException {
         return userDao.autenticar(email, senha);
+    }
+    
+    public List<Usuario> buscarNome(String nome) throws SQLException{
+        
+        return userDao.buscaNome(nome);
     }
 
 }
