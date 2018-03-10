@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="CSS/app.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
 
-        <title>  </title>
+        <title><%= buscado.getNome()%></title>
     </head>
     <body>
 
@@ -26,12 +26,16 @@
                     <div class="row">
                         <img src="foto?command=FotoBuscado" class="circle">
 
-                        <label><%= buscado.getNome() %></label>
-                    </div>           
+                        <label id="nome"><%= buscado.getNome()%></label>
+                    </div>
+                    <label>Profissão: <%=  buscado.getProfissao()%></label>
+                    <br><label>Data de nascimento: <%= buscado.getNascimento()%></label>
+                    <br><label> Cidade: <%= buscado.getCidade()%></label>
                 </td>
 
                 <td>
-
+                    <a href="usuario?command=Solicitacao&tipo=amizade"><button 
+                            class="waves-effect waves-light btn s12">Solicitar amizade</button></a>
                 </td>
             </tr>
         </table>

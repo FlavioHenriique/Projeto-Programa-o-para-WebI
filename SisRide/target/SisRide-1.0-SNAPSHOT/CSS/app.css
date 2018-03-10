@@ -36,3 +36,8 @@ table{
 td{
     vertical-align: top;
 }
+
+#nome{
+    font-size: 40px;
+    color: black;
+}

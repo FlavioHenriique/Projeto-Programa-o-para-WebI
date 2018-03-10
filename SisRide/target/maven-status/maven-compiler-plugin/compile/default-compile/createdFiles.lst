@@ -4,6 +4,7 @@ com/ifpb/sisride/servlets/FotoServlet.class
 com/ifpb/sisride/controle/GerenciadorViagem.class
 com/ifpb/sisride/controle/GerenciadorCarro.class
 com/ifpb/sisride/modelo/Avaliacao.class
+com/ifpb/sisride/command/FotoBuscado.class
 com/ifpb/sisride/factory/ConFactory.class
 com/ifpb/sisride/factory/DaoFactory.class
 com/ifpb/sisride/dao/CarroDao.class
@@ -11,6 +12,7 @@ com/ifpb/sisride/modelo/Viagem.class
 com/ifpb/sisride/command/Login.class
 com/ifpb/sisride/servlets/LugarServlet.class
 com/ifpb/sisride/modelo/Usuario.class
+com/ifpb/sisride/command/Solicitacao.class
 com/ifpb/sisride/command/BuscaUsuario.class
 com/ifpb/sisride/controle/GerenciadorAvaliacao.class
 com/ifpb/sisride/factory/DaoFactoryBD.class
@@ -24,6 +26,7 @@ com/ifpb/sisride/modelo/Carro.class
 com/ifpb/sisride/command/Sair.class
 com/ifpb/sisride/exception/CadastroException.class
 com/ifpb/sisride/dao/ViagemDao.class
+com/ifpb/sisride/command/FotoUsuario.class
 com/ifpb/sisride/factory/DaoFactoryIF.class
 com/ifpb/sisride/servlets/UsuarioServlet.class
 com/ifpb/sisride/controle/GerenciadorLugar.class

@@ -50,5 +50,9 @@ public class GerenciadorUsuario {
         
         return userDao.buscaNome(nome);
     }
-
+    
+    public void solicitacao(String usuario,String amigo, String tipo) throws SQLException{
+        
+        userDao.solicitacao(usuario, amigo, tipo);
+    }
 }

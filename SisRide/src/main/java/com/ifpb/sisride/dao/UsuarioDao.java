@@ -145,4 +145,18 @@ public class UsuarioDao implements Dao<Usuario> {
         }
         return null;
     }
+
+    public void solicitacao(String usuario, String amigo, String tipo) throws SQLException {
+
+        String sql = "INSERT INTO Solicitacao (EmailUsuario, EmailAmigo, "
+                + "Situacao,tipo) VALUES (?,?,?,?)";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, usuario);
+        stmt.setString(2, amigo);
+        stmt.setString(3, "pendente");
+        stmt.setString(4, tipo);
+        stmt.execute();
+
+    }
 }
