@@ -76,7 +76,7 @@ CREATE TABLE SOLICITACAO(
 	EmailAmigo VARCHAR(50),
 	Situacao VARCHAR(15),
 	tipo VARCHAR(8),
-	PRIMARY KEY (EmailUsuario,EmailAmigo),
+	PRIMARY KEY (EmailUsuario,EmailAmigo,tipo),
 	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
 	FOREIGN KEY (EmailAmigo) REFERENCES Usuario(Email)
 );
