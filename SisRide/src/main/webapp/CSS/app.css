@@ -38,6 +38,10 @@ td{
 }
 
 #nome{
-    font-size: 40px;
+    font-size: 35px;
     color: black;
+}
+
+#busca{
+    float:right;
 }

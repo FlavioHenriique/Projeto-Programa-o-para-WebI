@@ -18,26 +18,26 @@
         <%@include file="menu.jsp"%>
         <br> 
 
-        <table>
+        <table width="100%">
             <tr>
-                <td>
+                <td width="50%">
                     <div class="row">
                         <img src="foto?command=FotoUsuario" class="circle">
 
-                        <label><%= atual.getNome()%></label>
+                        <label id="nome"><%= atual.getNome()%></label>
                     </div>            
                 </td>
-                <td>
-                    <div class="row">
-                        <form method="get" action="usuario">
+                <td width="50%">
+                    <div class="row" id="busca" width="100%">
+                        <form method="get" action="front">
 
                             <input type="hidden" name="command" value="BuscaUsuario">
-                            <div  class="input-field col s8">
-                                <input type="text" name="buscado" class="col 12" placeholder="Buscar usuários">
-                            </div>
-                            <div  class="input-field col ">
-                                <button type="submit" class="waves-effect waves-light btn s12">Buscar</button>
-                            </div>
+                            
+                                <input type="text" name="buscado"  placeholder="Buscar usuários">
+                            
+                            
+                                <button type="submit" class="waves-effect waves-light btn" >Buscar</button>
+                            
                         </form>
                     </div>
                     <div>

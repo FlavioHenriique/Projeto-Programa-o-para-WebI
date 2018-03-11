@@ -2,6 +2,7 @@ package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.modelo.Usuario;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,8 @@ public class Solicitacao implements Command {
         } catch (SQLException ex) {
             Logger.getLogger(Solicitacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Solicitacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Solicitacao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

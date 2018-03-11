@@ -23,7 +23,7 @@
             <tr>
                 <td width="50%">
             <center>    
-                <form method="post" action="lugar"  class="col s12 l4">
+                <form method="post" action="front"  class="col s12 l4">
                     <h3>Cadastrar lugar</h3><br>
                     <div class="row">
                         <div  class="input-field col l4  offset-l4">

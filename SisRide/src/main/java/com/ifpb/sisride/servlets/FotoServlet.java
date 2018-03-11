@@ -28,9 +28,9 @@ public class FotoServlet extends HttpServlet {
 
             command.execute(request, response);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrontServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(LugarServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrontServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

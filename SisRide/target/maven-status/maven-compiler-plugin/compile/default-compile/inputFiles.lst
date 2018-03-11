@@ -1,5 +1,4 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorAvaliacao.java
-/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/servlets/UsuarioServlet.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/servlets/FotoServlet.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorViagem.java
@@ -14,7 +13,6 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorLugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Sair.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/exception/CadastroException.java
-/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/servlets/LugarServlet.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AtualizaUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/Dao.java
@@ -31,6 +29,7 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/ViagemDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/LugarDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/UsuarioDao.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/servlets/FrontServlet.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Avaliacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroLugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/AvaliacaoDao.java

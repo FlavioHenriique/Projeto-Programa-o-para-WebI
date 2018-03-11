@@ -18,7 +18,7 @@ public class Sair implements Command{
             HttpSession session = request.getSession();
             session.removeAttribute("usuario");
  
-            response.sendRedirect("index.html");
+            response.sendRedirect("index.jsp");
             
         } catch (IOException ex) {
             Logger.getLogger(Sair.class.getName()).log(Level.SEVERE, null, ex);

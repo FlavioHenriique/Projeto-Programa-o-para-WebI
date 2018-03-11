@@ -22,7 +22,7 @@
     <center>
         <br><br><br><br><br>
         <h1 class="row">SisRide</h1>
-        <form method="post" action="usuario" class="col s12 l4">
+        <form method="post" action="front" class="col s12 l4">
 
             <div class="row">
                 <div class="input-field col l4  offset-l4">
