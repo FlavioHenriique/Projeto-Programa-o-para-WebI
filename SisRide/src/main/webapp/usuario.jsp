@@ -2,10 +2,6 @@
 <%@page import="com.ifpb.sisride.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
-    Usuario atual = (Usuario) session.getAttribute("usuario");
-    Usuario buscado = (Usuario) session.getAttribute("buscado");
-%>
 
 <html>
     <head>
@@ -14,7 +10,7 @@
         <link rel="stylesheet" href="CSS/app.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
 
-        <title><%= buscado.getNome()%></title>
+        <title>${buscado.nome}</title>
     </head>
     <body>
 
@@ -26,11 +22,11 @@
                     <div class="row">
                         <img src="foto?command=FotoBuscado" class="circle">
 
-                        <label id="nome"><%= buscado.getNome()%></label>
+                        <label id="nome">${buscado.nome}</label>
                     </div>
-                    <label>Profissão: <%=  buscado.getProfissao()%></label>
-                    <br><label>Data de nascimento: <%= buscado.getNascimento()%></label>
-                    <br><label> Cidade: <%= buscado.getCidade()%></label>
+                    <label>Profissão: ${buscado.profissao}</label>
+                    <br><label>Data de nascimento: ${buscado.nascimento}</label>
+                    <br><label> Cidade: ${buscado.cidade}</label>
                 </td>
 
                 <td>

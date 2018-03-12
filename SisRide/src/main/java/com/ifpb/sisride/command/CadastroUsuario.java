@@ -33,7 +33,7 @@ public class CadastroUsuario implements Command {
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
                     request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"),input)) {
 
-                response.sendRedirect("index.html");
+                response.sendRedirect("index.jsp");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);

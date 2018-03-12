@@ -140,7 +140,6 @@ public class UsuarioDao implements Dao<Usuario> {
             Usuario u2 = this.buscar(result.getString("email"));
 
             u = u2;
-            System.out.println(u.toString());
             return u;
         }
         return null;

@@ -3,7 +3,7 @@
     if(session.getAttribute("usuario") != null){
         request.setCharacterEncoding("UTF-8");
            
-        RequestDispatcher dispatcher = request.getRequestDispatcher("usuario?command=Login");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=Login");
         dispatcher.forward(request, response);
     }
 %>

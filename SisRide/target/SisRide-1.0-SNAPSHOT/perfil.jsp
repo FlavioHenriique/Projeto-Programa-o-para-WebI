@@ -4,9 +4,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<%
-    Usuario atual = (Usuario) session.getAttribute("usuario");
-%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,24 +21,24 @@
 
 
 
-        <form method="post" action="usuario" enctype="multipart/form-data"  class="col s12 l4">
+        <form method="post"  enctype="multipart/form-data" action="front">
 
             <div class="row">
                 <div  class="input-field col l4  offset-l4">
-
+                    
                     <input type="file" name="foto2"><br><br>
 
                     <input type="text" class="validate" name="nome" placeholder="Nome"
-                           value ="<%= atual.getNome()%>"> <br>
+                           value ="${usuario.nome}"> <br>
 
-                    <input type="hidden" value="AtualizaUsuario" name="command"><br>
+                    <input type="hidden" value="AtualizaUsuario" name="command" ><br>
 
                     <input type="password" class="validate" name="senha" placeholder="Senha"
-                           value="<%=  atual.getSenha()%>"><br><br>
+                           value="${usuario.senha}"><br><br>
                     <input type="text" name="cidade" class="validate" placeholder="Cidade"
-                           value="<%= atual.getCidade()%>"><br><br>
+                           value="${usuario.cidade}"><br><br>
                     <input type="text" class="validate" name="profissao" placeholder="Profissão"
-                           value="<%= atual.getProfissao()%>"><br><br>
+                           value="${usuario.profissao}"><br><br>
                     <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
                 </div>
             </div>
@@ -55,7 +52,7 @@
             </div>
         </form>
         <div>
-            <a href="usuario?command=ExcluirConta"><button class="waves-effect waves-light btn s12">
+            <a href="front?command=ExcluirConta"><button class="waves-effect waves-light btn s12">
                     Excluir conta</button></a>
             <a href="inicial.jsp"><button class="waves-effect waves-light btn s12">Cancelar</button></a>
         </div>

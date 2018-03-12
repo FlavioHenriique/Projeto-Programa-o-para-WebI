@@ -2,10 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  %>
 
 
-<%
-    Usuario atual = (Usuario) session.getAttribute("usuario");
-%>
-
 <html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,7 +20,7 @@
                     <div class="row">
                         <img src="foto?command=FotoUsuario" class="circle">
 
-                        <label id="nome"><%= atual.getNome()%></label>
+                        <label id="nome">${usuario.nome}</label>
                     </div>            
                 </td>
                 <td width="50%">

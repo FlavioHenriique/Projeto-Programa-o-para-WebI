@@ -38,7 +38,7 @@ public class Login implements Command {
 
                 response.sendRedirect("inicial.jsp");
             } else {
-                response.sendRedirect("index.html");
+                response.sendRedirect("index.jsp");
             }
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

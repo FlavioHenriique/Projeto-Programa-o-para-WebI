@@ -1,5 +1,5 @@
 body{
-    background-color: #eceff1   ;
+    background-color: #eceff1;
 }
 
 .row,.validate,.active{
@@ -7,7 +7,7 @@ body{
 }
 
 .btn,.nav-wrapper{
-    background-color: #2e7d32 ;
+    background-color: #2e7d32; 
 }
 
 .btn:hover{
@@ -22,7 +22,7 @@ img{
 
 label {
     font-size: 30px;
-    color:#2e7d32;
+    color: #2e7d32;
 }
 
 ::placeholder{

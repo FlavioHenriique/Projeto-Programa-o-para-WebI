@@ -7,12 +7,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/front")
+@MultipartConfig
 public class FrontServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +43,8 @@ public class FrontServlet extends HttpServlet {
 
         try {
             request.setCharacterEncoding("UTF-8");
-
+            System.out.println(request.getParameter("command"));
+            
             Command command = (Command) Class.forName("com.ifpb.sisride.command."
                     + request.getParameter("command")).newInstance();
 

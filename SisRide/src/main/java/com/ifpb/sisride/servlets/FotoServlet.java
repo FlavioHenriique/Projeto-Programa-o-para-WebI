@@ -22,7 +22,6 @@ public class FotoServlet extends HttpServlet {
 
         try {
             request.setCharacterEncoding("UTF-8");
-
             Command command = (Command) Class.forName("com.ifpb.sisride.command."
                     + request.getParameter("command")).newInstance();
 
