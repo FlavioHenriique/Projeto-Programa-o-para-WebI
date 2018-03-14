@@ -1,8 +1,6 @@
 
-
 <%@page import="com.ifpb.sisride.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 
 <html>
     <head>
@@ -16,30 +14,30 @@
     </head>
     <body>
         <%@include file="menu.jsp"%>
+
     <center>
-        <h3>Editar perfil</h3>
-
-
-
+        <h4>Editar perfil</h4>
         <form method="post"  enctype="multipart/form-data" action="front">
 
             <div class="row">
-                <div  class="input-field col l4  offset-l4">
+                <div class="input-field col s14 offset-l4">
                     
-                    <input type="file" name="foto2"><br><br>
+                        <br>
+                        <input type="file" name="foto2"><br><br>
 
-                    <input type="text" class="validate" name="nome" placeholder="Nome"
-                           value ="${usuario.nome}"> <br>
+                        <input type="text" class="validate" name="nome" placeholder="Nome"
+                               value ="${usuario.nome}"> <br>
 
-                    <input type="hidden" value="AtualizaUsuario" name="command" ><br>
+                        <input type="hidden" value="AtualizaUsuario" name="command" ><br>
 
-                    <input type="password" class="validate" name="senha" placeholder="Senha"
-                           value="${usuario.senha}"><br><br>
-                    <input type="text" name="cidade" class="validate" placeholder="Cidade"
-                           value="${usuario.cidade}"><br><br>
-                    <input type="text" class="validate" name="profissao" placeholder="Profissão"
-                           value="${usuario.profissao}"><br><br>
-                    <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
+                        <input type="password" class="validate" name="senha" placeholder="Senha"
+                               value="${usuario.senha}"><br><br>
+                        <input type="text" name="cidade" class="validate" placeholder="Cidade"
+                               value="${usuario.cidade}"><br><br>
+                        <input type="text" class="validate" name="profissao" placeholder="Profissão"
+                               value="${usuario.profissao}"><br><br>
+                        <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
+                
                 </div>
             </div>
             <input name="sexo" type="radio" id="masc" value="Masculino" class="validate"/>
@@ -52,17 +50,18 @@
             </div>
         </form>
         <div>
+            <br>
             <a href="front?command=ExcluirConta"><button class="waves-effect waves-light btn s12">
                     Excluir conta</button></a>
             <a href="inicial.jsp"><button class="waves-effect waves-light btn s12">Cancelar</button></a>
         </div>
 
-</center>
-<br><br>
+    </center>
+
+    <br><br>
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="JS/app.js"></script>
-
 </html>

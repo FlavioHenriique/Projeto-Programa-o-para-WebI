@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
     private String sexo;
     private InputStream foto;
     private byte[] foto2;
-
+  
     public Usuario(String email, String senha, String nome, LocalDate nascimento,
             String profissao, String cidade, String sexo, InputStream foto) {
         this.email = email;
@@ -66,7 +66,6 @@ public class Usuario implements Serializable {
     public Usuario() {
 
     }
-
     public InputStream getFoto() {
         return foto;
     }

@@ -5,6 +5,7 @@ import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
 import com.ifpb.sisride.modelo.Lugar;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GerenciadorLugar {
 
@@ -38,5 +39,9 @@ public class GerenciadorLugar {
     
     public Lugar buscaLugar(int identificacao) throws SQLException{
         return dao.buscar(identificacao);
+    }
+    
+    public List<Lugar> buscaLugares(String email) throws SQLException{
+        return dao.buscaLugares(email);
     }
 }

@@ -5,7 +5,7 @@ $('.datepicker').pickadate({
     weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
     weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
     selectMonths: true,
-    selectYears: 40, 
+    selectYears: 160,
     today: 'Hoje',
     clear: 'Limpar',
     close: 'Ok',
@@ -13,3 +13,7 @@ $('.datepicker').pickadate({
     format: 'dd/mm/yyyy'
 });
 
+$(document).ready(function () {
+    $('select').material_select();
+});
+          

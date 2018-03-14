@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ifpb.sisride.modelo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -44,11 +45,16 @@
         </td>
         <td width="50%">
             <h3 align="top">Lugares cadastrados por mim </h3>
-            <% 
-                
-            %>
-
             <br>
+            <table class="highlight bordered centered responsive-table">
+            <c:forEach var="lugar" items="${lugares}">
+                <tr> 
+                    <td> ${lugar.descricao}</td>
+                    <td>${lugar.nome}</td>
+                    <td>${lugar.cidade}</td>
+                </tr>
+            </c:forEach>
+            </table>
         </td>
     </tr>
 </table>

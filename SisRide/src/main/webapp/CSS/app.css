@@ -1,5 +1,5 @@
 body{
-    background-color: #eceff1;
+    background-color: #e8f5e9 ;
 }
 
 .row,.validate,.active{
@@ -14,7 +14,9 @@ body{
     background-color: #2e7d32;
 }
 
-
+fieldset{
+    background-color: white;
+}
 img{
     width: 80px;
     height:80px;
@@ -44,4 +46,9 @@ td{
 
 #busca{
     float:right;
+}
+
+select{
+    display: inline-flex;
+    visibility:visible;
 }

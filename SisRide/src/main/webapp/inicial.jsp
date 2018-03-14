@@ -31,7 +31,7 @@
                             
                                 <input type="text" name="buscado"  placeholder="Buscar usuários">
                             
-                            
+                                
                                 <button type="submit" class="waves-effect waves-light btn" >Buscar</button>
                             
                         </form>
@@ -43,8 +43,8 @@
             </tr>
         </table>
 
-        <br><br>
-        <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button></a>
+        <br><br>    
+        <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button></a><br><br>
     </body>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

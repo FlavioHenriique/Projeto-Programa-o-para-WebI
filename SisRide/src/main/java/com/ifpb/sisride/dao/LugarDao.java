@@ -105,4 +105,28 @@ public class LugarDao implements Dao<Lugar> {
         return lugares;
     }
 
+    public List<Lugar> buscaLugares(String email) throws SQLException {
+
+        String sql = "SELECT * FROM Lugar WHERE EmailUsuario = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet result = stmt.executeQuery();
+        List<Lugar> lista = new ArrayList<>();
+
+        while (result.next()) {
+            Lugar lugar = new Lugar();
+            lugar.setCidade(result.getString("cidade"));
+            lugar.setDescricao(result.getString("descricao"));
+            lugar.setEmailUsuario(result.getString("emailusuario"));
+            lugar.setEstado(result.getString("estado"));
+            lugar.setIdentificacao(result.getInt("identificacao"));
+            lugar.setNome(result.getString("nome"));
+            lugar.setNumero(result.getInt("numero"));
+            lugar.setRua(result.getString("rua"));
+
+            lista.add(lugar);
+        }
+        return lista;
+    }
+
 }
