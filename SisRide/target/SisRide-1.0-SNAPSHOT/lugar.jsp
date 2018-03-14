@@ -25,7 +25,7 @@
                 <td width="50%">
             <center>    
                 <form method="post" action="front"  class="col s12 l4">
-                    <h3>Cadastrar lugar</h3><br>
+                    <h4>Cadastrar lugar</h4><br>
                     <div class="row">
                         <div  class="input-field col l4  offset-l4">
 
@@ -44,22 +44,30 @@
             </center>
         </td>
         <td width="50%">
-            <h3 align="top">Lugares cadastrados por mim </h3>
+            <h4 align="top">Lugares cadastrados por mim </h4>
             <br>
             <table class="highlight bordered centered responsive-table">
                 <tr>
-                    <td><b>Descrição</b></td>
                     <td><b>Nome</b></td>
+                    <td><b>Descrição</b></td>
                 </tr>
-            <c:forEach var="lugar" items="${lugares}">
-                <tr> 
-                    <td> ${lugar.descricao}</td>
-                    <td>${lugar.nome}</td>
-                </tr>
-            </c:forEach>
-            </table>
-        </td>
-    </tr>
+                <c:forEach var="lugar" items="${lugares}">
+                    <tr onclick="armazenarId(this.id)" id="${lugar.identificacao}"> 
+                        <td> ${lugar.nome}</td>
+                        <td>${lugar.descricao}</td>
+                    </tr>
+                </c:forEach>
+            </table><br>
+        <center>
+            <div>
+
+                <button class="waves-effect waves-light btn s12">Atualizar um lugar</button>
+                <label>       </label>
+                <button class="waves-effect waves-light btn s12" onclick="deletarLugar()">Deletar lugar</button>
+            </div>
+        </center>
+    </td>
+</tr>
 </table>
 </body>
 

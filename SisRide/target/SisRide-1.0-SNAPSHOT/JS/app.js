@@ -1,3 +1,5 @@
+localStorage.removeItem("id");
+
 
 $('.datepicker').pickadate({
     monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -16,4 +18,16 @@ $('.datepicker').pickadate({
 $(document).ready(function () {
     $('select').material_select();
 });
-          
+
+function armazenarId(id){
+    localStorage.setItem("id",id);
+}
+ 
+ function deletarLugar(){
+     id = localStorage.getItem("id");
+     
+     if(id != null){
+        window.location.replace("front?command=DeletaLugar&IdLugar="+id);
+     }
+     else alert('Selecione um lugar para ser deletado!');
+ }
