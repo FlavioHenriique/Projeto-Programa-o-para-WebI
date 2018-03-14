@@ -28,7 +28,6 @@ public class Login implements Command {
 
         try {
             GerenciadorUsuario g = new GerenciadorUsuario();
-            GerenciadorLugar gLugar = new GerenciadorLugar();
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
 
@@ -38,9 +37,8 @@ public class Login implements Command {
 
                 Usuario atual = g.buscaUsuario(request.getParameter("email"));
                 session.setAttribute("usuario", atual);
-
-                List<Lugar> lugares = gLugar.buscaLugares(atual.getEmail());
-                session.setAttribute("lugares", lugares);
+                
+                AtualizaLugares.execute(request, atual.getEmail());
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
                 dispatcher.forward(request, response);

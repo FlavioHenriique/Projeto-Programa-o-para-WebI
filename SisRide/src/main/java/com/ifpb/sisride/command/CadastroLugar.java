@@ -27,6 +27,8 @@ public class CadastroLugar implements Command{
                     request.getParameter("rua"), request.getParameter("cidade"), request.getParameter("estado"),
                     Integer.parseInt(request.getParameter("numero")),atual.getEmail());
             
+            AtualizaLugares.execute(request, atual.getEmail());
+            
             response.sendRedirect("lugar.jsp");
             
         } catch (SQLException ex) {

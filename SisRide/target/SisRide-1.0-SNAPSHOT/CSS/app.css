@@ -31,8 +31,8 @@ label {
     color :#2e7d32;  
 }
 
-table{
-    width: 100%;
+.responsive-table{
+    background-color: white;
 }
 
 td{

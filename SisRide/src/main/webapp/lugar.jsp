@@ -47,11 +47,14 @@
             <h3 align="top">Lugares cadastrados por mim </h3>
             <br>
             <table class="highlight bordered centered responsive-table">
+                <tr>
+                    <td><b>Descrição</b></td>
+                    <td><b>Nome</b></td>
+                </tr>
             <c:forEach var="lugar" items="${lugares}">
                 <tr> 
                     <td> ${lugar.descricao}</td>
                     <td>${lugar.nome}</td>
-                    <td>${lugar.cidade}</td>
                 </tr>
             </c:forEach>
             </table>
