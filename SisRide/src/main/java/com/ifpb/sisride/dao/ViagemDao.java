@@ -1,6 +1,8 @@
 package com.ifpb.sisride.dao;
 
 import com.ifpb.sisride.factory.ConFactory;
+import com.ifpb.sisride.modelo.Lugar;
+import com.ifpb.sisride.modelo.Usuario;
 import com.ifpb.sisride.modelo.Viagem;
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,13 +41,13 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setDate(2, Date.valueOf(obj.getData()));
             stmt.setTime(3, time);
             stmt.setFloat(4, obj.getValor());
-            stmt.setString(5, obj.getMotorista());
+            stmt.setString(5, obj.getMotorista().getEmail());
             stmt.setString(6, obj.getMusica());
             stmt.setBoolean(7, obj.isAnimais());
             stmt.setBoolean(8, obj.isFumar());
             stmt.setString(9, obj.getConversa());
-            stmt.setInt(10, obj.getDestino());
-            stmt.setInt(11, obj.getPartida());
+            stmt.setInt(10, obj.getDestino().getIdentificacao());
+            stmt.setInt(11, obj.getPartida().getIdentificacao());
             stmt.setInt(12, obj.getCodCarro());
             return stmt.execute();
         } catch (ParseException ex) {
@@ -59,12 +63,29 @@ public class ViagemDao implements Dao<Viagem> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
         ResultSet result = stmt.executeQuery();
+        Lugar destino = null;
+        Lugar partida = null;
+        Usuario motorista = null;
         if (result.next()) {
+
+            LugarDao dao;
+            UsuarioDao daoUser;
+            try {
+                dao = new LugarDao();
+                daoUser = new UsuarioDao();
+                
+                motorista = daoUser.buscar(result.getString("motorista"));
+                partida = dao.buscar(result.getInt("partida"));
+                destino = dao.buscar(result.getInt("destino"));
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
                     toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
-                    result.getString("motorista"), result.getString("musica"),
+                    motorista, result.getString("musica"),
                     result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
-                    result.getInt("destino"), result.getInt("partida"), result.getInt("codcarro"), result.getInt("codigo"));
+                    destino, partida, result.getInt("codcarro"), result.getInt("codigo"));
             return viagem;
         }
         return null;
@@ -87,13 +108,13 @@ public class ViagemDao implements Dao<Viagem> {
                 stmt.setDate(2, Date.valueOf(obj.getData()));
                 stmt.setTime(3, time);
                 stmt.setFloat(4, obj.getValor());
-                stmt.setString(5, obj.getMotorista());
+                stmt.setString(5, obj.getMotorista().getEmail());
                 stmt.setString(6, obj.getMusica());
                 stmt.setBoolean(7, obj.isAnimais());
                 stmt.setBoolean(8, obj.isFumar());
                 stmt.setString(9, obj.getConversa());
-                stmt.setInt(10, obj.getDestino());
-                stmt.setInt(11, obj.getPartida());
+                stmt.setInt(10, obj.getDestino().getIdentificacao());
+                stmt.setInt(11, obj.getPartida().getIdentificacao());
                 stmt.setInt(12, obj.getCodCarro());
                 stmt.setInt(13, obj.getCodigo());
                 return stmt.execute();
@@ -110,5 +131,22 @@ public class ViagemDao implements Dao<Viagem> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
         return stmt.execute();
+    }
+
+    public List<Viagem> buscarNome(String nome) throws SQLException {
+
+        String sql = "select v.codigo from viagem v, lugar l "
+                + "where l.nome ilike ? and v.destino = l.identificacao";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, nome);
+        ResultSet result = stmt.executeQuery();
+        List<Viagem> lista = new ArrayList<>();
+
+        while (result.next()) {
+            Viagem viagem = buscar(result.getInt("codigo"));
+            lista.add(viagem);
+        }
+
+        return lista;
     }
 }

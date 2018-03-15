@@ -3,9 +3,12 @@ package com.ifpb.sisride.controle;
 import com.ifpb.sisride.dao.ViagemDao;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
+import com.ifpb.sisride.modelo.Lugar;
+import com.ifpb.sisride.modelo.Usuario;
 import com.ifpb.sisride.modelo.Viagem;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class GerenciadorViagem {
 
@@ -18,8 +21,8 @@ public class GerenciadorViagem {
     }
 
     public boolean adicionaViagem(int vagas, LocalDate data, String hora, float valor,
-            String motorista, String musica, boolean animais, boolean fumar,
-            String conversa, int destino, int partida, int codCarro) throws SQLException {
+            Usuario motorista, String musica, boolean animais, boolean fumar,
+            String conversa, Lugar destino, Lugar partida, int codCarro) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
                 animais, fumar, conversa, destino, partida, codCarro);
         dao.salvar(v);
@@ -31,8 +34,8 @@ public class GerenciadorViagem {
     }
 
     public void atualizaViagem(int vagas, LocalDate data, String hora, float valor,
-            String motorista, String musica, boolean animais, boolean fumar,
-            String conversa, int destino, int partida, int codCarro,int codigo) throws SQLException {
+            Usuario motorista, String musica, boolean animais, boolean fumar,
+            String conversa, Lugar destino, Lugar partida, int codCarro,int codigo) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
                 animais, fumar, conversa, destino, partida, codCarro,codigo);
         dao.atualizar(v);
@@ -41,5 +44,10 @@ public class GerenciadorViagem {
     public Viagem buscaViagem(int codigo) throws SQLException {
 
         return dao.buscar(codigo);
+    }
+    
+    public List<Viagem> buscaNome(String nome) throws SQLException{
+        
+        return dao.buscarNome(nome);
     }
 }

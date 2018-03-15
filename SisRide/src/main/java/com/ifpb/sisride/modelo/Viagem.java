@@ -9,19 +9,19 @@ public class Viagem {
     private LocalDate data;
     private String hora;
     private float valor;
-    private String motorista;
+    private Usuario motorista;
     private String musica;
     private boolean animais;
     private boolean fumar;
     private String conversa;
-    private int destino;
-    private int partida;
+    private Lugar destino;
+    private Lugar partida;
     private int codCarro;
     private int codigo;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
-            String motorista, String musica, boolean animais, boolean fumar,
-            String conversa, int destino, int partida, int codCarro) {
+            Usuario motorista, String musica, boolean animais, boolean fumar,
+            String conversa, Lugar destino, Lugar partida, int codCarro) {
         this.vagas = vagas;
         this.data = data;
         this.hora = hora;
@@ -36,9 +36,9 @@ public class Viagem {
         this.codCarro = codCarro;
     }
 
-    public Viagem(int vagas, LocalDate data, String hora, float valor, String 
-            motorista, String musica, boolean animais, boolean fumar, String 
-                    conversa, int destino, int partida, int codCarro, int codigo) {
+    public Viagem(int vagas, LocalDate data, String hora, float valor,
+            Usuario motorista, String musica, boolean animais, boolean fumar,
+            String conversa, Lugar destino, Lugar partida, int codCarro, int codigo) {
         this.vagas = vagas;
         this.data = data;
         this.hora = hora;
@@ -86,11 +86,11 @@ public class Viagem {
         this.valor = valor;
     }
 
-    public String getMotorista() {
+    public Usuario getMotorista() {
         return motorista;
     }
 
-    public void setMotorista(String motorista) {
+    public void setMotorista(Usuario motorista) {
         this.motorista = motorista;
     }
 
@@ -126,19 +126,19 @@ public class Viagem {
         this.conversa = conversa;
     }
 
-    public int getDestino() {
+    public Lugar getDestino() {
         return destino;
     }
 
-    public void setDestino(int destino) {
+    public void setDestino(Lugar destino) {
         this.destino = destino;
     }
 
-    public int getPartida() {
+    public Lugar getPartida() {
         return partida;
     }
 
-    public void setPartida(int partida) {
+    public void setPartida(Lugar partida) {
         this.partida = partida;
     }
 
@@ -156,20 +156,20 @@ public class Viagem {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.vagas;
-        hash = 41 * hash + Objects.hashCode(this.data);
-        hash = 41 * hash + Objects.hashCode(this.hora);
-        hash = 41 * hash + Float.floatToIntBits(this.valor);
-        hash = 41 * hash + Objects.hashCode(this.motorista);
-        hash = 41 * hash + Objects.hashCode(this.musica);
-        hash = 41 * hash + (this.animais ? 1 : 0);
-        hash = 41 * hash + (this.fumar ? 1 : 0);
-        hash = 41 * hash + Objects.hashCode(this.conversa);
-        hash = 41 * hash + this.destino;
-        hash = 41 * hash + this.partida;
-        hash = 41 * hash + this.codCarro;
-        hash = 41 * hash + this.codigo;
+        int hash = 3;
+        hash = 67 * hash + this.vagas;
+        hash = 67 * hash + Objects.hashCode(this.data);
+        hash = 67 * hash + Objects.hashCode(this.hora);
+        hash = 67 * hash + Float.floatToIntBits(this.valor);
+        hash = 67 * hash + Objects.hashCode(this.motorista);
+        hash = 67 * hash + Objects.hashCode(this.musica);
+        hash = 67 * hash + (this.animais ? 1 : 0);
+        hash = 67 * hash + (this.fumar ? 1 : 0);
+        hash = 67 * hash + Objects.hashCode(this.conversa);
+        hash = 67 * hash + Objects.hashCode(this.destino);
+        hash = 67 * hash + Objects.hashCode(this.partida);
+        hash = 67 * hash + this.codCarro;
+        hash = 67 * hash + this.codigo;
         return hash;
     }
 
@@ -197,12 +197,6 @@ public class Viagem {
         if (this.fumar != other.fumar) {
             return false;
         }
-        if (this.destino != other.destino) {
-            return false;
-        }
-        if (this.partida != other.partida) {
-            return false;
-        }
         if (this.codCarro != other.codCarro) {
             return false;
         }
@@ -212,9 +206,6 @@ public class Viagem {
         if (!Objects.equals(this.hora, other.hora)) {
             return false;
         }
-        if (!Objects.equals(this.motorista, other.motorista)) {
-            return false;
-        }
         if (!Objects.equals(this.musica, other.musica)) {
             return false;
         }
@@ -222,6 +213,15 @@ public class Viagem {
             return false;
         }
         if (!Objects.equals(this.data, other.data)) {
+            return false;
+        }
+        if (!Objects.equals(this.motorista, other.motorista)) {
+            return false;
+        }
+        if (!Objects.equals(this.destino, other.destino)) {
+            return false;
+        }
+        if (!Objects.equals(this.partida, other.partida)) {
             return false;
         }
         return true;

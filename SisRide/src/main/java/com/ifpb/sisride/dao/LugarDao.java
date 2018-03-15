@@ -45,7 +45,7 @@ public class LugarDao implements Dao<Lugar> {
                     resultado.getInt("numero"), resultado.getString("emailusuario"),
                     resultado.getInt("identificacao"));
             lista.add(lugar);
-            
+
         }
         System.out.println(lista.toString());
         return lista;
@@ -132,7 +132,25 @@ public class LugarDao implements Dao<Lugar> {
 
     @Override
     public Lugar buscar(Object obj) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = "SELECT * FROM Lugar WHERE identificacao = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, (int) obj);
+
+        ResultSet result = stmt.executeQuery();
+        while (result.next()) {
+            Lugar l = new Lugar();
+            l.setCidade(result.getString("cidade"));
+            l.setDescricao(result.getString("descricao"));
+            l.setEmailUsuario(result.getString("emailusuario"));
+            l.setEstado(result.getString("estado"));
+            l.setIdentificacao(result.getInt("identificacao"));
+            l.setNome(result.getString("nome"));
+            l.setNumero(result.getInt("numero"));
+            l.setRua(result.getString("rua"));
+            return l;
+        }
+        return null;
     }
 
 }
