@@ -19,11 +19,12 @@ public class FotoBuscado implements Command {
         HttpSession session = request.getSession();
         Usuario buscado = (Usuario) session.getAttribute("buscado");
         try {
-           response.getOutputStream().write(buscado.getFoto2());
-            
+            response.getOutputStream().write(buscado.getFoto2());
+
         } catch (IOException ex) {
             Logger.getLogger(FotoBuscado.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
 }

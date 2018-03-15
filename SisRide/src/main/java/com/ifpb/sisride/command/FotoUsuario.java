@@ -17,6 +17,7 @@ public class FotoUsuario implements Command {
         
         HttpSession session = request.getSession();
         Usuario u = (Usuario) session.getAttribute("usuario");
+       
         try {
             response.getOutputStream().write(u.getFoto2());
         } catch (IOException ex) {

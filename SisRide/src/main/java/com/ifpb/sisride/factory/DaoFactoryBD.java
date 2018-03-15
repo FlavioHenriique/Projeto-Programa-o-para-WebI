@@ -3,6 +3,7 @@ package com.ifpb.sisride.factory;
 import com.ifpb.sisride.dao.AvaliacaoDao;
 import com.ifpb.sisride.dao.CarroDao;
 import com.ifpb.sisride.dao.LugarDao;
+import com.ifpb.sisride.dao.SolicitacaoDao;
 import com.ifpb.sisride.dao.UsuarioDao;
 import com.ifpb.sisride.dao.ViagemDao;
 import java.sql.SQLException;
@@ -36,4 +37,11 @@ public class DaoFactoryBD implements DaoFactoryIF {
     public AvaliacaoDao criaAvaliacaoDao() throws SQLException, ClassNotFoundException {
         return new AvaliacaoDao();
     }
+
+    @Override
+    public SolicitacaoDao criaSolicitacaoDao() throws SQLException, ClassNotFoundException {
+        return new SolicitacaoDao();
+    }
+    
+    
 }

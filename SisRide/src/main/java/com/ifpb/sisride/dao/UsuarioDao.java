@@ -158,4 +158,5 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.execute();
 
     }
+    
 }

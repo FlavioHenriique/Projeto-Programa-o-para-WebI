@@ -28,7 +28,7 @@
                     <br><label>Data de nascimento: ${buscado.nascimento}</label>
                     <br><label> Cidade: ${buscado.cidade}</label>
                 </td>
-
+                
                 <td>
             <center>
                 <br>

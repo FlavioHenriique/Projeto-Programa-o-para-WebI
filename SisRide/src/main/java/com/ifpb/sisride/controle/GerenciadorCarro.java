@@ -16,10 +16,11 @@ public class GerenciadorCarro {
         dao = fabrica.criaCarroDao();
     }
 
-    public void adicionaCarro(String modelo, int ano, boolean ar_condicionado)
+    public int adicionaCarro(String modelo, String ano, boolean ar_condicionado)
             throws SQLException {
         Carro carro = new Carro(modelo, ano, ar_condicionado);
-        dao.salvar(carro);
+        System.out.println(carro.toString());
+        return dao.salvarCarro(carro);
     }
 
     public void removeCarro(int codigo) throws SQLException {
@@ -27,7 +28,7 @@ public class GerenciadorCarro {
         dao.deletar(codigo);
     }
 
-    public void atualizaCarro(String modelo, int ano, boolean ar_condicionado,
+    public void atualizaCarro(String modelo, String ano, boolean ar_condicionado,
             int codigo) throws SQLException {
         Carro carro = new Carro(modelo, ano, ar_condicionado, codigo);
         dao.atualizar(carro);

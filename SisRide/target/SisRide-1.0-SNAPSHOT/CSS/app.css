@@ -47,8 +47,3 @@ td{
 #busca{
     float:right;
 }
-
-select{
-    display: inline-flex;
-    visibility:visible;
-}

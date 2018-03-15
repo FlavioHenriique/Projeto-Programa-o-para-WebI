@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Carro {
 
     private String modelo;
-    private int ano;
+    private String ano;
     private boolean ar_condicionado;
     private int codigo;
 
-    public Carro(String modelo, int ano, boolean ar_condicionado) {
+    public Carro(String modelo, String ano, boolean ar_condicionado) {
         this.modelo = modelo;
         this.ano = ano;
         this.ar_condicionado = ar_condicionado;
     }
 
-    public Carro(String modelo, int ano, boolean ar_condicionado, int codigo) {
+    public Carro(String modelo, String ano, boolean ar_condicionado, int codigo) {
         this.modelo = modelo;
         this.ano = ano;
         this.ar_condicionado = ar_condicionado;
@@ -34,11 +34,11 @@ public class Carro {
         this.modelo = modelo;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
@@ -53,9 +53,10 @@ public class Carro {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.modelo);
-        hash = 29 * hash + this.ano;
-        hash = 29 * hash + (this.ar_condicionado ? 1 : 0);
+        hash = 13 * hash + Objects.hashCode(this.modelo);
+        hash = 13 * hash + Objects.hashCode(this.ano);
+        hash = 13 * hash + (this.ar_condicionado ? 1 : 0);
+        hash = 13 * hash + this.codigo;
         return hash;
     }
 
@@ -71,13 +72,16 @@ public class Carro {
             return false;
         }
         final Carro other = (Carro) obj;
-        if (this.ano != other.ano) {
-            return false;
-        }
         if (this.ar_condicionado != other.ar_condicionado) {
             return false;
         }
+        if (this.codigo != other.codigo) {
+            return false;
+        }
         if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.ano, other.ano)) {
             return false;
         }
         return true;

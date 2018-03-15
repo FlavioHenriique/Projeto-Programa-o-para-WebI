@@ -27,7 +27,7 @@ CREATE TABLE LUGAR(
 CREATE TABLE CARRO(
     Modelo VARCHAR(30) NOT NULL,
     ArCondicionado boolean NOT NULL,
-    Ano int NOT NULL,
+    Ano varchar NOT NULL,
     Codigo serial PRIMARY KEY
 );
 
