@@ -51,7 +51,7 @@
                     <td><b>Nome</b></td>
                     <td><b>Descrição</b></td>
                 </tr>
-                <c:forEach var="lugar" items="${lugares}">
+                <c:forEach var="lugar" items="${MeusLugares}">
                     <tr onclick="armazenarId(this.id)" id="${lugar.identificacao}"> 
                         <td> ${lugar.nome}</td>
                         <td>${lugar.descricao}</td>

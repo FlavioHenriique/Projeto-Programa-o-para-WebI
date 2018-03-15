@@ -33,21 +33,22 @@ public class LugarDao implements Dao<Lugar> {
         return stmt.execute();
     }
 
-    @Override
-    public Lugar buscar(Object obj) throws SQLException {
-        String sql = "SELECT * FROM LUGAR WHERE identificacao = ?";
+    public List<Lugar> buscarLugares() throws SQLException {
+        String sql = "SELECT * FROM LUGAR ";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, (int) obj);
         ResultSet resultado = stmt.executeQuery();
-        if (resultado.next()) {
+        List<Lugar> lista = new ArrayList<>();
+        while (resultado.next()) {
             Lugar lugar = new Lugar(resultado.getString("descricao"),
                     resultado.getString("nome"), resultado.getString("rua"),
                     resultado.getString("cidade"), resultado.getString("estado"),
                     resultado.getInt("numero"), resultado.getString("emailusuario"),
                     resultado.getInt("identificacao"));
-            return lugar;
+            lista.add(lugar);
+            
         }
-        return null;
+        System.out.println(lista.toString());
+        return lista;
     }
 
     @Override
@@ -127,6 +128,11 @@ public class LugarDao implements Dao<Lugar> {
             lista.add(lugar);
         }
         return lista;
+    }
+
+    @Override
+    public Lugar buscar(Object obj) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

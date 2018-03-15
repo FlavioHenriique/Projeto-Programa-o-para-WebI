@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,7 +13,7 @@
         <%@include file="menu.jsp"%>
 
 
-        <table width="100%">
+             <table width="100%">
             <tr>
                 <td width="30%">
             <center>
@@ -51,6 +50,12 @@
                                     </select>
                                 </div>
                                 <br>
+                                <select>
+                                    <option value="" disabled selected>Selecione o lugar ...</option>
+                                    <c:forEach var="lugar" items="${lugares}">
+                                        <option>${lugar.nome}</option>
+                                    </c:forEach>
+                                </select>
                             </fieldset>
                         </form>
                     </div>
@@ -61,6 +66,7 @@
         <center>
             <h4>Minhas caronas</h4>
         </center>
+
     </td>
 </tr>
 </table>

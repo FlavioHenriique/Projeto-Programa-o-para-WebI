@@ -37,8 +37,9 @@ public class GerenciadorLugar {
         return dao.atualizar(l);
     }
     
-    public Lugar buscaLugar(int identificacao) throws SQLException{
-        return dao.buscar(identificacao);
+    public List<Lugar> buscaLugar() throws SQLException{
+        return dao.buscarLugares();
+       
     }
     
     public List<Lugar> buscaLugares(String email) throws SQLException{

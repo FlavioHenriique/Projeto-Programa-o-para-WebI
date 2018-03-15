@@ -17,7 +17,7 @@ public class AtualizaLugares {
         GerenciadorLugar gLugar = new GerenciadorLugar();
 
         List<Lugar> lugares = gLugar.buscaLugares(email);
-        session.setAttribute("lugares", lugares);
+        session.setAttribute("MeusLugares", lugares);
 
     }
 }
