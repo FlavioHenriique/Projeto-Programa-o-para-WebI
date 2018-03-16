@@ -3,6 +3,7 @@ package com.ifpb.sisride.command;
 import com.ifpb.sisride.controle.GerenciadorCarro;
 import com.ifpb.sisride.controle.GerenciadorLugar;
 import com.ifpb.sisride.controle.GerenciadorViagem;
+import com.ifpb.sisride.modelo.Carro;
 import com.ifpb.sisride.modelo.Lugar;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
@@ -27,9 +28,15 @@ public class CadastroViagem implements Command {
             GerenciadorCarro gCarro = new GerenciadorCarro();
             GerenciadorLugar gLugar = new GerenciadorLugar();
 
-            int carro = gCarro.adicionaCarro(request.getParameter("modelo"), request.getParameter("ano"),
+            Carro carro = new Carro();
+            carro.setAno(request.getParameter("ano"));
+            carro.setAr_condicionado(Boolean.parseBoolean(request.getParameter("ar")));
+            carro.setModelo(request.getParameter("modelo"));
+            
+            
+            int codCarro = gCarro.adicionaCarro(request.getParameter("modelo"), request.getParameter("ano"),
                     Boolean.parseBoolean(request.getParameter("ar")));
-            System.out.println(carro);
+            carro.setCodigo(codCarro);
             HttpSession session = request.getSession();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

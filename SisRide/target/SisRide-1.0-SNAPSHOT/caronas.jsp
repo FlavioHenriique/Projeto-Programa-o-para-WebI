@@ -44,10 +44,10 @@
                                 <div>
                                     <select name="conversa">
                                         <option value="" disabled selected>Selecione o nível de conversa...</option>
-                                        <option value="Alto">Alto</option>
-                                        <option value="Médio">Médio</option>
-                                        <option value="Baixo">Baixo</option>
-                                        <option value="Nenhum">Nenhum</option>
+                                        <option value="alto">Alto</option>
+                                        <option value="médio">Médio</option>
+                                        <option value="baixo">Baixo</option>
+                                        <option value="nenhum">Nenhum</option>
                                     </select>
                                 </div>
                                 <br>

@@ -16,12 +16,12 @@ public class Viagem {
     private String conversa;
     private Lugar destino;
     private Lugar partida;
-    private int codCarro;
     private int codigo;
+    private Carro carro;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, int codCarro) {
+            String conversa, Lugar destino, Lugar partida, Carro carro) {
         this.vagas = vagas;
         this.data = data;
         this.hora = hora;
@@ -33,12 +33,12 @@ public class Viagem {
         this.conversa = conversa;
         this.destino = destino;
         this.partida = partida;
-        this.codCarro = codCarro;
+        this.carro = carro;
     }
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, int codCarro, int codigo) {
+            String conversa, Lugar destino, Lugar partida, Carro carro, int codigo) {
         this.vagas = vagas;
         this.data = data;
         this.hora = hora;
@@ -50,7 +50,7 @@ public class Viagem {
         this.conversa = conversa;
         this.destino = destino;
         this.partida = partida;
-        this.codCarro = codCarro;
+        this.carro = carro;
         this.codigo = codigo;
     }
 
@@ -142,34 +142,34 @@ public class Viagem {
         this.partida = partida;
     }
 
-    public int getCodCarro() {
-        return codCarro;
-    }
-
-    public void setCodCarro(int codCarro) {
-        this.codCarro = codCarro;
-    }
-
     public int getCodigo() {
         return codigo;
+    }
+
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Carro carro) {
+        this.carro = carro;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + this.vagas;
-        hash = 67 * hash + Objects.hashCode(this.data);
-        hash = 67 * hash + Objects.hashCode(this.hora);
-        hash = 67 * hash + Float.floatToIntBits(this.valor);
-        hash = 67 * hash + Objects.hashCode(this.motorista);
-        hash = 67 * hash + Objects.hashCode(this.musica);
-        hash = 67 * hash + (this.animais ? 1 : 0);
-        hash = 67 * hash + (this.fumar ? 1 : 0);
-        hash = 67 * hash + Objects.hashCode(this.conversa);
-        hash = 67 * hash + Objects.hashCode(this.destino);
-        hash = 67 * hash + Objects.hashCode(this.partida);
-        hash = 67 * hash + this.codCarro;
-        hash = 67 * hash + this.codigo;
+        hash = 17 * hash + this.vagas;
+        hash = 17 * hash + Objects.hashCode(this.data);
+        hash = 17 * hash + Objects.hashCode(this.hora);
+        hash = 17 * hash + Float.floatToIntBits(this.valor);
+        hash = 17 * hash + Objects.hashCode(this.motorista);
+        hash = 17 * hash + Objects.hashCode(this.musica);
+        hash = 17 * hash + (this.animais ? 1 : 0);
+        hash = 17 * hash + (this.fumar ? 1 : 0);
+        hash = 17 * hash + Objects.hashCode(this.conversa);
+        hash = 17 * hash + Objects.hashCode(this.destino);
+        hash = 17 * hash + Objects.hashCode(this.partida);
+        hash = 17 * hash + this.codigo;
+        hash = 17 * hash + Objects.hashCode(this.carro);
         return hash;
     }
 
@@ -197,9 +197,6 @@ public class Viagem {
         if (this.fumar != other.fumar) {
             return false;
         }
-        if (this.codCarro != other.codCarro) {
-            return false;
-        }
         if (this.codigo != other.codigo) {
             return false;
         }
@@ -224,12 +221,15 @@ public class Viagem {
         if (!Objects.equals(this.partida, other.partida)) {
             return false;
         }
+        if (!Objects.equals(this.carro, other.carro)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codCarro=" + codCarro + ", codigo=" + codigo + '}';
+        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codigo=" + codigo + ", carro=" + carro + '}';
     }
 
 }

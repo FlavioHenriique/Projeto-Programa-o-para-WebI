@@ -11,44 +11,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolicitacaoDao {
-    
+
     private Connection con;
-    
+
     public SolicitacaoDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();
         con = factory.getConnection();
     }
-    
+
     public List<Solicitacao> listarSolicitacoes(Usuario usuario) throws SQLException, ClassNotFoundException {
-        
+
         String sql = "SELECT * FROM SOLICITACAO WHERE emailUsuario = ? OR emailamigo = ?";
-        
+
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, usuario.getEmail());
         stmt.setString(2, usuario.getEmail());
         ResultSet result = stmt.executeQuery();
-        
+
         List<Solicitacao> solicitacoes = new ArrayList<>();
         UsuarioDao dao = new UsuarioDao();
-        
+
         while (result.next()) {
             Solicitacao s = new Solicitacao(dao.buscar(result.getString("emailUsuario")),
                     dao.buscar(result.getString("emailamigo")), result.getString("tipo"), result.getString("situacao"));
-            
+
             solicitacoes.add(s);
         }
         return solicitacoes;
     }
-    
-    public void aceitaSolicitacao(String atual, String solicitador, String tipo) throws SQLException {
-        
-        String sql = "UPDATE Solicitacao SET situacao = 'aceita' WHERE emailUsuario = ? "
-                + "AND emailAmigo = ? AND tipo = ?";
-        System.out.println("aqui "+atual + solicitador + tipo);
-        
+
+    public void aceitaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+
+
+        String sql = "update solicitacao set situacao = 'aceita' where emailamigo = ?  and "
+                + "emailusuario = ? and tipo = ?";
+     
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, atual);
+        stmt.setString(1, requisitado);
         stmt.setString(2, solicitador);
+        stmt.setString(3, tipo);
+        stmt.executeUpdate();
+      
+
+    }
+
+    public void recusaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+
+        String sql = "DELETE FROM Solicitacao WHERE emailUsuario = ? AND"
+                + " emailAmigo = ? AND tipo = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(2, requisitado);
+        stmt.setString(1, solicitador);
         stmt.setString(3, tipo);
         stmt.execute();
     }

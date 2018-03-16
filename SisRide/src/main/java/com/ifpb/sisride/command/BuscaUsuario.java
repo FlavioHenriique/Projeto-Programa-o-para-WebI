@@ -33,6 +33,10 @@ public class BuscaUsuario implements Command {
                 dispatcher.forward(request, response);
 
             } else {
+                
+                ListarSolicitacoes listar = new ListarSolicitacoes();
+                listar.listar(session, (Usuario) session.getAttribute("usuario"));
+                
                 RequestDispatcher dispatcher = request.getRequestDispatcher("usuario.jsp");
                 dispatcher.forward(request, response);
             }

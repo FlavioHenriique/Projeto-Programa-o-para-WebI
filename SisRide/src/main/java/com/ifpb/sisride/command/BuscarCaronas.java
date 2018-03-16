@@ -19,7 +19,9 @@ public class BuscarCaronas implements Command {
         
         try {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
-            request.setAttribute("buscaViagens", gerenciador.buscaNome(request.getParameter("nomeLugar")));
+            List<Viagem> lista = gerenciador.buscaNome(request.getParameter("nomeLugar"));
+           
+            request.setAttribute("buscaViagens", lista);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp");
             dispatcher.forward(request, response);

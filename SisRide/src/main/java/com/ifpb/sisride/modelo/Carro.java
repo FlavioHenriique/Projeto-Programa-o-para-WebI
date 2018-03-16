@@ -9,6 +9,10 @@ public class Carro {
     private boolean ar_condicionado;
     private int codigo;
 
+    public Carro() {
+
+    }
+
     public Carro(String modelo, String ano, boolean ar_condicionado) {
         this.modelo = modelo;
         this.ano = ano;
@@ -24,6 +28,10 @@ public class Carro {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getModelo() {

@@ -22,10 +22,12 @@ public class GerenciadorSolicitacao {
         return dao.listarSolicitacoes(u);
     }
     
-    public void aceitarSolicitacao(String atual, String solicitador, String tipo) throws SQLException{
-        System.out.println(atual);
-        System.out.println(solicitador);
-        System.out.println(tipo);
-        dao.aceitaSolicitacao(atual, solicitador, tipo);
+    public void aceitarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException{
+       
+        dao.aceitaSolicitacao(solicitador, requisitado, tipo);
+    }
+    
+    public void recusarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException{
+        dao.recusaSolicitacao( solicitador,requisitado, tipo);
     }
 }

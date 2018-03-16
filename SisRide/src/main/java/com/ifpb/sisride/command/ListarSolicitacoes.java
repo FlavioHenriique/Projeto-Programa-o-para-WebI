@@ -12,17 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ListarSolicitacoes implements Command {
-    
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
-        HttpSession session = request.getSession();
-        Usuario atual = (Usuario) session.getAttribute("usuario");
-        
+
         try {
-            GerenciadorSolicitacao g = new GerenciadorSolicitacao();
-            session.setAttribute("solicitacoes", g.listarSolicitacoes(atual));
-            
+
+            HttpSession session = request.getSession();
+            Usuario atual = (Usuario) session.getAttribute("usuario");
+            listar(session, atual);
+
             response.sendRedirect("solicitacoes.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(ListarSolicitacoes.class.getName()).log(Level.SEVERE, null, ex);
@@ -32,5 +31,11 @@ public class ListarSolicitacoes implements Command {
             Logger.getLogger(ListarSolicitacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void listar(HttpSession session, Usuario u) throws SQLException, ClassNotFoundException {
+
+        GerenciadorSolicitacao g = new GerenciadorSolicitacao();
+        session.setAttribute("solicitacoes", g.listarSolicitacoes(u));
+    }
+
 }

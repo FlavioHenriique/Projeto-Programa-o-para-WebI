@@ -3,6 +3,7 @@ package com.ifpb.sisride.controle;
 import com.ifpb.sisride.dao.ViagemDao;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
+import com.ifpb.sisride.modelo.Carro;
 import com.ifpb.sisride.modelo.Lugar;
 import com.ifpb.sisride.modelo.Usuario;
 import com.ifpb.sisride.modelo.Viagem;
@@ -22,9 +23,9 @@ public class GerenciadorViagem {
 
     public boolean adicionaViagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, int codCarro) throws SQLException {
+            String conversa, Lugar destino, Lugar partida,Carro carro) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
-                animais, fumar, conversa, destino, partida, codCarro);
+                animais, fumar, conversa, destino, partida, carro);
         dao.salvar(v);
         return true;
     }
@@ -35,9 +36,9 @@ public class GerenciadorViagem {
 
     public void atualizaViagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, int codCarro,int codigo) throws SQLException {
+            String conversa, Lugar destino, Lugar partida, Carro carro,int codigo) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
-                animais, fumar, conversa, destino, partida, codCarro,codigo);
+                animais, fumar, conversa, destino, partida, carro ,codigo);
         dao.atualizar(v);
     }
 

@@ -1,4 +1,4 @@
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ifpb.sisride.modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -28,13 +28,16 @@
                     <br><label>Data de nascimento: ${buscado.nascimento}</label>
                     <br><label> Cidade: ${buscado.cidade}</label>
                 </td>
-                
                 <td>
             <center>
                 <br>
-                <a href="front?command=Solicitacao&tipo=amizade"><button 
-                        class="waves-effect waves-light btn s12">Solicitar amizade</button></a>
-
+                <c:forEach var="solicitacao" items="${solicitacoes}">
+                    <c:if test="${(solicitacao.usuario.email eq usuario.email) 
+                                  && (solicitacao.amigo.email eq buscado.email)}">
+                                      
+                    </c:if>
+                </c:forEach>
+              
                 <br><br>
                 <a href="front?command=Solicitacao&tipo=seguir"><button 
                         class="waves-effect waves-light btn s12">Seguir</button></a>

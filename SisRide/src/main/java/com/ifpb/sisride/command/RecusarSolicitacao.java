@@ -9,20 +9,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AceitarSolicitacao implements Command {
+public class RecusarSolicitacao implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+
         try {
             GerenciadorSolicitacao g = new GerenciadorSolicitacao();
-            g.aceitarSolicitacao(request.getParameter("solicitador"), request.getParameter("requisitado"),
+            g.recusarSolicitacao(request.getParameter("solicitador"), request.getParameter("requisitado"),
                     request.getParameter("tipoSolicitacao"));
-                    
+
             response.sendRedirect("front?command=ListarSolicitacoes");
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(AceitarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RecusarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RecusarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(AceitarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RecusarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

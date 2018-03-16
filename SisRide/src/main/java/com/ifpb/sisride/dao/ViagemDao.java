@@ -1,6 +1,7 @@
 package com.ifpb.sisride.dao;
 
 import com.ifpb.sisride.factory.ConFactory;
+import com.ifpb.sisride.modelo.Carro;
 import com.ifpb.sisride.modelo.Lugar;
 import com.ifpb.sisride.modelo.Usuario;
 import com.ifpb.sisride.modelo.Viagem;
@@ -48,7 +49,7 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setString(9, obj.getConversa());
             stmt.setInt(10, obj.getDestino().getIdentificacao());
             stmt.setInt(11, obj.getPartida().getIdentificacao());
-            stmt.setInt(12, obj.getCodCarro());
+            stmt.setInt(12, obj.getCarro().getCodigo());
             return stmt.execute();
         } catch (ParseException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,27 +67,33 @@ public class ViagemDao implements Dao<Viagem> {
         Lugar destino = null;
         Lugar partida = null;
         Usuario motorista = null;
+        Carro carro = null;
+
         if (result.next()) {
 
             LugarDao dao;
+            CarroDao daoCarro;
             UsuarioDao daoUser;
             try {
                 dao = new LugarDao();
                 daoUser = new UsuarioDao();
-                
+                daoCarro = new CarroDao();
+
                 motorista = daoUser.buscar(result.getString("motorista"));
                 partida = dao.buscar(result.getInt("partida"));
                 destino = dao.buscar(result.getInt("destino"));
+                carro = daoCarro.buscar(result.getInt("codCarro"));
+                
+                Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
+                        toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
+                        motorista, result.getString("musica"),
+                        result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
+                        destino, partida, carro, result.getInt("codigo"));
+                return viagem;
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
-                    toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
-                    motorista, result.getString("musica"),
-                    result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
-                    destino, partida, result.getInt("codcarro"), result.getInt("codigo"));
-            return viagem;
         }
         return null;
     }
@@ -115,7 +122,7 @@ public class ViagemDao implements Dao<Viagem> {
                 stmt.setString(9, obj.getConversa());
                 stmt.setInt(10, obj.getDestino().getIdentificacao());
                 stmt.setInt(11, obj.getPartida().getIdentificacao());
-                stmt.setInt(12, obj.getCodCarro());
+                stmt.setInt(12, obj.getCarro().getCodigo());
                 stmt.setInt(13, obj.getCodigo());
                 return stmt.execute();
             } catch (ParseException ex) {
@@ -137,6 +144,7 @@ public class ViagemDao implements Dao<Viagem> {
 
         String sql = "select v.codigo from viagem v, lugar l "
                 + "where l.nome ilike ? and v.destino = l.identificacao";
+
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nome);
         ResultSet result = stmt.executeQuery();
@@ -146,7 +154,10 @@ public class ViagemDao implements Dao<Viagem> {
             Viagem viagem = buscar(result.getInt("codigo"));
             lista.add(viagem);
         }
-
+        
+        for(Viagem v: lista){
+            System.out.println(v.getCarro().toString());
+        }
         return lista;
     }
 }

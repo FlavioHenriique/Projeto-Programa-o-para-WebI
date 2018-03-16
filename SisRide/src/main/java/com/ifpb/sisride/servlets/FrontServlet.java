@@ -43,7 +43,6 @@ public class FrontServlet extends HttpServlet {
 
         try {
             request.setCharacterEncoding("UTF-8");
-            System.out.println(request.getParameter("command"));
             
             Command command = (Command) Class.forName("com.ifpb.sisride.command."
                     + request.getParameter("command")).newInstance();
