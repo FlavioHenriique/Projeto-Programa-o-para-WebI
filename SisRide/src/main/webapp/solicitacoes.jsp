@@ -22,23 +22,42 @@
                         <input type="text" name="nomeLugar" placeholder="Para onde deseja ir?" class="validate">
                         <input type="hidden" name="command" value="BuscarCaronas">
                         <button class="waves-effect waves-light btn s12">Buscar caronas</button>
+                        <c:choose>
+                            <c:when test="${buscaViagens != null}">
 
-                        <c:if test="${buscaViagens != null}">
-
-                            <h4>Caronas encontradas</h4><br><hr>
-                            <c:forEach var="viagem" items="${buscaViagens}">
-                                <c:if test="${viagem.motorista.email != usuario.email}">
-                                    <div>
-                                        ${viagem.partida.nome} - ${viagem.destino.nome}
-                                        <br> ${viagem.motorista.nome}
-                                        <br> ${viagem.data}
-                                        <button class="waves-effect waves-light btn s12">Solicitar</button>
-                                    </div>
-                                </c:if>
-                            </c:forEach>
-                        </c:if>
-
-
+                                <h4>Caronas encontradas</h4><br><hr>
+                                <c:forEach var="viagem" items="${buscaViagens}">
+                                    <c:if test="${viagem.motorista.email != usuario.email}">
+                                        <div class="solicitacoes">
+                                            <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
+                                            Motorista: <a href="front?command=BuscaUsuario&buscado=${viagem.motorista.nome}">
+                                                ${viagem.motorista.nome}</a>
+                                            <br>Data da viagem: ${viagem.data}, às ${viagem.hora} horas
+                                            <br>${viagem.vagas} vagas
+                                            <br>O nível de conversa desejado é ${viagem.conversa},
+                                            <c:choose>
+                                                <c:when test="${viagem.fumar eq true}">
+                                                    Ṕermitido fumar
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Não é permitido fumar
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${viagem.animais eq true}">
+                                                    e é permitido levar animais.
+                                                </c:when>
+                                                <c:otherwise>
+                                                    e não é permitido levar animais.
+                                                </c:otherwise>
+                                            </c:choose><br>
+                                            <button class="waves-effect waves-light btn s12 alinhado">Solicitar</button>
+                                            <hr>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
                 </td>
                 <td width="5%"></td>
                 <td width="45%">
@@ -46,11 +65,12 @@
                     <hr>
                     <c:forEach var="solicitacao" items="${solicitacoes}">
                         <c:if test="${solicitacao.tipo eq 'amizade'}">
-                            <div>
-                                <h5>${solicitacao.amigo.nome}</h5>
+                            <div class="solicitacoes">
+                                <h5><b>${solicitacao.amigo.nome}</b></h5>
                                 <a href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
-                                <button class="waves-effect waves-light btn s12">Aceitar</button>
-                                <button class="waves-effect waves-light btn s12">Recusar</button>
+                                <button class="waves-effect waves-light btn s12 alinhado">Aceitar</button>
+
+                                <button class="waves-effect waves-light btn s12 alinhado">Recusar</button>
                                 <hr>
                             </div>    
                         </c:if>
@@ -60,11 +80,11 @@
                     <hr>
                     <c:forEach var="solicitacao" items="${solicitacoes}">
                         <c:if test="${solicitacao.tipo eq 'seguir'}">
-                            <div>
-                                <h5>${solicitacao.amigo.nome}</h5>
+                            <div class="solicitacoes">
+                                <h5><b>${solicitacao.amigo.nome}</b></h5>
                                 <a href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
-                                <button class="waves-effect waves-light btn s12">Aceitar</button>
-                                <button class="waves-effect waves-light btn s12">Recusar</button>
+                                <button class="waves-effect waves-light btn s12 alinhado">Aceitar</button>
+                                <button class="waves-effect waves-light btn s12 alinhado">Recusar</button>
                                 <hr>
                             </div>    
                         </c:if>

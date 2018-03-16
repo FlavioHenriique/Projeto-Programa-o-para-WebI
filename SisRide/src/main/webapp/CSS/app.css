@@ -14,8 +14,9 @@ body{
     background-color: #2e7d32;
 }
 
-fieldset{
+fieldset, .solicitacoes{
     background-color: white;
+    
 }
 img{
     width: 80px;
@@ -44,6 +45,6 @@ td{
     color: black;
 }
 
-#busca{
+#busca, .alinhado{
     float:right;
 }
