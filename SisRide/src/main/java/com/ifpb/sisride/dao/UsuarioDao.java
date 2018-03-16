@@ -25,11 +25,6 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean salvar(Usuario obj) throws SQLException, CadastroException {
 
-        if (obj.getCidade() == "" || obj.getEmail() == "" || obj.getNascimento() == null
-                || obj.getNome() == "" || obj.getProfissao() == "" || obj.getSenha() == "" || obj.getSexo() == "") {
-            throw new CadastroException("Preencha todos os campos");
-        }
-
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
                 + "Cidade,Sexo,foto) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -158,5 +153,5 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.execute();
 
     }
-    
+
 }

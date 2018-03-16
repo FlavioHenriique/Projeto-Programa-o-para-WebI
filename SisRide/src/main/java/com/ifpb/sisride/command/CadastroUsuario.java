@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 public class CadastroUsuario implements Command {
 
     @Override
@@ -27,13 +28,23 @@ public class CadastroUsuario implements Command {
 
             Part part = request.getPart("foto");
             InputStream input = part.getInputStream();
+
+            if (request.getParameter("email") == null || request.getParameter("senha") == null
+                    || request.getParameter("nome") == null || request.getParameter("data") == null
+                    || request.getParameter("profissao") == null || request.getParameter("cidade") == null
+                    || request.getParameter("sexo") == null) {
+                response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=1");
+            } else if (g.buscaUsuario(request.getParameter("email")) != null) {
                 
-            
-            if (g.adicionaUsuario(request.getParameter("email"), request.getParameter("senha"),
+                response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=2");
+                
+            } else if (g.adicionaUsuario(request.getParameter("email"), request.getParameter("senha"),
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
-                    request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"),input)) {
+                    request.getParameter("profissao"), request.getParameter("cidade"),
+                    request.getParameter("sexo"), input)) {
 
                 response.sendRedirect("index.jsp");
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,6 +55,6 @@ public class CadastroUsuario implements Command {
         } catch (CadastroException ex) {
 
         }
-
     }
+
 }

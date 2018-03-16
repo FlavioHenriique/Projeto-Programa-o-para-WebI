@@ -43,7 +43,7 @@ public class Login implements Command {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
                 dispatcher.forward(request, response);
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index.jsp?erro=1");
             }
         } catch (SQLException | ClassNotFoundException | IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

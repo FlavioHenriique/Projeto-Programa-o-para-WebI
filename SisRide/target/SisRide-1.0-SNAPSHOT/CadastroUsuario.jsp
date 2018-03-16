@@ -14,7 +14,7 @@
         <h2 class="row col 12">Cadastre-se aqui</h2>
         <br>
         <form method="post" action="front" enctype="multipart/form-data" >
-            
+
             <div class="row">
                 <div  class="input-field col l4  offset-l4">
                     <input type="file" name="foto" ><br><br>
@@ -46,4 +46,13 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="JS/app.js"></script>
+<script>
+    var erro = "${param.erroCadastroUsuario}";
+    if (erro == "1") {
+        swal("Erro!!", "Preencha todos os campos", "error");
+    }
+    if (erro == "2") {
+        swal("Erro!!","Este email já está sendo utilizado","error");
+    }
+</script>
 </html>

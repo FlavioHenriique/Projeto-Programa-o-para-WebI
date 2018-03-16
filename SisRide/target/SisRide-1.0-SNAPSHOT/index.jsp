@@ -43,9 +43,16 @@
 
         </form>
         <br>
-        Nao possui conta? <a href="CadastroUsuario.html"> clique aqui para se cadastrar</a>
+        Nao possui conta? <a href="CadastroUsuario.jsp"> clique aqui para se cadastrar</a>
     </center>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script>
+    var erro = "${param.erro}";
+    
+    if (erro == 1){
+        alert("Usuário não encontrado!");
+    }
+</script>
 </html>
