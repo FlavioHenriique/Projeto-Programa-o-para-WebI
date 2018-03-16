@@ -51,7 +51,7 @@
                                                     e não é permitido levar animais.
                                                 </c:otherwise>
                                             </c:choose><br>
-                                            <button class="waves-effect waves-light btn s12 alinhado">Solicitar</button>
+                                            <button class="waves-effect waves-light btn s12 alinhado">Solicitar vaga</button>
                                             <hr>
                                         </div>
                                     </c:if>
@@ -64,29 +64,35 @@
                     <h4>Solicitações de amizade</h4>
                     <hr>
                     <c:forEach var="solicitacao" items="${solicitacoes}">
-                        <c:if test="${solicitacao.tipo eq 'amizade'}">
-                            <div class="solicitacoes">
-                                <h5><b>${solicitacao.amigo.nome}</b></h5>
-                                <a href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
-                                <button class="waves-effect waves-light btn s12 alinhado">Aceitar</button>
+                        <c:if test="${(solicitacao.tipo eq 'amizade') && 
+                                      (solicitacao.situacao eq 'pendente') && (solicitacao.usuario.email eq usuario.email)}">
+                              <div class="solicitacoes">
+                                  <h5><b>${solicitacao.amigo.nome}</b></h5>
+                                  <a class="waves-effect waves-light btn s12 alinhado"
+                                     href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
 
-                                <button class="waves-effect waves-light btn s12 alinhado">Recusar</button>
-                                <hr>
-                            </div>    
+                                  <a href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.amigo.email}&atual=${usuario.email}">
+                                      Aceitar</a>
+
+                                  <a class="waves-effect waves-light btn s12 alinhado">Recusar</a>
+                                  <hr>
+                              </div>    
                         </c:if>
                     </c:forEach>
                     <br><br>
                     <h4>Solicitações de seguir</h4>
                     <hr>
                     <c:forEach var="solicitacao" items="${solicitacoes}">
-                        <c:if test="${solicitacao.tipo eq 'seguir'}">
-                            <div class="solicitacoes">
-                                <h5><b>${solicitacao.amigo.nome}</b></h5>
-                                <a href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
-                                <button class="waves-effect waves-light btn s12 alinhado">Aceitar</button>
-                                <button class="waves-effect waves-light btn s12 alinhado">Recusar</button>
-                                <hr>
-                            </div>    
+                        <c:if test="${(solicitacao.tipo eq 'seguir') && (solicitacao.situacao eq 'pendente')
+                                      && (solicitacao.usuario.email eq usuario.email)}">
+                              <div class="solicitacoes">
+                                  <h5><b>${solicitacao.amigo.nome}</b></h5>
+                                  <a href="front?command=BuscaUsuario&buscado=${solicitacao.amigo.nome}">Ver perfil</a>
+                                  <a href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.amigo.email}&atual=${usuario.email}"
+                                     class="waves-effect waves-light btn s12 alinhado">Aceitar</a>
+                                  <a class="waves-effect waves-light btn s12 alinhado">Recusar</a>
+                                  <hr>
+                              </div>    
                         </c:if>
                     </c:forEach>
                 </td>

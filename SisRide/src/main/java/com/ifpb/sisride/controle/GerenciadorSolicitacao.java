@@ -21,4 +21,11 @@ public class GerenciadorSolicitacao {
     public List<Solicitacao> listarSolicitacoes(Usuario u) throws SQLException, ClassNotFoundException {
         return dao.listarSolicitacoes(u);
     }
+    
+    public void aceitarSolicitacao(String atual, String solicitador, String tipo) throws SQLException{
+        System.out.println(atual);
+        System.out.println(solicitador);
+        System.out.println(tipo);
+        dao.aceitaSolicitacao(atual, solicitador, tipo);
+    }
 }
