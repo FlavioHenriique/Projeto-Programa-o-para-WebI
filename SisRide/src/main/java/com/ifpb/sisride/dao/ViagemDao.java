@@ -83,7 +83,7 @@ public class ViagemDao implements Dao<Viagem> {
                 partida = dao.buscar(result.getInt("partida"));
                 destino = dao.buscar(result.getInt("destino"));
                 carro = daoCarro.buscar(result.getInt("codCarro"));
-                
+
                 Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
                         toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
                         motorista, result.getString("musica"),
@@ -154,9 +154,25 @@ public class ViagemDao implements Dao<Viagem> {
             Viagem viagem = buscar(result.getInt("codigo"));
             lista.add(viagem);
         }
-        
-        for(Viagem v: lista){
+
+        for (Viagem v : lista) {
             System.out.println(v.getCarro().toString());
+        }
+        return lista;
+    }
+
+    public List<Viagem> minhasCaronas(String usuario) throws SQLException {
+
+        String sql = "SELECT codigo FROM viagem where motorista = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, usuario);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Viagem> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Viagem viagem = buscar(rs.getInt("codigo"));
+            lista.add(viagem);
         }
         return lista;
     }

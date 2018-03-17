@@ -23,7 +23,7 @@ public class GerenciadorViagem {
 
     public boolean adicionaViagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida,Carro carro) throws SQLException {
+            String conversa, Lugar destino, Lugar partida, Carro carro) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
                 animais, fumar, conversa, destino, partida, carro);
         dao.salvar(v);
@@ -36,9 +36,9 @@ public class GerenciadorViagem {
 
     public void atualizaViagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, Carro carro,int codigo) throws SQLException {
+            String conversa, Lugar destino, Lugar partida, Carro carro, int codigo) throws SQLException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
-                animais, fumar, conversa, destino, partida, carro ,codigo);
+                animais, fumar, conversa, destino, partida, carro, codigo);
         dao.atualizar(v);
     }
 
@@ -46,9 +46,13 @@ public class GerenciadorViagem {
 
         return dao.buscar(codigo);
     }
-    
-    public List<Viagem> buscaNome(String nome) throws SQLException{
-        
+
+    public List<Viagem> buscaNome(String nome) throws SQLException {
+
         return dao.buscarNome(nome);
+    }
+
+    public List<Viagem> minhasCaronas(String usuario) throws SQLException {
+        return dao.minhasCaronas(usuario);
     }
 }

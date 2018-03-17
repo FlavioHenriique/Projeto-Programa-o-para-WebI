@@ -1,13 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  %>
-<% 
-    if(session.getAttribute("usuario") != null){
+<%
+    if (session.getAttribute("usuario") != null) {
         request.setCharacterEncoding("UTF-8");
-           
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=Login");
         dispatcher.forward(request, response);
     }
 %>
-<!DOCTYPE html> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,8 +37,8 @@
                 <input type="hidden" name="command" value="Login">
             </div>    
             <Br>
-            <input type="submit" value="Login"  class="waves-effect waves-light btn s12">
-            
+            <button type="submit" class="waves-effect waves-light btn s12">Login</button>
+
 
         </form>
         <br>
@@ -48,11 +47,12 @@
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     var erro = "${param.erro}";
-    
-    if (erro == 1){
-        alert("Usuário não encontrado!");
+
+    if (erro == 1) {
+        swal("Erro!", "Usuário não encontrado!", "error");
     }
 </script>
 </html>

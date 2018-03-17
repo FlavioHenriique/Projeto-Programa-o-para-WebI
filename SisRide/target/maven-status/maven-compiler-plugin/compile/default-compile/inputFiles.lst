@@ -18,6 +18,7 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/RecusarSolicitacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorLugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/FotoSolicitacoes.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/MeusLugares.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Sair.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/exception/CadastroException.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroUsuario.java
