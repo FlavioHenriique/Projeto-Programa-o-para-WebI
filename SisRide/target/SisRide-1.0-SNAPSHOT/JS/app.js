@@ -29,5 +29,5 @@ function armazenarId(id){
      if(id != null){
         window.location.replace("front?command=DeletaLugar&IdLugar="+id);
      }
-     else alert('Selecione um lugar para ser deletado!');
+     else swal("Opa...","Selecione um lugar para ser deletado!","warning");
  }

@@ -21,8 +21,10 @@ public class ListarLugares implements Command {
         try {
             GerenciadorLugar g = new GerenciadorLugar();
             List<Lugar> lista = g.buscaLugar();
+            
             HttpSession session = request.getSession();
             session.setAttribute("lugares", lista);
+                
             response.sendRedirect("caronas.jsp");
         } catch (SQLException ex) {
             Logger.getLogger(ListarLugares.class.getName()).log(Level.SEVERE, null, ex);

@@ -13,19 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class BuscarCaronas implements Command {
-    
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
+
         try {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             List<Viagem> lista = gerenciador.buscaNome(request.getParameter("nomeLugar"));
-           
+
             request.setAttribute("buscaViagens", lista);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp");
-            dispatcher.forward(request, response);
-            
+            if (lista.isEmpty()) {
+                response.sendRedirect("solicitacoes.jsp?erroBuscaCarona=1");
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp");
+                dispatcher.forward(request, response);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(BuscarCaronas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -34,5 +36,5 @@ public class BuscarCaronas implements Command {
             Logger.getLogger(BuscarCaronas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

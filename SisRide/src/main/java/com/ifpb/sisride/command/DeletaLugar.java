@@ -23,7 +23,7 @@ public class DeletaLugar implements Command{
             Usuario u = (Usuario) session.getAttribute("usuario");
             AtualizaLugares.execute(request,u.getEmail());
             
-            response.sendRedirect("lugar.jsp");
+            response.sendRedirect("lugar.jsp?mensagem=2");
         } catch (SQLException ex) {
             Logger.getLogger(DeletaLugar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

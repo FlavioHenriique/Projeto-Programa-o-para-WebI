@@ -21,23 +21,23 @@
 
             <div class="row">
                 <div class="input-field col s14 offset-l4">
-                    
-                        <br>
-                        <input type="file" name="foto2"><br><br>
 
-                        <input type="text" class="validate" name="nome" placeholder="Nome"
-                               value ="${usuario.nome}"> <br>
+                    <br>
+                    <input type="file" name="foto2"><br><br>
 
-                        <input type="hidden" value="AtualizaUsuario" name="command" ><br>
+                    <input type="text" class="validate" name="nome" placeholder="Nome"
+                           value ="${usuario.nome}"> <br>
 
-                        <input type="password" class="validate" name="senha" placeholder="Senha"
-                               value="${usuario.senha}"><br><br>
-                        <input type="text" name="cidade" class="validate" placeholder="Cidade"
-                               value="${usuario.cidade}"><br><br>
-                        <input type="text" class="validate" name="profissao" placeholder="Profissão"
-                               value="${usuario.profissao}"><br><br>
-                        <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
-                
+                    <input type="hidden" value="AtualizaUsuario" name="command" ><br>
+
+                    <input type="password" class="validate" name="senha" placeholder="Senha"
+                           value="${usuario.senha}"><br><br>
+                    <input type="text" name="cidade" class="validate" placeholder="Cidade"
+                           value="${usuario.cidade}"><br><br>
+                    <input type="text" class="validate" name="profissao" placeholder="Profissão"
+                           value="${usuario.profissao}"><br><br>
+                    <input type="text" class="datepicker" placeholder="Data de nascimento" name="data"><br><br>
+
                 </div>
             </div>
             <input name="sexo" type="radio" id="masc" value="Masculino" class="validate"/>
@@ -63,5 +63,14 @@
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="JS/app.js"></script>
+<script>
+    var erro = "${param.erroPerfilUsuario}";
+    if (erro == "1") {
+        swal("Erro!!", "Preencha todos os campos", "error");
+    }
+   
+</script>
 </html>

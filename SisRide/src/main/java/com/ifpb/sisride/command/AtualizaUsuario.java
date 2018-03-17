@@ -26,18 +26,24 @@ public class AtualizaUsuario implements Command {
 
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
-            
+
             Part part = request.getPart("foto2");
             InputStream input = part.getInputStream();
-            
-            System.out.println("FOto"+input.toString());
-            if(g.atualizaUsuario(u.getEmail(), request.getParameter("senha"),
+
+            if (request.getParameter("senha") == null || request.getParameter("nome") == null
+                    || request.getParameter("data") == null || request.getParameter("profissao") == null
+                    || request.getParameter("cidade") == null || request.getParameter("sexo") == null) {
+
+                response.sendRedirect("perfil.jsp?erroPerfilUsuario=1");
+
+            } else if (g.atualizaUsuario(u.getEmail(), request.getParameter("senha"),
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
-                    request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"),input)){
-            
+                    request.getParameter("profissao"), request.getParameter("cidade"), request.getParameter("sexo"),
+                    input)) {
+
                 session.setAttribute("usuario", g.buscaUsuario(u.getEmail()));
-                
-                response.sendRedirect("inicial.jsp");
+
+                response.sendRedirect("inicial.jsp?mensagem=1");
             }
         } catch (SQLException ex) {
             Logger.getLogger(AtualizaUsuario.class.getName()).log(Level.SEVERE, null, ex);

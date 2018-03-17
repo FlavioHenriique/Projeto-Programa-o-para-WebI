@@ -18,6 +18,6 @@ public class AtualizaLugares {
 
         List<Lugar> lugares = gLugar.buscaLugares(email);
         session.setAttribute("MeusLugares", lugares);
-
+        
     }
 }

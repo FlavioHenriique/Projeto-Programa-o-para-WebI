@@ -33,11 +33,13 @@ public class CadastroUsuario implements Command {
                     || request.getParameter("nome") == null || request.getParameter("data") == null
                     || request.getParameter("profissao") == null || request.getParameter("cidade") == null
                     || request.getParameter("sexo") == null) {
+                
                 response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=1");
+                
             } else if (g.buscaUsuario(request.getParameter("email")) != null) {
-                
+
                 response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=2");
-                
+
             } else if (g.adicionaUsuario(request.getParameter("email"), request.getParameter("senha"),
                     request.getParameter("nome"), LocalDate.parse(request.getParameter("data"), formatter),
                     request.getParameter("profissao"), request.getParameter("cidade"),
