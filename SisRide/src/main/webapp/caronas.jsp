@@ -85,7 +85,6 @@
         <td width="5%"></td>
         <td width="60%">
 
-
             <h4>Minhas caronas</h4>
             <br>
             <c:if test="${empty minhasCaronas}">

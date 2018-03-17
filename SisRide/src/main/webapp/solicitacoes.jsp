@@ -27,7 +27,7 @@
 
                     <c:if test="${buscaViagens != null}">
                         <c:forEach var="viagem" items="${buscaViagens}">
-                            <c:if test="${viagem.motorista.email != usuario.email}">
+                            <c:if test="${(viagem.motorista.email != usuario.email) && (viagem.vagas > 0)}">
                                 <div class="solicitacoes">
                                     <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
                                     Motorista: <a href="front?command=BuscaUsuario&buscado=${viagem.motorista.nome}">
@@ -62,7 +62,8 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <br><br>
-                                    <button class="waves-effect waves-light btn s12 alinhado">Solicitar vaga</button>
+                                    <a class="waves-effect waves-light btn s12 alinhado"
+                                       href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>
                                     <hr>
                                 </div>
                             </c:if>
@@ -121,7 +122,12 @@
     <script>
         var erro = "${param.erroBuscaCarona}";
         if (erro == "1") {
-            swal("Infelizmente...","Não encontramos nenhuma carona para este lugar.","warning");
+            swal("Infelizmente...", "Não encontramos nenhuma carona para este lugar.", "warning");
+        }
+
+        var mensagem = "${param.mensagem}";
+        if (mensagem == "1") {
+            swal("Parabéns!", "A solicitação foi realizada", "success");
         }
     </script>
 </html>

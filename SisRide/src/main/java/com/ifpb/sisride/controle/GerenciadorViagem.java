@@ -55,4 +55,8 @@ public class GerenciadorViagem {
     public List<Viagem> minhasCaronas(String usuario) throws SQLException {
         return dao.minhasCaronas(usuario);
     }
+    
+    public void solicitaVaga(String email, int codigo) throws SQLException{
+        dao.solicitaVaga(email, codigo);
+    }
 }

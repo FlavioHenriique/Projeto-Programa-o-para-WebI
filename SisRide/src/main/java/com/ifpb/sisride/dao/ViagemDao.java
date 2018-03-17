@@ -176,4 +176,15 @@ public class ViagemDao implements Dao<Viagem> {
         }
         return lista;
     }
+
+    public void solicitaVaga(String email, int codigo) throws SQLException {
+
+        String sql = "INSERT INTO Solicita_Viagem (emailUsuario, codViagem, situacao)"
+                + "VALUES (?,?,?)";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        stmt.setInt(2, codigo);
+        stmt.setString(3, "pendente");
+        stmt.execute();
+    }
 }
