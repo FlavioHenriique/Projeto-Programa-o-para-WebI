@@ -53,9 +53,14 @@ public class ListarLugares implements Command {
         List<Viagem> caronas = gerenciador.minhasCaronas(u.getEmail());
 
         request.setAttribute("minhasCaronas", caronas);
+        RequestDispatcher dispatcher;
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("caronas.jsp");
+        if ((String) request.getAttribute("mensagem") != null) {
+            dispatcher = request.getRequestDispatcher("caronas.jsp?mensagem="
+                    + request.getAttribute("mensagem"));
+        } else {
+            dispatcher = request.getRequestDispatcher("caronas.jsp");
+        }
         dispatcher.forward(request, response);
     }
-
 }

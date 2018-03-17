@@ -88,6 +88,9 @@
 
             <h4>Minhas caronas</h4>
             <br>
+            <c:if test="${empty minhasCaronas}">
+                Você não cadastrou nenhuma carona
+            </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
                 <div class="solicitacoes">
                     <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
@@ -122,6 +125,8 @@
                         </c:otherwise>
                     </c:choose>
                     <br><br>
+                    <a class="waves-effect waves-light btn s12 alinhado"
+                       href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
                     <hr>
                 </div>
                 <br>
@@ -143,7 +148,10 @@
     }
     var mensagem = "${param.mensagem}";
     if (mensagem == "1") {
-        swal("Parabéns!", "A carona foi cadastrada com sucesso!", "success");
+        window.location.replace("front?command=ListarLugares");
+    }
+    if(mensagem == "3"){
+        swal("OK!","Esta carona foi cancelada.","success");
     }
 </script>
 </html>
