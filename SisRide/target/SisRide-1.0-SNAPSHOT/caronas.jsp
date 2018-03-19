@@ -124,11 +124,33 @@
                         </c:otherwise>
                     </c:choose>
                     <br><br>
-                    <a class="waves-effect waves-light btn s12 alinhado"
+                    <a class="waves-effect waves-light btn s12 alinhado cancelar"
                        href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
                     <hr>
                 </div>
+
                 <br>
+                <c:choose>
+                    <c:when test="${!empty viagem.solicitadores}">
+
+                        <h5>Usuários que solicitaram vagas</h5>
+                        <br>
+                        <c:forEach var="solicitante" items="${viagem.solicitadores}">
+                            <div class="solicitacoes">
+                                <h5><b>${solicitante.nome}</b></h5>
+
+                                <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
+                                <br><br>
+                                <a class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                <a class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
+                                <hr>
+                            </div><br>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h5>Não existem solicitações de vaga até o momento!</h5>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </td>
     </tr>
@@ -149,8 +171,8 @@
     if (mensagem == "1") {
         window.location.replace("front?command=ListarLugares");
     }
-    if(mensagem == "3"){
-        swal("OK!","Esta carona foi cancelada.","success");
+    if (mensagem == "3") {
+        swal("OK!", "Esta carona foi cancelada.", "success");
     }
 </script>
 </html>

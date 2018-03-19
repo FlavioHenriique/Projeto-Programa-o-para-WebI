@@ -1,6 +1,7 @@
 package com.ifpb.sisride.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class Viagem {
@@ -18,6 +19,7 @@ public class Viagem {
     private Lugar partida;
     private int codigo;
     private Carro carro;
+    private List<Usuario> solicitadores;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
@@ -64,6 +66,14 @@ public class Viagem {
 
     public LocalDate getData() {
         return data;
+    }
+
+    public List<Usuario> getSolicitadores() {
+        return solicitadores;
+    }
+
+    public void setSolicitadores(List<Usuario> solicitadores) {
+        this.solicitadores = solicitadores;
     }
 
     public void setData(LocalDate data) {

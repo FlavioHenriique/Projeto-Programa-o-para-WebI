@@ -51,7 +51,8 @@ public class ListarLugares implements Command {
         Usuario u = (Usuario) session.getAttribute("usuario");
 
         List<Viagem> caronas = gerenciador.minhasCaronas(u.getEmail());
-
+        
+        
         request.setAttribute("minhasCaronas", caronas);
         RequestDispatcher dispatcher;
 

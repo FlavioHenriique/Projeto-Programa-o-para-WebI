@@ -48,3 +48,7 @@ td{
 #busca, .alinhado{
     float:right;
 }
+
+.cancelar, .cancelar:hover{
+    background-color: #ef5350  ;
+}
