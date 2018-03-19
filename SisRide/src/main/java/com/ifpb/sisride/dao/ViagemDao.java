@@ -134,9 +134,11 @@ public class ViagemDao implements Dao<Viagem> {
 
     @Override
     public boolean deletar(Object obj) throws SQLException {
-        String sql = "DELETE FROM Viagem WHERE codigo = ?";
+        String sql = "DELETE FROM SOLICITA_VIAGEM WHERE CodViagem = ?;"
+                + "DELETE FROM Viagem WHERE codigo = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
+        stmt.setInt(2, (int) obj);
         return stmt.execute();
     }
 
