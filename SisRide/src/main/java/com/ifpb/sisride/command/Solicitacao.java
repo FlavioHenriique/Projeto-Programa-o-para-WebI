@@ -25,7 +25,8 @@ public class Solicitacao implements Command {
 
             g.solicitacao(usuario.getEmail(), amigo.getEmail(),request.getParameter("tipo"));
             
-            response.sendRedirect("usuario.jsp");
+            response.setCharacterEncoding("UTF-8");
+            response.sendRedirect("front?command=BuscaUsuario&buscado="+amigo.getNome());
         } catch (SQLException ex) {
             Logger.getLogger(Solicitacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

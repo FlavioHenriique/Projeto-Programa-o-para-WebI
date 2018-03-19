@@ -21,13 +21,17 @@ public class GerenciadorSolicitacao {
     public List<Solicitacao> listarSolicitacoes(Usuario u) throws SQLException, ClassNotFoundException {
         return dao.listarSolicitacoes(u);
     }
-    
-    public void aceitarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException{
-       
+
+    public void aceitarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+
         dao.aceitaSolicitacao(solicitador, requisitado, tipo);
     }
-    
-    public void recusarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException{
-        dao.recusaSolicitacao( solicitador,requisitado, tipo);
+
+    public void recusarSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+        dao.recusaSolicitacao(solicitador, requisitado, tipo);
+    }
+
+    public void desfazerRelacionamento(String usuario1, String usuario2, String tipo) throws SQLException {
+        dao.DesfazerRelacionamento(usuario1, usuario2,tipo);
     }
 }
