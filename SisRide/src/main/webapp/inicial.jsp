@@ -43,7 +43,6 @@
             </tr>
         </table>
 
-        <br><br>    
         <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button></a><br><br>
     </body>
 

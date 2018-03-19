@@ -44,7 +44,7 @@
                                 Aguardando resposta do usuário (amizade)
                             </c:when>
                             <c:when test="${solicitacao.situacao eq 'aceita'}">
-                                <a  class="waves-effect waves-light btn s12"
+                                <a  class="waves-effect waves-light btn s12 cancelar"
                                     href="front?command=DesfazerRelacionamento&tipo=amizade">Desfazer amizade</a>
                             </c:when>
                         </c:choose>
@@ -56,7 +56,7 @@
                 </c:forEach>
 
                 <c:if test="${foiSolicitado eq 'true'}">
-                    <a  class="waves-effect waves-light btn s12"
+                    <a  class="waves-effect waves-light btn s12 cancelar"
                         href="front?command=DesfazerRelacionamento&tipo=amizade">Desfazer amizade</a>
                 </c:if>
 
@@ -79,7 +79,7 @@
                                 Aguardando resposta do usuário (seguir)
                             </c:when>
                             <c:when test="${solicitacao.situacao eq 'aceita'}">
-                                <a  class="waves-effect waves-light btn s12"
+                                <a  class="waves-effect waves-light btn s12 cancelar"
                                     href="front?command=DesfazerRelacionamento&tipo=seguir">Deixar de seguir</a>
                             </c:when>
                         </c:choose>

@@ -140,7 +140,7 @@
                                 <h5><b>${solicitante.nome}</b></h5>
 
                                 <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
-                                <br><br>
+                                <br>
                                 <a class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
                                 <a class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
                                 <hr>
@@ -148,7 +148,7 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <h5>Não existem solicitações de vaga até o momento!</h5>
+                        <h5>Não existem solicitações de vagas até o momento!</h5>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

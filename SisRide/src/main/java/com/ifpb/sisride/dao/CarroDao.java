@@ -24,6 +24,7 @@ public class CarroDao implements Dao<Carro> {
         stmt.setString(3, obj.getAno());
         ResultSet result =  stmt.executeQuery();
         if(result.next()){
+            stmt.close();
             return result.getInt("codigo");
         }
         return 0;
