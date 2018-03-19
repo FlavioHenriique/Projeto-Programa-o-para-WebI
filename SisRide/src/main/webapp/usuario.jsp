@@ -31,16 +31,65 @@
                 <td>
             <center>
                 <br>
+
+                <!-- Verificação do relacionamento de Amizade entre os usuários -->
+
+                <c:set var="solicitouAmizade" scope="page" value="false" />
                 <c:forEach var="solicitacao" items="${solicitacoes}">
-                    <c:if test="${(solicitacao.usuario.email eq usuario.email) 
-                                  && (solicitacao.amigo.email eq buscado.email)}">
-                                      
+                    <c:if test="${(solicitacao.usuario.email eq usuario.email) &&
+                                  (solicitacao.amigo.email eq buscado.email) && (solicitacao.tipo eq 'amizade')}">
+                        <c:set var="solicitouAmizade" scope="page" value="true" />
+                        <c:choose>
+                            <c:when test="${solicitacao.situacao eq 'pendente'}">
+                                Aguardando resposta do usuário (amizade)
+                            </c:when>
+                            <c:when test="${solicitacao.situacao eq 'aceita'}">
+                                <a  class="waves-effect waves-light btn s12"
+                                    href="front?command=DesfazerRelacionamento&tipo=amizade">Desfazer amizade</a>
+                            </c:when>
+                        </c:choose>
+                    </c:if>
+                    <c:if test="${(solicitacao.amigo.email eq usuario.email) && (solicitacao.usuario.email eq buscado.email)
+                                  && (solicitacao.tipo eq 'amizade') && (solicitacao.situacao eq 'aceita')}">
+                        <c:set var="foiSolicitado"  value="true"/>
                     </c:if>
                 </c:forEach>
-              
+
+                <c:if test="${foiSolicitado eq 'true'}">
+                    <a  class="waves-effect waves-light btn s12"
+                        href="front?command=DesfazerRelacionamento&tipo=amizade">Desfazer amizade</a>
+                </c:if>
+
+                <c:if test="${(solicitouAmizade eq 'false') && (foiSolicitado != 'true')}">
+                    <a  class="waves-effect waves-light btn s12"
+                        href="front?command=Solicitacao&tipo=amizade">Adicionar aos amigos</a>
+                </c:if>
+
                 <br><br>
-                <a href="front?command=Solicitacao&tipo=seguir"><button 
-                        class="waves-effect waves-light btn s12">Seguir</button></a>
+
+                <!-- Verificação do relacionamento de Seguir entre os usuários -->
+
+                <c:set var="solicitouSeguir" scope="page" value="false" />
+                <c:forEach var="solicitacao" items="${solicitacoes}">
+                    <c:if test="${(solicitacao.usuario.email eq usuario.email) &&
+                                  (solicitacao.amigo.email eq buscado.email) && (solicitacao.tipo eq 'seguir')}">
+                        <c:set var="solicitouSeguir" scope="page" value="true" />
+                        <c:choose>
+                            <c:when test="${solicitacao.situacao eq 'pendente'}">
+                                Aguardando resposta do usuário (seguir)
+                            </c:when>
+                            <c:when test="${solicitacao.situacao eq 'aceita'}">
+                                <a  class="waves-effect waves-light btn s12"
+                                    href="front?command=DesfazerRelacionamento&tipo=seguir">Deixar de seguir</a>
+                            </c:when>
+                        </c:choose>
+                    </c:if>
+
+                </c:forEach>
+                <c:if test="${solicitouSeguir eq 'false'}">
+                    <a  class="waves-effect waves-light btn s12"
+                        href="front?command=Solicitacao&tipo=seguir">Seguir este usuário</a>
+                </c:if>
             </center>
         </td>
     </tr>

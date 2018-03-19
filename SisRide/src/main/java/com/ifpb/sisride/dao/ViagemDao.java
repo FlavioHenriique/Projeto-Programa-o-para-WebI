@@ -187,4 +187,5 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.setString(3, "pendente");
         stmt.execute();
     }
+
 }

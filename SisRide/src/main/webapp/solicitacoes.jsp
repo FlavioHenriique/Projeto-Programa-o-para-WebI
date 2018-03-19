@@ -84,7 +84,7 @@
                                   <a 
                                       href="front?command=BuscaUsuario&buscado=${solicitacao.usuario.nome}">Ver perfil</a>
 
-                                  <a 
+                                  <a  class="waves-effect waves-light btn s12 alinhado"
                                       href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}">
                                       Aceitar</a>
 
