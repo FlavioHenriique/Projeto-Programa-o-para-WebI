@@ -6,11 +6,13 @@ com/ifpb/sisride/dao/SolicitacaoDao.class
 com/ifpb/sisride/command/BuscarCaronas.class
 com/ifpb/sisride/factory/ConFactory.class
 com/ifpb/sisride/factory/DaoFactory.class
+com/ifpb/sisride/command/MeusLugares.class
 com/ifpb/sisride/command/Login.class
 com/ifpb/sisride/command/AtualizaUsuario.class
 com/ifpb/sisride/command/DeletaLugar.class
 com/ifpb/sisride/dao/Dao.class
 com/ifpb/sisride/exception/AutenticacaoException.class
+com/ifpb/sisride/command/SolicitaVaga.class
 com/ifpb/sisride/controle/GerenciadorSolicitacao.class
 com/ifpb/sisride/modelo/Solicitacao.class
 com/ifpb/sisride/modelo/Carro.class
@@ -32,6 +34,7 @@ com/ifpb/sisride/modelo/Usuario.class
 com/ifpb/sisride/command/Solicitacao.class
 com/ifpb/sisride/command/BuscaUsuario.class
 com/ifpb/sisride/servlets/FrontServlet.class
+com/ifpb/sisride/command/DesfazerRelacionamento.class
 com/ifpb/sisride/controle/GerenciadorAvaliacao.class
 com/ifpb/sisride/factory/DaoFactoryBD.class
 com/ifpb/sisride/command/Command.class
@@ -42,6 +45,7 @@ com/ifpb/sisride/dao/ViagemDao.class
 com/ifpb/sisride/factory/DaoFactoryIF.class
 com/ifpb/sisride/command/AceitarSolicitacao.class
 com/ifpb/sisride/controle/GerenciadorLugar.class
+com/ifpb/sisride/command/CancelarCarona.class
 com/ifpb/sisride/command/CadastroLugar.class
 com/ifpb/sisride/modelo/Lugar.class
 com/ifpb/sisride/dao/AvaliacaoDao.class

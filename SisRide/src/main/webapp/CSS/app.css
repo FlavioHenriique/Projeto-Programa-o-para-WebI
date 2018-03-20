@@ -7,7 +7,7 @@ body{
 }
 
 .btn,.nav-wrapper{
-    background-color: #2e7d32; 
+    background-color: #43a047; 
 }
 
 .btn:hover{
@@ -51,4 +51,14 @@ td{
 
 .cancelar, .cancelar:hover{
     background-color: #ef5350  ;
+}
+
+.logo{
+    width: 20%;
+    height: 20%;
+}
+
+.logo_bar{
+    width:10%;
+    height: 100%;
 }

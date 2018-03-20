@@ -14,13 +14,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" href="CSS/app.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
+        <link rel="icon" href="Imagens/icon.png">
         <title>SisRide</title>
     </head>
     <body>
 
     <center>
         <br><br><br><br><br>
-        <h1 class="row">SisRide</h1>
+        <img src="Imagens/logo.png" class="logo">
         <form method="post" action="front" class="col s12 l4">
 
             <div class="row">

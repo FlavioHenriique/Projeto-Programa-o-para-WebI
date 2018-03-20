@@ -3,7 +3,7 @@
 
 <nav>
     <div class="nav-wrapper">
-        <a href="inicial.jsp" class="brand-logo">SisRide</a>
+        <img src="Imagens/logo.png" href="inicial.jsp" class="logo_bar">
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="inicial.jsp">Página inicial</a></li>
             <li><a href="front?command=MeusLugares">Lugares</a></li>
