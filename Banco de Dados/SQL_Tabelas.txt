@@ -89,3 +89,12 @@ CREATE TABLE MENSAGEM(
 	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
 	FOREIGN KEY (EmailAmigo) REFERENCES Usuario(Email)
 	);
+
+CREATE TABLE NOTIFICACAO (
+	mensagem VARCHAR,
+	notificado VARCHAR,
+	notificador varchar,
+	codigo serial primary key,
+	foreign key (notificado) references usuario(email),
+	foreign key (notificador) references usuario(email)
+);
