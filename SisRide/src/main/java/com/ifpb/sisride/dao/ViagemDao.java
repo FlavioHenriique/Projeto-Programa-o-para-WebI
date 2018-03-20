@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 public class ViagemDao implements Dao<Viagem> {
 
-    private Connection con;
+    private final Connection con;
 
     public ViagemDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();
@@ -220,18 +220,26 @@ public class ViagemDao implements Dao<Viagem> {
     public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException {
 
         String sql = "";
+
         if (resposta.equals("sim")) {
             sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ? ;"
                     + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(2, solicitante);
+            stmt.setInt(1, viagem);
+            stmt.setInt(3, viagem);
+
+            stmt.execute();
+
         } else if (resposta.equals("nao")) {
             sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(2, solicitante);
+            stmt.setInt(1, viagem);
+            stmt.execute();
         }
 
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(2, solicitante);
-        stmt.setInt(1, viagem);
-        stmt.setInt(3, viagem);
-        stmt.execute();
     }
 
     public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException {

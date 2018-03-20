@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SolicitacaoDao {
 
-    private Connection con;
+    private final Connection con;
 
     public SolicitacaoDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();

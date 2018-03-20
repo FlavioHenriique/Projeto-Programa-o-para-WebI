@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class CarroDao implements Dao<Carro> {
 
-    private Connection con;
+    private final Connection con;
 
     public CarroDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();

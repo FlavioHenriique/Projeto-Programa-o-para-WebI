@@ -15,7 +15,7 @@ import java.util.List;
 
 public class UsuarioDao implements Dao<Usuario> {
 
-    private Connection con;
+    private final Connection con;
 
     public UsuarioDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();
@@ -23,7 +23,7 @@ public class UsuarioDao implements Dao<Usuario> {
     }
 
     @Override
-    public boolean salvar(Usuario obj) throws SQLException, CadastroException {
+    public boolean salvar(Usuario obj) throws SQLException, CadastroException, ClassNotFoundException {
 
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
                 + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?);";
@@ -41,8 +41,10 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setBinaryStream(8, obj.getFoto());
             stmt.setString(9, obj.getEmail());
         }
-        
+
         stmt.execute();
+        con.close();
+        stmt.close();
 
         return true;
     }

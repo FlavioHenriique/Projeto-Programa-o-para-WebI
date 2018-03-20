@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class AvaliacaoDao implements Dao<Avaliacao> {
 
-    private Connection con;
+    private final Connection con;
 
     public AvaliacaoDao() throws SQLException, ClassNotFoundException {
         ConFactory factory = new ConFactory();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LugarDao implements Dao<Lugar> {
 
-    private Connection con;
+    private final Connection con;
 
     public LugarDao() throws ClassNotFoundException, SQLException {
         ConFactory factory = new ConFactory();
