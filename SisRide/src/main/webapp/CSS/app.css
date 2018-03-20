@@ -16,11 +16,17 @@ body{
 
 fieldset, .solicitacoes{
     background-color: white;
-    
+
 }
 img{
     width: 80px;
     height:80px;
+}
+
+.amizade{
+    width:60px;
+    height:60px;
+    font-size:25px;
 }
 
 label {

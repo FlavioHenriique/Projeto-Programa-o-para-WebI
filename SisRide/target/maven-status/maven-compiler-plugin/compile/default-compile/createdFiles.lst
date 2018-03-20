@@ -14,6 +14,7 @@ com/ifpb/sisride/exception/AutenticacaoException.class
 com/ifpb/sisride/command/SolicitaVaga.class
 com/ifpb/sisride/controle/GerenciadorSolicitacao.class
 com/ifpb/sisride/modelo/Solicitacao.class
+com/ifpb/sisride/command/ImprimeFoto.class
 com/ifpb/sisride/modelo/Carro.class
 com/ifpb/sisride/command/Sair.class
 com/ifpb/sisride/exception/CadastroException.class
@@ -30,6 +31,7 @@ com/ifpb/sisride/command/AtualizaLugares.class
 com/ifpb/sisride/command/FotoBuscado.class
 com/ifpb/sisride/dao/CarroDao.class
 com/ifpb/sisride/modelo/Viagem.class
+com/ifpb/sisride/command/ListarAmigos.class
 com/ifpb/sisride/modelo/Usuario.class
 com/ifpb/sisride/command/Solicitacao.class
 com/ifpb/sisride/command/BuscaUsuario.class

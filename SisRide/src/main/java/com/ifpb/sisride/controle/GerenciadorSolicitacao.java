@@ -32,6 +32,10 @@ public class GerenciadorSolicitacao {
     }
 
     public void desfazerRelacionamento(String usuario1, String usuario2, String tipo) throws SQLException {
-        dao.DesfazerRelacionamento(usuario1, usuario2,tipo);
+        dao.DesfazerRelacionamento(usuario1, usuario2, tipo);
+    }
+
+    public List<Usuario> listarAmigos(String email) throws SQLException, ClassNotFoundException {
+        return dao.listarAmigos(email);
     }
 }

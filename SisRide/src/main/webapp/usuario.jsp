@@ -15,7 +15,7 @@
     <body>
 
         <%@include file="menu.jsp"%>
-
+        <br>
         <table>
             <tr>
                 <td>
@@ -30,7 +30,6 @@
                                 <img src="Imagens/user.png" class="circle">
                             </c:otherwise>
                         </c:choose>
-
 
                         <label id="nome">${buscado.nome}</label>
                     </div>

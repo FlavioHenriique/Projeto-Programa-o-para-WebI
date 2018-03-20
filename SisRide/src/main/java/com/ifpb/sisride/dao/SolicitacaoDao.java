@@ -37,9 +37,7 @@ public class SolicitacaoDao {
 
             solicitacoes.add(s);
         }
-        
-        
-        
+
         return solicitacoes;
     }
 
@@ -53,9 +51,7 @@ public class SolicitacaoDao {
         stmt.setString(2, solicitador);
         stmt.setString(3, tipo);
         stmt.executeUpdate();
-        
-        
-       
+
     }
 
     public void recusaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
@@ -67,10 +63,10 @@ public class SolicitacaoDao {
         stmt.setString(1, solicitador);
         stmt.setString(3, tipo);
         stmt.execute();
-        
+
     }
 
-    public void DesfazerRelacionamento(String usuario1, String usuario2,String tipo) throws SQLException {
+    public void DesfazerRelacionamento(String usuario1, String usuario2, String tipo) throws SQLException {
 
         String sql = "DELETE  FROM SOLICITACAO WHERE emailUsuario = ? AND emailAMigo = ? and tipo = ?; "
                 + "DELETE FROM SOLICITACAO WHERE emailUsuario = ? AND emailAmigo = ? and tipo = ?";
@@ -83,6 +79,35 @@ public class SolicitacaoDao {
         stmt.setString(5, usuario1);
         stmt.setString(6, tipo);
         stmt.execute();
-        
+
+    }
+
+    public List<Usuario> listarAmigos(String email) throws SQLException, ClassNotFoundException {
+
+        String sql = "SELECT emailusuario, emailamigo FROM SOLICITACAO WHERE (emailusuario = ? "
+                + "or emailamigo = ?) and tipo = 'amizade' and situacao = 'aceita'";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        stmt.setString(2, email);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Usuario> amigos = new ArrayList<>();
+        UsuarioDao dao = new UsuarioDao();
+
+        while (rs.next()) {
+
+            Usuario u = null;
+
+            if (rs.getString("emailusuario").equals(email)) {
+
+                u = dao.buscar(rs.getString("emailamigo"));
+
+            } else if (rs.getString("emailamigo").equals(email)) {
+
+                u = dao.buscar(rs.getString("emailusuario"));
+            }
+            amigos.add(u);
+        }
+        return amigos;
     }
 }

@@ -22,7 +22,7 @@
                             <c:when test="${usuario.foto2 != null}">
 
                                 <img src="front?command=FotoUsuario" class="circle">
-
+                                
                             </c:when>
                             <c:otherwise>
                                 <img src="Imagens/user.png" class="circle">
