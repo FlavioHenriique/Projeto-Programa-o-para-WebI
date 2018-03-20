@@ -1,6 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ifpb.sisride.modelo.*, java.io.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"  %>
-
 
 <html>
     <head>
@@ -42,8 +42,38 @@
                 </td>
             </tr>
         </table>
+        <br>
+
 
         <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button></a><br><br>
+        <br>
+
+        <c:if test="${!empty caronasSolicitadas}">
+            <table class="highlight centered responsive-table bordered">
+                <tr>
+                    <td><b>Situação</b></td>
+                    <td><b>Trajeto</b></td>
+                    <td><b>Data</b></td>
+                </tr>
+                <c:forEach var="viagem" items="${caronasSolicitadas}">
+                    <tr>
+                        <td>${viagem.situacao}</td>
+                        <td>
+
+                            ${viagem.partida.nome} - ${viagem.destino.nome}    
+                        </td>
+                        <td>
+                            ${viagem.data}
+                        </td>
+                    </tr>
+                </c:forEach>    
+
+            </table>
+        </c:if>
+        <c:if test="${empty caronasSolicitadas}">
+            Você não solicitou nenhuma carona ainda
+        </c:if>
+
     </body>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -51,8 +81,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         var mensagem = "${param.mensagem}";
-        if(mensagem == "1"){
-            swal("Parabéns!","Seu perfil foi atualizado","success");
+        if (mensagem == "1") {
+            swal("Parabéns!", "Seu perfil foi atualizado", "success");
         }
     </script>
 </html>

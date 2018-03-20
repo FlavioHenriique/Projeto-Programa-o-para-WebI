@@ -63,5 +63,9 @@ public class GerenciadorViagem {
     public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException{
         dao.confirmaVaga(solicitante, viagem, resposta);
     }
+    
+    public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException{
+        return dao.caronasSolicitadas(email);
+    }
         
 }

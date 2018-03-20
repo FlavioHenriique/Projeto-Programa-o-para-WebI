@@ -19,6 +19,7 @@ public class Viagem {
     private Lugar partida;
     private int codigo;
     private Carro carro;
+    private String situacao;
     private List<Usuario> solicitadores;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
@@ -54,6 +55,17 @@ public class Viagem {
         this.partida = partida;
         this.carro = carro;
         this.codigo = codigo;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public Viagem() {
     }
 
     public int getVagas() {

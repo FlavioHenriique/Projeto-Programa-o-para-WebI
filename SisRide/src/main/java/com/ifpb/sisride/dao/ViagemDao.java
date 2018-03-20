@@ -230,17 +230,40 @@ public class ViagemDao implements Dao<Viagem> {
 
     public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException {
 
-        String sql="";
-        if(resposta.equals("sim")){
-            sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ?";
-        }
-        else if (resposta.equals("nao")){
+        String sql = "";
+        if (resposta.equals("sim")) {
+            sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ? ;"
+                    + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ?";
+        } else if (resposta.equals("nao")) {
             sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?";
         }
-        
+
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(2, solicitante);
         stmt.setInt(1, viagem);
+        stmt.setInt(3, viagem);
         stmt.execute();
+    }
+
+    public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException {
+
+        String sql = "SELECT V.*, s.situacao FROM solicita_viagem s, viagem v where v.codigo = s.codviagem and s.emailusuario = ?";
+        
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        List<Viagem> lista = new ArrayList<>();
+        
+        ResultSet result = stmt.executeQuery();
+        LugarDao dao = new LugarDao();
+        
+        while(result.next()){
+                Viagem v = new Viagem();
+                v.setPartida(dao.buscar(result.getInt("partida")));
+                v.setDestino(dao.buscar(result.getInt("destino")));
+                v.setData(result.getDate("data").toLocalDate());
+                v.setSituacao(result.getString("situacao"));
+                lista.add(v);
+        }
+        return lista;
     }
 }
