@@ -62,9 +62,19 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <br><br>
-                                    <a class="waves-effect waves-light btn s12 alinhado"
-                                       href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>
-                                    <hr>
+                                    <c:set var="jaSolicitou" value="false" />
+                                    <c:forEach  var="solicitador" items="${viagem.solicitadores}">
+
+                                        <c:if test="${solicitador.email eq usuario.email}">
+                                            <c:set  var="jaSolicitou" value="true" />
+                                        </c:if>
+
+                                    </c:forEach>
+                                    <c:if test="${jaSolicitou eq 'false'}">
+                                        <a class="waves-effect waves-light btn s12 alinhado"
+                                           href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>
+                                        <hr>
+                                    </c:if>
                                 </div>
                             </c:if>
                         </c:forEach>
