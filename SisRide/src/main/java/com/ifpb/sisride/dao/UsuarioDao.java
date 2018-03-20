@@ -26,7 +26,7 @@ public class UsuarioDao implements Dao<Usuario> {
     public boolean salvar(Usuario obj) throws SQLException, CadastroException {
 
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
-                + "Cidade,Sexo,foto) VALUES (?,?,?,?,?,?,?,?)";
+                + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?);";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, obj.getEmail());
         stmt.setString(2, obj.getNome());
@@ -35,8 +35,15 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(5, obj.getProfissao());
         stmt.setString(6, obj.getCidade());
         stmt.setString(7, obj.getSexo());
-        stmt.setBinaryStream(8, obj.getFoto());
+
+        if (obj.getFoto() != null) {
+            sql.concat(" UPDATE USUARIO SET foto = ? WHERE email = ?");
+            stmt.setBinaryStream(8, obj.getFoto());
+            stmt.setString(9, obj.getEmail());
+        }
+        
         stmt.execute();
+
         return true;
     }
 

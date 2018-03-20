@@ -18,7 +18,16 @@
             <tr>
                 <td width="50%">
                     <div class="row">
-                        <img src="foto?command=FotoUsuario" class="circle">
+                        <c:choose>
+                            <c:when test="${usuario.foto2 != null}">
+
+                                <img src="front?command=FotoUsuario" class="circle">
+
+                            </c:when>
+                            <c:otherwise>
+                                <img src="Imagens/user.png" class="circle">
+                            </c:otherwise>
+                        </c:choose>
 
                         <label id="nome">${usuario.nome}</label>
                     </div>            
@@ -49,6 +58,7 @@
         <br>
 
         <c:if test="${!empty caronasSolicitadas}">
+        <center>
             <table class="highlight centered responsive-table bordered">
                 <tr>
                     <td><b>Situação</b></td>
@@ -69,22 +79,23 @@
                 </c:forEach>    
 
             </table>
-        </c:if>
-        <c:if test="${empty caronasSolicitadas}">
-            Você não solicitou nenhuma carona ainda
-        </c:if>
+        </center>
+    </c:if>
+    <c:if test="${empty caronasSolicitadas}">
+        Você ainda não solicitou nenhuma carona 
+    </c:if>
 
-    </body>
+</body>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        var mensagem = "${param.mensagem}";
-        if (mensagem == "1") {
-            swal("Parabéns!", "Seu perfil foi atualizado", "success");
-        }
-    </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    var mensagem = "${param.mensagem}";
+    if (mensagem == "1") {
+        swal("Parabéns!", "Seu perfil foi atualizado", "success");
+    }
+</script>
 </html>
 
 

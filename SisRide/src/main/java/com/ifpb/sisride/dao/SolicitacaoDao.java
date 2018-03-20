@@ -37,8 +37,8 @@ public class SolicitacaoDao {
 
             solicitacoes.add(s);
         }
-        stmt.close();
-        result.close();
+        
+        
         
         return solicitacoes;
     }
@@ -54,7 +54,7 @@ public class SolicitacaoDao {
         stmt.setString(3, tipo);
         stmt.executeUpdate();
         
-        stmt.close();
+        
        
     }
 
@@ -67,7 +67,7 @@ public class SolicitacaoDao {
         stmt.setString(1, solicitador);
         stmt.setString(3, tipo);
         stmt.execute();
-        stmt.close();
+        
     }
 
     public void DesfazerRelacionamento(String usuario1, String usuario2,String tipo) throws SQLException {
@@ -83,6 +83,6 @@ public class SolicitacaoDao {
         stmt.setString(5, usuario1);
         stmt.setString(6, tipo);
         stmt.execute();
-        stmt.close();
+        
     }
 }

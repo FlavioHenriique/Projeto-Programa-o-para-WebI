@@ -27,8 +27,13 @@ public class AtualizaUsuario implements Command {
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
 
-            Part part = request.getPart("foto2");
-            InputStream input = part.getInputStream();
+            InputStream input = null;
+            String foto = request.getParameter("foto2");
+            
+            if (foto != null && !foto.isEmpty()) {
+                Part part = request.getPart("foto2");
+                input = part.getInputStream();
+            }
 
             if (request.getParameter("senha") == null || request.getParameter("nome") == null
                     || request.getParameter("data") == null || request.getParameter("profissao") == null

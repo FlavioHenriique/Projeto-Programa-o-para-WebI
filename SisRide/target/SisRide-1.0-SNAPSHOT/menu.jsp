@@ -3,7 +3,8 @@
 
 <nav>
     <div class="nav-wrapper">
-        <a href="inicial.jsp"><img src="Imagens/logo.png" href="inicial.jsp" class="logo_bar"></a>
+        <a href="front?command=CaronasSolicitadas&email=${usuario.email}">
+           <img src="Imagens/logo.png" href="inicial.jsp" class="logo_bar"></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="front?command=CaronasSolicitadas&email=${usuario.email}">Página inicial</a></li>
             <li><a href="front?command=MeusLugares">Lugares</a></li>

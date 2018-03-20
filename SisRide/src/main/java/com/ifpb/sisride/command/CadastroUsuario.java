@@ -26,16 +26,21 @@ public class CadastroUsuario implements Command {
             g = new GerenciadorUsuario();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            Part part = request.getPart("foto");
-            InputStream input = part.getInputStream();
+            String foto = request.getParameter("foto");
+            InputStream input = null;
+            
+            if (foto != null && !foto.isEmpty()) {
+                Part part = request.getPart("foto");
+                 input = part.getInputStream();
+            }
 
             if (request.getParameter("email") == null || request.getParameter("senha") == null
                     || request.getParameter("nome") == null || request.getParameter("data") == null
                     || request.getParameter("profissao") == null || request.getParameter("cidade") == null
                     || request.getParameter("sexo") == null) {
-                
+
                 response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=1");
-                
+
             } else if (g.buscaUsuario(request.getParameter("email")) != null) {
 
                 response.sendRedirect("CadastroUsuario.jsp?erroCadastroUsuario=2");

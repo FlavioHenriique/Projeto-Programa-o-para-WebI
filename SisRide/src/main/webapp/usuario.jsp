@@ -20,7 +20,17 @@
             <tr>
                 <td>
                     <div class="row">
-                        <img src="foto?command=FotoBuscado" class="circle">
+                        <c:choose>
+                            <c:when test="${buscado.foto2 != null}">
+
+                                <img src="front?command=FotoBuscado" class="circle">
+
+                            </c:when>
+                            <c:otherwise>
+                                <img src="Imagens/user.png" class="circle">
+                            </c:otherwise>
+                        </c:choose>
+
 
                         <label id="nome">${buscado.nome}</label>
                     </div>

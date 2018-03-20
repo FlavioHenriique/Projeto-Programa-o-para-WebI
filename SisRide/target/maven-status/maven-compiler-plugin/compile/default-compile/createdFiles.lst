@@ -1,5 +1,4 @@
 com/ifpb/sisride/command/ExcluirConta.class
-com/ifpb/sisride/servlets/FotoServlet.class
 com/ifpb/sisride/command/CadastroViagem.class
 com/ifpb/sisride/controle/GerenciadorCarro.class
 com/ifpb/sisride/dao/SolicitacaoDao.class
@@ -18,6 +17,7 @@ com/ifpb/sisride/modelo/Solicitacao.class
 com/ifpb/sisride/modelo/Carro.class
 com/ifpb/sisride/command/Sair.class
 com/ifpb/sisride/exception/CadastroException.class
+com/ifpb/sisride/command/CaronasSolicitadas.class
 com/ifpb/sisride/command/FotoUsuario.class
 com/ifpb/sisride/command/RecusarSolicitacao.class
 com/ifpb/sisride/command/FotoSolicitacoes.class
@@ -48,4 +48,5 @@ com/ifpb/sisride/controle/GerenciadorLugar.class
 com/ifpb/sisride/command/CancelarCarona.class
 com/ifpb/sisride/command/CadastroLugar.class
 com/ifpb/sisride/modelo/Lugar.class
+com/ifpb/sisride/command/ConfirmaVaga.class
 com/ifpb/sisride/dao/AvaliacaoDao.class

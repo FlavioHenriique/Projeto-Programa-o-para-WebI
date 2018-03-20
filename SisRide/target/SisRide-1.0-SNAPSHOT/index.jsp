@@ -38,7 +38,7 @@
                 <input type="hidden" name="command" value="Login">
             </div>    
             <Br>
-            <button type="submit" class="waves-effect waves-light btn s12">Login</button>
+            <button type="submit" class="waves-effect waves-light btn s12">Entrar</button>
 
 
         </form>

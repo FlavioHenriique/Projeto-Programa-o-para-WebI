@@ -47,7 +47,7 @@ public class LugarDao implements Dao<Lugar> {
             lista.add(lugar);
 
         }
-        stmt.close();
+        
         resultado.close();
         
         return lista;
@@ -105,8 +105,8 @@ public class LugarDao implements Dao<Lugar> {
 
             lugares.add(l);
         }
-        stmt.close();
-        result.close();
+        
+        
         
         return lugares;
     }
@@ -132,8 +132,8 @@ public class LugarDao implements Dao<Lugar> {
 
             lista.add(lugar);
         }
-        stmt.close();
-        result.close();
+        
+        
         
         return lista;
     }
@@ -156,8 +156,8 @@ public class LugarDao implements Dao<Lugar> {
             l.setNome(result.getString("nome"));
             l.setNumero(result.getInt("numero"));
             l.setRua(result.getString("rua"));
-            stmt.close();
-            result.close();
+            
+            
             return l;
         }
         return null;

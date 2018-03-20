@@ -52,12 +52,9 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(12, obj.getCarro().getCodigo());
             stmt.execute();
 
-            stmt.close();
-
         } catch (ParseException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        stmt.close();
 
         return false;
     }
@@ -96,10 +93,6 @@ public class ViagemDao implements Dao<Viagem> {
                         result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
-
-                stmt.close();
-
-                result.close();
 
                 return viagem;
 
@@ -169,8 +162,6 @@ public class ViagemDao implements Dao<Viagem> {
             Viagem viagem = buscar(result.getInt("codigo"));
             lista.add(viagem);
         }
-        result.close();
-        stmt.close();
 
         return lista;
     }
@@ -188,7 +179,7 @@ public class ViagemDao implements Dao<Viagem> {
             Viagem viagem = buscar(rs.getInt("codigo"));
             lista.add(viagem);
         }
-        stmt.close();
+
         rs.close();
 
         return lista;
@@ -203,7 +194,7 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.setInt(2, codigo);
         stmt.setString(3, "pendente");
         stmt.execute();
-        stmt.close();
+
     }
 
     public List<Usuario> buscaSolicitadores(int viagem) throws SQLException, ClassNotFoundException {
@@ -221,8 +212,6 @@ public class ViagemDao implements Dao<Viagem> {
             System.out.println(u.toString());
             lista.add(u);
         }
-        stmt.close();
-        result.close();
 
         return lista;
 
@@ -248,21 +237,21 @@ public class ViagemDao implements Dao<Viagem> {
     public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT V.*, s.situacao FROM solicita_viagem s, viagem v where v.codigo = s.codviagem and s.emailusuario = ?";
-        
+
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
         List<Viagem> lista = new ArrayList<>();
-        
+
         ResultSet result = stmt.executeQuery();
         LugarDao dao = new LugarDao();
-        
-        while(result.next()){
-                Viagem v = new Viagem();
-                v.setPartida(dao.buscar(result.getInt("partida")));
-                v.setDestino(dao.buscar(result.getInt("destino")));
-                v.setData(result.getDate("data").toLocalDate());
-                v.setSituacao(result.getString("situacao"));
-                lista.add(v);
+
+        while (result.next()) {
+            Viagem v = new Viagem();
+            v.setPartida(dao.buscar(result.getInt("partida")));
+            v.setDestino(dao.buscar(result.getInt("destino")));
+            v.setData(result.getDate("data").toLocalDate());
+            v.setSituacao(result.getString("situacao"));
+            lista.add(v);
         }
         return lista;
     }

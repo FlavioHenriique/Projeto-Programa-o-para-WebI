@@ -59,7 +59,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
                     .toLocalDate(), resultado.getFloat("nota"), resultado.getString("usuarioavaliado"),
                     resultado.getString("avaliador"),resultado.getInt("codigo"));
             stmt.close();
-            resultado.close();
+            
             return a;
         }
         return null;
