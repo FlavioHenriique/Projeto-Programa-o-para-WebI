@@ -22,7 +22,7 @@
                             <c:when test="${usuario.foto2 != null}">
 
                                 <img src="front?command=FotoUsuario" class="circle">
-                                
+
                             </c:when>
                             <c:otherwise>
                                 <img src="Imagens/user.png" class="circle">
@@ -83,8 +83,14 @@
     </c:if>
     <c:if test="${empty caronasSolicitadas}">
         Você ainda não solicitou nenhuma carona 
-    </c:if>
+    </c:if><br>
 
+    <c:if test="${!empty notificacoes}">
+        <label>Notificações</label>
+        <c:forEach var="notificacao" items="${notificacoes}">
+            <h5>${notificacao}</h5>
+        </c:forEach>
+    </c:if>
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

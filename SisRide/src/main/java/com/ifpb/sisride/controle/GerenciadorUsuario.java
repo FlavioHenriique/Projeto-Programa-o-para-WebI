@@ -55,4 +55,8 @@ public class GerenciadorUsuario {
         
         userDao.solicitacao(usuario, amigo, tipo);
     }
+    
+    public List<String> getNotificacoes(String email) throws SQLException{
+        return userDao.getNotificacoes(email);
+    }
 }

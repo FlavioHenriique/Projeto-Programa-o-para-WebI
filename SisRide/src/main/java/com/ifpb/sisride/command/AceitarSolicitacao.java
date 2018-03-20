@@ -18,6 +18,7 @@ public class AceitarSolicitacao implements Command {
             g.aceitarSolicitacao(request.getParameter("solicitador"), request.getParameter("requisitado"),
                     request.getParameter("tipoSolicitacao"));
                     
+            
             response.sendRedirect("front?command=ListarSolicitacoes");
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AceitarSolicitacao.class.getName()).log(Level.SEVERE, null, ex);

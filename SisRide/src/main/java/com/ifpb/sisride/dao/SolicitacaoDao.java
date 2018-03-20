@@ -44,12 +44,18 @@ public class SolicitacaoDao {
     public void aceitaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
 
         String sql = "update solicitacao set situacao = 'aceita' where emailamigo = ?  and "
-                + "emailusuario = ? and tipo = ?";
+                + "emailusuario = ? and tipo = ?;"
+                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento)"
+                + " values (?,?,?,?,current_timestamp)";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, requisitado);
         stmt.setString(2, solicitador);
         stmt.setString(3, tipo);
+        stmt.setString(5, requisitado);
+        stmt.setString(4, solicitador);
+        stmt.setString(6,"aceitou sua solicitação de amizade.");
+        stmt.setString(7, "pendente");
         stmt.executeUpdate();
 
     }

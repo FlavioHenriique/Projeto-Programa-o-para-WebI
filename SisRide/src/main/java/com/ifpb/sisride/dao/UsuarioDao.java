@@ -163,4 +163,22 @@ public class UsuarioDao implements Dao<Usuario> {
 
     }
 
+    public List<String> getNotificacoes(String email) throws SQLException {
+
+        String sql = "SELECT u.nome,n.mensagem FROM NOTIFICACAO n, usuario u WHERE notificado = ?"
+                + "and n.notificador = u.email order by momento desc";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet result = stmt.executeQuery();
+        List<String> notificacoes = new ArrayList<>();
+        System.out.println("print");
+        while (result.next()) {
+            String notificacao = result.getString("nome") + " " + result.getString("mensagem");
+            notificacoes.add(notificacao);
+            System.out.println(notificacao);
+        }
+
+        return notificacoes;
+    }
+
 }

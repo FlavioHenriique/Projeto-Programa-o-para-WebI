@@ -1,6 +1,7 @@
 package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorLugar;
+import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.controle.GerenciadorViagem;
 import com.ifpb.sisride.modelo.Lugar;
 import com.ifpb.sisride.modelo.Usuario;
@@ -23,12 +24,16 @@ public class ListarLugares implements Command {
 
         try {
             GerenciadorLugar g = new GerenciadorLugar();
+                    
             List<Lugar> lista = g.buscaLugar();
-
+            
             HttpSession session = request.getSession();
+            Usuario u = (Usuario) session.getAttribute("usuario");
+            
+            
             session.setAttribute("lugares", lista);
 
-            minhasCaronas(request, response);
+            minhasCaronas(request, response,u.getEmail());
 
         } catch (SQLException ex) {
             Logger.getLogger(ListarLugares.class.getName()).log(Level.SEVERE, null, ex);
@@ -40,19 +45,15 @@ public class ListarLugares implements Command {
 
     }
 
-    public void minhasCaronas(HttpServletRequest request, HttpServletResponse response) throws SQLException,
+    public void minhasCaronas(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException,
             ClassNotFoundException,
             ServletException,
             IOException {
 
         GerenciadorViagem gerenciador = new GerenciadorViagem();
 
-        HttpSession session = request.getSession();
-        Usuario u = (Usuario) session.getAttribute("usuario");
+        List<Viagem> caronas = gerenciador.minhasCaronas(email);
 
-        List<Viagem> caronas = gerenciador.minhasCaronas(u.getEmail());
-        
-        
         request.setAttribute("minhasCaronas", caronas);
         RequestDispatcher dispatcher;
 
@@ -64,4 +65,5 @@ public class ListarLugares implements Command {
         }
         dispatcher.forward(request, response);
     }
+
 }

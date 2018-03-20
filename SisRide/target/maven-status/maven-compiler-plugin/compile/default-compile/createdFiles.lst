@@ -22,6 +22,7 @@ com/ifpb/sisride/command/CaronasSolicitadas.class
 com/ifpb/sisride/command/FotoUsuario.class
 com/ifpb/sisride/command/RecusarSolicitacao.class
 com/ifpb/sisride/command/FotoSolicitacoes.class
+com/ifpb/sisride/controle/GerenciadorUsuario.class
 com/ifpb/sisride/command/CadastroUsuario.class
 com/ifpb/sisride/command/ListarSolicitacoes.class
 com/ifpb/sisride/controle/GerenciadorViagem.class
