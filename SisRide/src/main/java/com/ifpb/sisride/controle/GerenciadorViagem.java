@@ -59,4 +59,9 @@ public class GerenciadorViagem {
     public void solicitaVaga(String email, int codigo) throws SQLException{
         dao.solicitaVaga(email, codigo);
     }
+    
+    public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException{
+        dao.confirmaVaga(solicitante, viagem, resposta);
+    }
+        
 }

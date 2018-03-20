@@ -3,7 +3,7 @@
 
 <nav>
     <div class="nav-wrapper">
-        <img src="Imagens/logo.png" href="inicial.jsp" class="logo_bar">
+        <a href="inicial.jsp"><img src="Imagens/logo.png" href="inicial.jsp" class="logo_bar"></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="inicial.jsp">Página inicial</a></li>
             <li><a href="front?command=MeusLugares">Lugares</a></li>

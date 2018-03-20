@@ -53,13 +53,12 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.execute();
 
             stmt.close();
-            
-            
+
         } catch (ParseException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         stmt.close();
-        
+
         return false;
     }
 
@@ -97,11 +96,11 @@ public class ViagemDao implements Dao<Viagem> {
                         result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
-                
+
                 stmt.close();
-                
+
                 result.close();
-                
+
                 return viagem;
 
             } catch (ClassNotFoundException ex) {
@@ -138,7 +137,7 @@ public class ViagemDao implements Dao<Viagem> {
                 stmt.setInt(12, obj.getCarro().getCodigo());
                 stmt.setInt(13, obj.getCodigo());
                 return stmt.execute();
-                
+
             } catch (ParseException ex) {
                 Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -172,7 +171,7 @@ public class ViagemDao implements Dao<Viagem> {
         }
         result.close();
         stmt.close();
-        
+
         return lista;
     }
 
@@ -191,7 +190,7 @@ public class ViagemDao implements Dao<Viagem> {
         }
         stmt.close();
         rs.close();
-        
+
         return lista;
     }
 
@@ -224,7 +223,24 @@ public class ViagemDao implements Dao<Viagem> {
         }
         stmt.close();
         result.close();
-        
+
         return lista;
+
+    }
+
+    public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException {
+
+        String sql="";
+        if(resposta.equals("sim")){
+            sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ?";
+        }
+        else if (resposta.equals("nao")){
+            sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?";
+        }
+        
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(2, solicitante);
+        stmt.setInt(1, viagem);
+        stmt.execute();
     }
 }

@@ -20,8 +20,8 @@
     <body>
 
     <center>
-        <br><br><br><br><br>
-        <img src="Imagens/logo.png" class="logo">
+        <br><br><br><br>
+        <img src="Imagens/logo.png" class="logo"><br><br>
         <form method="post" action="front" class="col s12 l4">
 
             <div class="row">

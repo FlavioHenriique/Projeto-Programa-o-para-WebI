@@ -26,12 +26,6 @@ public class CadastroViagem implements Command {
 
         try {
 
-            Enumeration parametros = request.getParameterNames();
-            while(parametros.hasMoreElements()){
-                String nome = parametros.nextElement().toString();
-                System.out.println(nome+" "+request.getParameter(nome));
-            }
-            
             if (request.getParameter("vagas") == null || request.getParameter("data") == null
                     || request.getParameter("hora") == null || request.getParameter("valor") == null
                     || request.getParameter("musica") == null || request.getParameter("animal") == null

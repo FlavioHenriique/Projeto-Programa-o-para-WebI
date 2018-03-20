@@ -141,14 +141,16 @@
 
                                 <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
                                 <br>
-                                <a class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
-                                <a class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
+                                <a href="front?command=ConfirmaVaga&resposta=nao&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                                   class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                <a href="front?command=ConfirmaVaga&resposta=sim&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                                   class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
                                 <hr>
                             </div><br>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <h5>Não existem solicitações de vagas até o momento!</h5>
+                        <h5>Não existem solicitações de vagas para essa carona!</h5><br>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
@@ -173,6 +175,9 @@
     }
     if (mensagem == "3") {
         swal("OK!", "Esta carona foi cancelada.", "success");
+    }
+    if (mensagem == "4") {
+        swal("OK!","O usuário receberá uma notificação da sua decisão.","success");
     }
 </script>
 </html>
