@@ -45,8 +45,8 @@ public class SolicitacaoDao {
 
         String sql = "update solicitacao set situacao = 'aceita' where emailamigo = ?  and "
                 + "emailusuario = ? and tipo = ?;"
-                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento)"
-                + " values (?,?,?,?,current_timestamp)";
+                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento,tipo)"
+                + " values (?,?,?,?,current_timestamp,'aceita')";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, requisitado);
@@ -64,8 +64,8 @@ public class SolicitacaoDao {
 
         String sql = "DELETE FROM Solicitacao WHERE emailUsuario = ? AND"
                 + " emailAmigo = ? AND tipo = ? ;"
-                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento)"
-                + " values (?,?,?,?,current_timestamp)";
+                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento,tipo)"
+                + " values (?,?,?,?,current_timestamp,'rejeita')";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(2, requisitado);

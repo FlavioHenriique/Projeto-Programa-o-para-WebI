@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CaronasSolicitadas implements Command {
+public class DadosUsuario implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -28,11 +28,11 @@ public class CaronasSolicitadas implements Command {
             dispatcher.forward(request, response);
 
         } catch (SQLException ex) {
-            Logger.getLogger(CaronasSolicitadas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CaronasSolicitadas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(CaronasSolicitadas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DadosUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

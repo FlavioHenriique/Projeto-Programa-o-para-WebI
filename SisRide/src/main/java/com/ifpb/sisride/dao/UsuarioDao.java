@@ -2,6 +2,7 @@ package com.ifpb.sisride.dao;
 
 import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.factory.ConFactory;
+import com.ifpb.sisride.modelo.Notificacao;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -163,19 +164,23 @@ public class UsuarioDao implements Dao<Usuario> {
 
     }
 
-    public List<String> getNotificacoes(String email) throws SQLException {
+    public List<Notificacao> getNotificacoes(String email) throws SQLException {
 
-        String sql = "SELECT u.nome,n.mensagem FROM NOTIFICACAO n, usuario u WHERE notificado = ?"
+        String sql = "SELECT u.nome,n.* FROM NOTIFICACAO n, usuario u WHERE notificado = ?"
                 + "and n.notificador = u.email order by momento desc";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
-        List<String> notificacoes = new ArrayList<>();
+        List<Notificacao> notificacoes = new ArrayList<>();
         System.out.println("print");
         while (result.next()) {
-            String notificacao = result.getString("nome") + " " + result.getString("mensagem");
-            notificacoes.add(notificacao);
-            System.out.println(notificacao);
+            Notificacao n = new Notificacao();
+            n.setMensagem(result.getString("mensagem"));
+            n.setNotificador(result.getString("nome"));
+            n.setSituacao(result.getString("situacao"));
+            n.setTipo(result.getString("tipo"));
+            
+            notificacoes.add(n);
         }
 
         return notificacoes;

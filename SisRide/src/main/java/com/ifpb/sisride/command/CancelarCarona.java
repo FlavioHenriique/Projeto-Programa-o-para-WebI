@@ -19,7 +19,7 @@ public class CancelarCarona implements Command {
             
             request.setAttribute("mensagem","3");
             
-            ListarLugares listar = new ListarLugares();
+            DadosUsuario listar = new DadosUsuario();
             listar.execute(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(CancelarCarona.class.getName()).log(Level.SEVERE, null, ex);

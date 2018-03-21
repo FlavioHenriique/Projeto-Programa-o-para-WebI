@@ -87,9 +87,18 @@
 
     <c:if test="${!empty notificacoes}">
         <label>Notificações</label>
+        <br><br>
         <c:forEach var="notificacao" items="${notificacoes}">
             <div class="solicitacoes col s12">
-                <h5>${notificacao}</h5> <hr>
+                <c:choose>
+                    <c:when test="${notificacao.tipo eq 'rejeita'}">
+                        <img src="Imagens/rejeita.jpg" class="circle amizade">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="Imagens/confirma.png" class="circle amizade">
+                    </c:otherwise>
+                </c:choose>
+                <label>${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
             </div>
         </c:forEach>
     </c:if>    

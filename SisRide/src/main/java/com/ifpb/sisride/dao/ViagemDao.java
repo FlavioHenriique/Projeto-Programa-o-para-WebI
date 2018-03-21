@@ -233,8 +233,8 @@ public class ViagemDao implements Dao<Viagem> {
 
         } else if (resposta.equals("nao")) {
             sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?;"
-                    + "INSERT INTO NOTIFICACAO (notificado, mensagem, situacao,momento,notificador) "
-                    + "values (?,?,'pendente',current_timestamp,?)";
+                    + "INSERT INTO NOTIFICACAO (notificado, mensagem, situacao,momento,notificador,tipo) "
+                    + "values (?,?,'pendente',current_timestamp,?,'rejeita')";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(2, solicitante);

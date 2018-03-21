@@ -95,6 +95,7 @@ CREATE TABLE NOTIFICACAO (
 	notificado VARCHAR,
 	notificador varchar,
 	situacao varchar,
+	tipo varchar,
 	codigo serial primary key,
 	foreign key (notificado) references usuario(email),
 	foreign key (notificador) references usuario(email)

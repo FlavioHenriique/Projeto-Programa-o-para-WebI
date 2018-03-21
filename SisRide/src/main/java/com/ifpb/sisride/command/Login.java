@@ -32,7 +32,7 @@ public class Login implements Command {
             Usuario u = (Usuario) session.getAttribute("usuario");
 
             if (u != null) {
-                response.sendRedirect("front?command=CaronasSolicitadas&email="+request.getParameter("email"));
+                response.sendRedirect("front?command=DadosUsuario&email="+request.getParameter("email"));
             } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
 
                 Usuario atual = g.buscaUsuario(request.getParameter("email"));
@@ -40,7 +40,7 @@ public class Login implements Command {
                 
                 AtualizaLugares.execute(request, atual.getEmail());
                 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=CaronasSolicitadas&email="+atual.getEmail());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=DadosUsuario&email="+atual.getEmail());
                 dispatcher.forward(request, response);
             } else {
                 response.sendRedirect("index.jsp?erro=1");

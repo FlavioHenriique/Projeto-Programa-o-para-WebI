@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ListarLugares implements Command {
+public class Caronas implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -36,11 +36,11 @@ public class ListarLugares implements Command {
             minhasCaronas(request, response,u.getEmail());
 
         } catch (SQLException ex) {
-            Logger.getLogger(ListarLugares.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Caronas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ListarLugares.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Caronas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(ListarLugares.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Caronas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -4,6 +4,7 @@ import com.ifpb.sisride.dao.UsuarioDao;
 import com.ifpb.sisride.exception.CadastroException;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
+import com.ifpb.sisride.modelo.Notificacao;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -56,7 +57,7 @@ public class GerenciadorUsuario {
         userDao.solicitacao(usuario, amigo, tipo);
     }
     
-    public List<String> getNotificacoes(String email) throws SQLException{
+    public List<Notificacao> getNotificacoes(String email) throws SQLException{
         return userDao.getNotificacoes(email);
     }
 }
