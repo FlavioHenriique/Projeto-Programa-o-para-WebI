@@ -82,27 +82,28 @@
         </center>
     </c:if>
     <c:if test="${empty caronasSolicitadas}">
-        Você ainda não solicitou nenhuma carona 
+    <label>Você ainda não solicitou nenhuma carona</label> <br>
     </c:if><br>
 
     <c:if test="${!empty notificacoes}">
-        <label>Notificações</label>
-        <br><br>
+        <h4>Notificações</h4>
+        <br>
         <c:forEach var="notificacao" items="${notificacoes}">
             <div class="solicitacoes col s12">
                 <c:choose>
                     <c:when test="${notificacao.tipo eq 'rejeita'}">
-                        <img src="Imagens/rejeita.jpg" class="circle amizade">
+                      
+                        <i class="material-icons icone_recusa">thumb_down</i>
                     </c:when>
                     <c:otherwise>
-                        <img src="Imagens/confirma.png" class="circle amizade">
+                        <i class="material-icons icone_confirma">thumb_up</i>
                     </c:otherwise>
                 </c:choose>
-                <label>${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
+                <label class="amizade">${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
             </div>
         </c:forEach>
     </c:if>    
-
+        <br><br>
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

@@ -67,5 +67,9 @@ public class GerenciadorViagem {
     public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException{
         return dao.caronasSolicitadas(email);
     }
-        
+    
+    
+    public void recomendaCarona(String motorista, String passageiro, int carona) throws SQLException{
+        dao.recomendaCarona(motorista, passageiro, carona);
+    }
 }

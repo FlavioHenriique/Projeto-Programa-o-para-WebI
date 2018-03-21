@@ -51,11 +51,13 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(11, obj.getPartida().getIdentificacao());
             stmt.setInt(12, obj.getCarro().getCodigo());
             stmt.execute();
+            stmt.close();
+            return true;
 
         } catch (ParseException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        stmt.close();
         return false;
     }
 
@@ -93,6 +95,8 @@ public class ViagemDao implements Dao<Viagem> {
                         result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
+                stmt.close();
+                result.close();
 
                 return viagem;
 
@@ -181,6 +185,7 @@ public class ViagemDao implements Dao<Viagem> {
         }
 
         rs.close();
+        stmt.close();
 
         return lista;
     }
@@ -194,6 +199,8 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.setInt(2, codigo);
         stmt.setString(3, "pendente");
         stmt.execute();
+
+        stmt.close();
 
     }
 
@@ -212,6 +219,8 @@ public class ViagemDao implements Dao<Viagem> {
             System.out.println(u.toString());
             lista.add(u);
         }
+        result.close();
+        stmt.close();
 
         return lista;
 
@@ -223,7 +232,7 @@ public class ViagemDao implements Dao<Viagem> {
 
         if (resposta.equals("sim")) {
             sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ? ;"
-                    + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ? "; 
+                    + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ? ";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(2, solicitante);
             stmt.setInt(1, viagem);
@@ -241,7 +250,7 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(1, viagem);
             stmt.setString(3, solicitante);
             stmt.setString(4, "recusou sua solicitação de vaga.");
-            stmt.setString(5,this.buscar(viagem).getMotorista().getEmail());
+            stmt.setString(5, this.buscar(viagem).getMotorista().getEmail());
             stmt.execute();
         }
 
@@ -266,6 +275,21 @@ public class ViagemDao implements Dao<Viagem> {
             v.setSituacao(result.getString("situacao"));
             lista.add(v);
         }
+        result.close();
+        stmt.close();
+
         return lista;
+    }
+
+    public void recomendaCarona(String motorista, String passageiro, int carona) throws SQLException {
+
+        String sql = "INSERT INTO Recomendacao (motorista,passageiro,carona) values (?,?,?)";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, motorista);
+        stmt.setString(2, passageiro);
+        stmt.setInt(3, carona);
+        stmt.execute();
+
+        stmt.close();
     }
 }

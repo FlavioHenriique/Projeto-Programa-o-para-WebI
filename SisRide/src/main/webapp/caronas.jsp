@@ -123,7 +123,40 @@
                             sem ar-condicionado.
                         </c:otherwise>
                     </c:choose>
-                    <br><br>
+                    <br>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">screen_share</i>
+                                Recomendar para um amigo</div>
+                            <div class="collapsible-body">
+
+                                <!-- Gerando lista com os amigos do usuário-->       
+                                <c:choose>
+                                    <c:when test="${!empty amigos}">
+                                        <c:forEach var="amigo" items="${amigos}">
+                                            <c:choose>
+                                                <c:when test="${amigo.foto2 != null}">
+                                                    <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle recomendacao">        
+
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img src="Imagens/user.png" class="circle recomendacao">
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <a href="front?command=RecomendarCarona&carona=${viagem.codigo}&passageiro=${amigo.email}"
+                                               class="recomendacao">${amigo.nome}</a>
+                                            <hr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        Você não tem amigos
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </li>
+                    </ul>
+
                     <a class="waves-effect waves-light btn s12 alinhado cancelar"
                        href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
                     <hr>
@@ -170,14 +203,28 @@
         swal("Erro!", "Preencha todos os campos", "error");
     }
     var mensagem = "${param.mensagem}";
-    if (mensagem == "1") {
-        window.location.replace("front?command=ListarLugares");
-    }
-    if (mensagem == "3") {
-        swal("OK!", "Esta carona foi cancelada.", "success");
-    }
-    if (mensagem == "4") {
-        swal("OK!","O usuário receberá uma notificação da sua decisão.","success");
+
+    switch (mensagem) {
+        case "1":
+        {
+            window.location.replace("front?command=ListarLugares");
+            break;
+        }
+        case "3":
+        {
+            swal("OK!", "Esta carona foi cancelada.", "success");
+            break;
+        }
+        case "4":
+        {
+            swal("OK!", "O usuário receberá uma notificação da sua decisão.", "success");
+            break;
+        }
+        case "5":
+        {
+            swal("Ok!", "Seu amigo receberá a recomendação.", "success");
+            break;
+        }
     }
 </script>
 </html>

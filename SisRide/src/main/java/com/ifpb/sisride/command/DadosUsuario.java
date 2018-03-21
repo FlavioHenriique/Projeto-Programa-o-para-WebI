@@ -1,7 +1,9 @@
 package com.ifpb.sisride.command;
 
+import com.ifpb.sisride.controle.GerenciadorSolicitacao;
 import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.controle.GerenciadorViagem;
+import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -10,6 +12,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class DadosUsuario implements Command {
 
@@ -20,9 +23,12 @@ public class DadosUsuario implements Command {
 
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             GerenciadorUsuario user = new GerenciadorUsuario();
+
+            request = ListarAmigos.listar(request);
             
+
             request.setAttribute("notificacoes", user.getNotificacoes(request.getParameter("email")));
-            
+
             request.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));
             RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
             dispatcher.forward(request, response);

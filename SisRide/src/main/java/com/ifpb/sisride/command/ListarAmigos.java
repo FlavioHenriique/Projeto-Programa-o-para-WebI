@@ -13,20 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ListarAmigos implements Command {
-    
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
+
         HttpSession session = request.getSession();
         Usuario atual = (Usuario) session.getAttribute("usuario");
         try {
-            GerenciadorSolicitacao gerenciador = new GerenciadorSolicitacao();
-            
-            session.setAttribute("amigos", gerenciador.listarAmigos(atual.getEmail()));
+            request = listar(request);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("amizades.jsp");
             dispatcher.forward(request, response);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ListarAmigos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -34,7 +32,19 @@ public class ListarAmigos implements Command {
         } catch (IOException ex) {
             Logger.getLogger(ListarAmigos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
+    public static HttpServletRequest listar(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+
+        HttpSession session = request.getSession();
+        Usuario atual = (Usuario) session.getAttribute("usuario");
+
+        GerenciadorSolicitacao gerenciador = new GerenciadorSolicitacao();
+
+        session.setAttribute("amigos", gerenciador.listarAmigos(atual.getEmail()));
+        
+        return request;
+    }
+
 }
