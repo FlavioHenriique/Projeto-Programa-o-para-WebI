@@ -100,3 +100,12 @@ CREATE TABLE NOTIFICACAO (
 	foreign key (notificado) references usuario(email),
 	foreign key (notificador) references usuario(email)
 );
+
+create table recomendacao(
+	motorista varchar,
+	passageiro varchar,
+	carona int,
+	primary key (motorista,passageiro,carona),
+	foreign key (motorista) references usuario(email),
+	foreign key (passageiro) references usuario(email)
+);
