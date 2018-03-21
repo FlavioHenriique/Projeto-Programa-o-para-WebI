@@ -98,7 +98,8 @@
                                       href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}">
                                       Aceitar</a>
 
-                                  <a class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                  <a href="front?command=RecusarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}"
+                                     class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
                                   <hr>
                               </div>    
                         </c:if>

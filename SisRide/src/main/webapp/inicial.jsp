@@ -88,9 +88,12 @@
     <c:if test="${!empty notificacoes}">
         <label>Notificações</label>
         <c:forEach var="notificacao" items="${notificacoes}">
-            <h5>${notificacao}</h5>
+            <div class="solicitacoes col s12">
+                <h5>${notificacao}</h5> <hr>
+            </div>
         </c:forEach>
-    </c:if>
+    </c:if>    
+
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

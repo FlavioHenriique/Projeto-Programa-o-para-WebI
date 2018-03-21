@@ -223,7 +223,7 @@ public class ViagemDao implements Dao<Viagem> {
 
         if (resposta.equals("sim")) {
             sql = "UPDATE Solicita_viagem set situacao = 'aceita' where codviagem = ? and emailusuario = ? ;"
-                    + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ?";
+                    + "UPDATE Viagem set vagas = vagas - 1 WHERE codigo = ? "; 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(2, solicitante);
             stmt.setInt(1, viagem);
@@ -232,11 +232,16 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.execute();
 
         } else if (resposta.equals("nao")) {
-            sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?";
+            sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?;"
+                    + "INSERT INTO NOTIFICACAO (notificado, mensagem, situacao,momento,notificador) "
+                    + "values (?,?,'pendente',current_timestamp,?)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(2, solicitante);
             stmt.setInt(1, viagem);
+            stmt.setString(3, solicitante);
+            stmt.setString(4, "recusou sua solicitação de vaga.");
+            stmt.setString(5,this.buscar(viagem).getMotorista().getEmail());
             stmt.execute();
         }
 

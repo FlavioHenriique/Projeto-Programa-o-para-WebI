@@ -54,7 +54,7 @@ public class SolicitacaoDao {
         stmt.setString(3, tipo);
         stmt.setString(5, requisitado);
         stmt.setString(4, solicitador);
-        stmt.setString(6,"aceitou sua solicitação de amizade.");
+        stmt.setString(6, "aceitou sua solicitação de " + tipo + ".");
         stmt.setString(7, "pendente");
         stmt.executeUpdate();
 
@@ -63,11 +63,18 @@ public class SolicitacaoDao {
     public void recusaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
 
         String sql = "DELETE FROM Solicitacao WHERE emailUsuario = ? AND"
-                + " emailAmigo = ? AND tipo = ?";
+                + " emailAmigo = ? AND tipo = ? ;"
+                + "insert into notificacao (notificado,notificador,mensagem,situacao,momento)"
+                + " values (?,?,?,?,current_timestamp)";
+
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(2, requisitado);
         stmt.setString(1, solicitador);
         stmt.setString(3, tipo);
+        stmt.setString(5, requisitado);
+        stmt.setString(4, solicitador);
+        stmt.setString(6, "recusou sua solicitação de " + tipo + ".");
+        stmt.setString(7, "pendente");
         stmt.execute();
 
     }
