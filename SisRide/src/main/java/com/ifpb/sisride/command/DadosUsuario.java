@@ -26,7 +26,7 @@ public class DadosUsuario implements Command {
 
             request = ListarAmigos.listar(request);
             
-
+            request.setAttribute("recomendacoes", gerenciador.getRecomendacoes(request.getParameter("email")));
             request.setAttribute("notificacoes", user.getNotificacoes(request.getParameter("email")));
 
             request.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));

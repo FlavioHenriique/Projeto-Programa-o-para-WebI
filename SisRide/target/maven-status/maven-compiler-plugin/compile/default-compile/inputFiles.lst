@@ -8,10 +8,10 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/CarroDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AtualizaLugares.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/RecusarSolicitacao.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Notificacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorLugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/FotoSolicitacoes.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/DesfazerRelacionamento.java
-/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CaronasSolicitadas.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AtualizaUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/SolicitacaoDao.java
@@ -19,8 +19,8 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Usuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Carro.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Viagem.java
-/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/ListarLugares.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/exception/AutenticacaoException.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/RecomendarCarona.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Command.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/ViagemDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/LugarDao.java
@@ -47,7 +47,9 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Lugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Solicitacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/BuscaUsuario.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Caronas.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/UsuarioDao.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/DadosUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AceitarSolicitacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroViagem.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/servlets/FrontServlet.java

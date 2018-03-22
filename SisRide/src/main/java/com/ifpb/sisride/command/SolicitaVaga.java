@@ -24,9 +24,15 @@ public class SolicitaVaga implements Command {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             gerenciador.solicitaVaga(atual.getEmail(), Integer.parseInt(request.getParameter("codViagem")));
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp?mensagem=1");
-            dispatcher.forward(request, response);
+            if (request.getParameter("pagina").equals("inicial")) {
 
+                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=DadosUsuario&email="+atual.getEmail()+"&mensagem=2");
+                dispatcher.forward(request, response);
+            } else {
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp?mensagem=1");
+                dispatcher.forward(request, response);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SolicitaVaga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

@@ -45,7 +45,7 @@ public class Caronas implements Command {
 
     }
 
-    public void minhasCaronas(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException,
+    public static void minhasCaronas(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException,
             ClassNotFoundException,
             ServletException,
             IOException {

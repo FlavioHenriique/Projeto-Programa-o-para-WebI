@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="minhasTags" %>
 <html>
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -91,105 +92,74 @@
                 Você não cadastrou nenhuma carona
             </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
-                <div class="solicitacoes">
-                    <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
+            <minhasTags:imprimeCarona viagem="${viagem}" />
+            <br>
 
-                    <br>Data da viagem: ${viagem.data}, às ${viagem.hora} horas
-                    <br> Há <b>${viagem.vagas} vagas</b> disponíveis
-                    <br>O nível de conversa desejado é ${viagem.conversa},
-                    a música desejada é ${viagem.musica},
-                    <c:choose>
-                        <c:when test="${viagem.fumar eq true}">
-                            é permitido fumar
-                        </c:when>
-                        <c:otherwise>
-                            Não é permitido fumar
-                        </c:otherwise>
-                    </c:choose>
-                    <c:choose>
-                        <c:when test="${viagem.animais eq true}">
-                            e é permitido levar animais.
-                        </c:when>
-                        <c:otherwise>
-                            e não é permitido levar animais.
-                        </c:otherwise>
-                    </c:choose>
-                    <br>O carro utilizado será um ${viagem.carro.modelo} ${viagem.carro.ano}
-                    <c:choose>
-                        <c:when test="${viagem.carro.ar_condicionado eq true}">
-                            com ar-condicionado.
-                        </c:when>
-                        <c:otherwise>
-                            sem ar-condicionado.
-                        </c:otherwise>
-                    </c:choose>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">screen_share</i>
+                        Recomendar para um amigo</div>
+                    <div class="collapsible-body">
+
+                        <!-- Gerando lista com os amigos do usuário-->       
+                        <c:choose>
+                            <c:when test="${!empty amigos}">
+                                <c:forEach var="amigo" items="${amigos}">
+                                    <c:choose>
+                                        <c:when test="${amigo.foto2 != null}">
+                                            <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle recomendacao">        
+
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="Imagens/user.png" class="circle recomendacao">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <a href="front?command=RecomendarCarona&carona=${viagem.codigo}&passageiro=${amigo.email}"
+                                       class="recomendacao">${amigo.nome}</a>
+                                    <hr>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                Você não tem amigos
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </li>
+            </ul>
+
+            <a class="waves-effect waves-light btn s12 alinhado cancelar"
+               href="front?command=CancelarCarona&codCarona=${viagem.codigo}&mensagem=3">Cancelar esta carona</a>
+            <hr>
+            </div>
+
+            <br>
+            <c:choose>
+                <c:when test="${!empty viagem.solicitadores}">
+
+                    <h5>Usuários que solicitaram vagas</h5>
                     <br>
+                    <c:forEach var="solicitante" items="${viagem.solicitadores}">
+                        <div class="solicitacoes">
+                            <h5><b>${solicitante.nome}</b></h5>
 
-                    <ul class="collapsible" data-collapsible="accordion">
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">screen_share</i>
-                                Recomendar para um amigo</div>
-                            <div class="collapsible-body">
-
-                                <!-- Gerando lista com os amigos do usuário-->       
-                                <c:choose>
-                                    <c:when test="${!empty amigos}">
-                                        <c:forEach var="amigo" items="${amigos}">
-                                            <c:choose>
-                                                <c:when test="${amigo.foto2 != null}">
-                                                    <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle recomendacao">        
-
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img src="Imagens/user.png" class="circle recomendacao">
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <a href="front?command=RecomendarCarona&carona=${viagem.codigo}&passageiro=${amigo.email}"
-                                               class="recomendacao">${amigo.nome}</a>
-                                            <hr>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                        Você não tem amigos
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <a class="waves-effect waves-light btn s12 alinhado cancelar"
-                       href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
-                    <hr>
-                </div>
-
-                <br>
-                <c:choose>
-                    <c:when test="${!empty viagem.solicitadores}">
-
-                        <h5>Usuários que solicitaram vagas</h5>
-                        <br>
-                        <c:forEach var="solicitante" items="${viagem.solicitadores}">
-                            <div class="solicitacoes">
-                                <h5><b>${solicitante.nome}</b></h5>
-
-                                <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
-                                <br>
-                                <a href="front?command=ConfirmaVaga&resposta=nao&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
-                                   class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
-                                <a href="front?command=ConfirmaVaga&resposta=sim&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
-                                   class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
-                                <hr>
-                            </div><br>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <h5>Não existem solicitações de vagas para essa carona!</h5><br>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
+                            <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
+                            <br>
+                            <a href="front?command=ConfirmaVaga&resposta=nao&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                               class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                            <a href="front?command=ConfirmaVaga&resposta=sim&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                               class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
+                            <hr>
+                        </div><br>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <h5>Não existem solicitações de vagas para essa carona!</h5><br>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
         </td>
-    </tr>
-</table>
+        </tr>
+    </table>
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -213,6 +183,7 @@
         case "3":
         {
             swal("OK!", "Esta carona foi cancelada.", "success");
+            
             break;
         }
         case "4":

@@ -23,8 +23,8 @@ public class ViagemDao implements Dao<Viagem> {
     private final Connection con;
 
     public ViagemDao() throws ClassNotFoundException, SQLException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+       
+        con = ConFactory.getConnection();
     }
 
     @Override
@@ -281,9 +281,11 @@ public class ViagemDao implements Dao<Viagem> {
         return lista;
     }
 
-    public void recomendaCarona(String motorista, String passageiro, int carona) throws SQLException {
+    public void recomendaCarona(String motorista, String passageiro, int carona)
+            throws SQLException {
 
-        String sql = "INSERT INTO Recomendacao (motorista,passageiro,carona) values (?,?,?)";
+        String sql = "INSERT INTO Recomendacao (motorista,passageiro,carona) "
+                + "values (?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, motorista);
         stmt.setString(2, passageiro);
@@ -291,5 +293,27 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.execute();
 
         stmt.close();
+    }
+
+    public List<Viagem> getRecomendacoes(String passageiro) throws SQLException {
+
+        String sql = "SELECT carona from Recomendacao WHERE passageiro = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, passageiro);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Viagem> viagens = new ArrayList<>();
+
+        while (rs.next()) {
+            Viagem viagem = buscar(rs.getInt("carona"));
+
+            viagens.add(viagem);
+        }
+        rs.close();
+        stmt.close();
+        for(Viagem v: viagens){
+            System.out.println(v.toString());
+        }
+        return viagens;
     }
 }

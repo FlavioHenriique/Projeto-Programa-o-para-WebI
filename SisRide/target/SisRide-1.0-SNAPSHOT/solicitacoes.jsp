@@ -138,7 +138,9 @@
 
         var mensagem = "${param.mensagem}";
         if (mensagem == "1") {
-            swal("Parabéns!", "A solicitação foi realizada", "success");
+             swal("Parabéns!", "A solicitação foi realizada", "success");
+         
         }
+        
     </script>
 </html>

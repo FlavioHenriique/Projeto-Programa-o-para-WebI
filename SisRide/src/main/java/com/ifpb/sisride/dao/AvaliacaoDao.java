@@ -18,8 +18,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
     private final Connection con;
 
     public AvaliacaoDao() throws SQLException, ClassNotFoundException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+       con = ConFactory.getConnection();
     }
 
     @Override

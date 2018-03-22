@@ -19,8 +19,8 @@ public class UsuarioDao implements Dao<Usuario> {
     private final Connection con;
 
     public UsuarioDao() throws ClassNotFoundException, SQLException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+       
+        con = ConFactory.getConnection();
     }
 
     @Override
@@ -44,7 +44,6 @@ public class UsuarioDao implements Dao<Usuario> {
         }
 
         stmt.execute();
-        con.close();
         stmt.close();
 
         return true;
@@ -62,6 +61,8 @@ public class UsuarioDao implements Dao<Usuario> {
                     resultado.getString("senha"), resultado.getString("nome"),
                     resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissão"),
                     resultado.getString("cidade"), resultado.getString("sexo"), resultado.getBytes("foto"));
+            resultado.close();
+            stmt.close();
             return u;
         }
         return null;
@@ -89,6 +90,7 @@ public class UsuarioDao implements Dao<Usuario> {
 
             stmt.execute();
 
+            stmt.close();
             if (obj.getFoto() instanceof FileInputStream) {
                 setFoto(obj.getEmail(), obj.getFoto());
             }
@@ -102,7 +104,9 @@ public class UsuarioDao implements Dao<Usuario> {
             String sql = "DELETE FROM Usuario WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setObject(1, obj);
-            return stmt.execute();
+            stmt.execute();
+            stmt.close();
+            return true;
         }
         return false;
     }
@@ -114,6 +118,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(1, email);
             stmt.setString(2, senha);
             if (stmt.executeQuery().next()) {
+                stmt.close();
                 return true;
             }
         }
@@ -128,6 +133,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(2, email);
         stmt.setBinaryStream(1, foto);
         stmt.execute();
+        stmt.close();
     }
 
     public Usuario buscaNome(String email) throws SQLException {
@@ -144,6 +150,8 @@ public class UsuarioDao implements Dao<Usuario> {
             Usuario u = new Usuario();
             Usuario u2 = this.buscar(result.getString("email"));
 
+            result.close();
+            stmt.close();
             u = u2;
             return u;
         }
@@ -161,6 +169,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(3, "pendente");
         stmt.setString(4, tipo);
         stmt.execute();
+        stmt.close();
 
     }
 
@@ -179,10 +188,12 @@ public class UsuarioDao implements Dao<Usuario> {
             n.setNotificador(result.getString("nome"));
             n.setSituacao(result.getString("situacao"));
             n.setTipo(result.getString("tipo"));
-            
+
             notificacoes.add(n);
         }
-
+        
+        result.close();
+        stmt.close();
         return notificacoes;
     }
 

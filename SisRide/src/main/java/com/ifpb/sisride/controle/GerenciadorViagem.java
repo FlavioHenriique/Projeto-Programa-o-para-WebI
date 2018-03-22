@@ -55,21 +55,25 @@ public class GerenciadorViagem {
     public List<Viagem> minhasCaronas(String usuario) throws SQLException {
         return dao.minhasCaronas(usuario);
     }
-    
-    public void solicitaVaga(String email, int codigo) throws SQLException{
+
+    public void solicitaVaga(String email, int codigo) throws SQLException {
         dao.solicitaVaga(email, codigo);
     }
-    
-    public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException{
+
+    public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException {
         dao.confirmaVaga(solicitante, viagem, resposta);
     }
-    
-    public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException{
+
+    public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException {
         return dao.caronasSolicitadas(email);
     }
-    
-    
-    public void recomendaCarona(String motorista, String passageiro, int carona) throws SQLException{
+
+    public void recomendaCarona(String motorista, String passageiro, int carona) throws SQLException {
         dao.recomendaCarona(motorista, passageiro, carona);
+    }
+
+    public List<Viagem> getRecomendacoes(String passageiro) throws SQLException {
+
+        return dao.getRecomendacoes(passageiro);
     }
 }

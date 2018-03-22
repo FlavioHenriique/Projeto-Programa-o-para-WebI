@@ -12,8 +12,8 @@ public class CarroDao implements Dao<Carro> {
     private final Connection con;
 
     public CarroDao() throws ClassNotFoundException, SQLException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+      
+        con = ConFactory.getConnection();
     }
 
     public int salvarCarro(Carro obj) throws SQLException {

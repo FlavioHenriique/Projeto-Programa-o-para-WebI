@@ -15,8 +15,7 @@ public class SolicitacaoDao {
     private final Connection con;
 
     public SolicitacaoDao() throws ClassNotFoundException, SQLException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+        con = ConFactory.getConnection();
     }
 
     public List<Solicitacao> listarSolicitacoes(Usuario usuario) throws SQLException, ClassNotFoundException {
@@ -37,6 +36,8 @@ public class SolicitacaoDao {
 
             solicitacoes.add(s);
         }
+        result.close();
+        stmt.close();
 
         return solicitacoes;
     }
@@ -57,6 +58,7 @@ public class SolicitacaoDao {
         stmt.setString(6, "aceitou sua solicitação de " + tipo + ".");
         stmt.setString(7, "pendente");
         stmt.executeUpdate();
+        stmt.close();
 
     }
 
@@ -76,7 +78,7 @@ public class SolicitacaoDao {
         stmt.setString(6, "recusou sua solicitação de " + tipo + ".");
         stmt.setString(7, "pendente");
         stmt.execute();
-
+        stmt.close();
     }
 
     public void DesfazerRelacionamento(String usuario1, String usuario2, String tipo) throws SQLException {
@@ -92,7 +94,7 @@ public class SolicitacaoDao {
         stmt.setString(5, usuario1);
         stmt.setString(6, tipo);
         stmt.execute();
-
+        stmt.close();
     }
 
     public List<Usuario> listarAmigos(String email) throws SQLException, ClassNotFoundException {
@@ -121,6 +123,9 @@ public class SolicitacaoDao {
             }
             amigos.add(u);
         }
+        rs.close();
+        stmt.close();
+
         return amigos;
     }
 }

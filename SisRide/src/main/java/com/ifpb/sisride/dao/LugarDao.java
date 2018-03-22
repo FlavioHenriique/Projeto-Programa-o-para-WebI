@@ -14,8 +14,7 @@ public class LugarDao implements Dao<Lugar> {
     private final Connection con;
 
     public LugarDao() throws ClassNotFoundException, SQLException {
-        ConFactory factory = new ConFactory();
-        con = factory.getConnection();
+        con = ConFactory.getConnection();
     }
 
     @Override
@@ -47,9 +46,10 @@ public class LugarDao implements Dao<Lugar> {
             lista.add(lugar);
 
         }
-        
+
         resultado.close();
-        
+        stmt.close();
+
         return lista;
     }
 
@@ -78,7 +78,9 @@ public class LugarDao implements Dao<Lugar> {
         String sql = "DELETE FROM lugar WHERE identificacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
-        return stmt.execute();
+        stmt.execute();
+        stmt.close();
+        return true;
     }
 
     public List<Lugar> buscarMeusLugares(String email) throws SQLException {
@@ -105,8 +107,8 @@ public class LugarDao implements Dao<Lugar> {
 
             lugares.add(l);
         }
-        
-        
+        result.close();
+        stmt.close();
         
         return lugares;
     }
@@ -132,8 +134,8 @@ public class LugarDao implements Dao<Lugar> {
 
             lista.add(lugar);
         }
-        
-        
+        result.close();
+        stmt.close();
         
         return lista;
     }
@@ -157,6 +159,8 @@ public class LugarDao implements Dao<Lugar> {
             l.setNumero(result.getInt("numero"));
             l.setRua(result.getString("rua"));
             
+            result.close();
+            stmt.close();
             
             return l;
         }
