@@ -18,32 +18,25 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
     private final Connection con;
 
     public AvaliacaoDao() throws SQLException, ClassNotFoundException {
-       con = ConFactory.getConnection();
+        con = ConFactory.getConnection();
     }
 
     @Override
     public boolean salvar(Avaliacao obj) throws SQLException {
 
-        String sql = "INSERT INTO Avaliacao (comentario,hora,data,nota,"
-                + "usuarioavaliado,avaliador) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Avaliacao (comentario,nota,"
+                + "usuarioavaliado,avaliador,tipo,momento) VALUES (?,?,?,?,?, current_timestamp)";
 
         SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
-        java.util.Date data;
-        try {
-            data = (java.util.Date) formatador.parse(obj.getHora());
-            Time time = new Time(data.getTime());
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, obj.getComentario());
-            stmt.setTime(2, time);
-            stmt.setDate(3, Date.valueOf(obj.getData()));
-            stmt.setFloat(4, obj.getNota());
-            stmt.setString(5, obj.getUsuarioAvaliado());
-            stmt.setString(6, obj.getAvaliador());
-            return stmt.execute();
-        } catch (ParseException ex) {
-            Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, obj.getComentario());
+        stmt.setFloat(2, obj.getNota());
+        stmt.setString(3, obj.getUsuarioAvaliado());
+        stmt.setString(4, obj.getAvaliador());
+        stmt.setString(5, obj.getTipo());
+        return stmt.execute();
+
     }
 
     @Override
@@ -54,11 +47,10 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
         ResultSet resultado = stmt.executeQuery();
         if (resultado.next()) {
             Avaliacao a = new Avaliacao(resultado.getString("comentario"),
-                    resultado.getTime("hora").toString(), resultado.getDate("data")
-                    .toLocalDate(), resultado.getFloat("nota"), resultado.getString("usuarioavaliado"),
-                    resultado.getString("avaliador"),resultado.getInt("codigo"));
+                   resultado.getFloat("nota"), resultado.getString("usuarioavaliado"),
+                    resultado.getString("avaliador"), resultado.getInt("codigo"));
             stmt.close();
-            
+
             return a;
         }
         return null;
@@ -67,26 +59,18 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
     @Override
     public boolean atualizar(Avaliacao obj) throws SQLException {
         if (buscar(obj.getCodigo()) != null) {
-            String sql = "UPDATE Avaliacao SET comentario =?,hora=?,data=?, "
-                    + "nota=?,usuarioavaliado=?,avaliador=? WHERE codigo = ?";
+            String sql = "UPDATE Avaliacao SET comentario =?,nota=?,usuarioavaliado=?,"
+                    + "avaliador=? WHERE codigo = ? and tipo = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
-            SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
-            java.util.Date data;
-            try {
-                data = (java.util.Date) formatador.parse(obj.getHora());
-                Time time = new Time(data.getTime());
-                stmt.setString(1, obj.getComentario());
-                stmt.setTime(2, time);
-                stmt.setDate(3, Date.valueOf(obj.getData()));
-                stmt.setFloat(4, obj.getNota());
-                stmt.setString(5, obj.getUsuarioAvaliado());
-                stmt.setString(6, obj.getAvaliador());
-                stmt.setInt(7, obj.getCodigo());
-                return stmt.execute();
-            } catch (ParseException ex) {
-                Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            stmt.setString(1, obj.getComentario());
+            stmt.setFloat(2, obj.getNota());
+            stmt.setString(3, obj.getUsuarioAvaliado());
+            stmt.setString(4, obj.getAvaliador());
+            stmt.setInt(5, obj.getCodigo());
+            stmt.setString(6, obj.getTipo());
+            return stmt.execute();
+
         }
         return false;
     }

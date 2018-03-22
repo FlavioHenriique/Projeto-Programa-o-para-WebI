@@ -57,6 +57,7 @@ CREATE TABLE AVALIACAO(
    Nota real,
    UsuarioAvaliado varchar(50),
    Avaliador varchar(50),
+   tipo varchar,
    FOREIGN KEY (UsuarioAvaliado) REFERENCES Usuario(Email),
    FOREIGN KEY (Avaliador) REFERENCES Usuario(Email)
 );

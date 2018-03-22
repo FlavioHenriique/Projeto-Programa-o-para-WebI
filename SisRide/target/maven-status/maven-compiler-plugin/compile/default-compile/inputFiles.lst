@@ -4,6 +4,7 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/Login.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/factory/ConFactory.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/ExcluirConta.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/PaginaAvaliacoes.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/factory/DaoFactoryIF.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/dao/CarroDao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AtualizaLugares.java
@@ -11,6 +12,7 @@
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/modelo/Notificacao.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/controle/GerenciadorLugar.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/FotoSolicitacoes.java
+/home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AvaliarUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/DesfazerRelacionamento.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/CadastroUsuario.java
 /home/flavio/ADS/4º Período/Programação para a Web I/SisRide/SisRide/src/main/java/com/ifpb/sisride/command/AtualizaUsuario.java

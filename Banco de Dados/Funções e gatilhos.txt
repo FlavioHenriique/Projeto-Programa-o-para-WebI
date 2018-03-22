@@ -1,9 +1,10 @@
-CREATE OR REPLACE FUNCTION mediausuario(varchar)
+CREATE OR REPLACE FUNCTION mediausuario(varchar,varchar)
 RETURNS real as $$
 DECLARE email alias for $1;
 	media real;
+	tipo_usuario alias for $2;
 BEGIN
-	SELECT INTO media  AVG(nota) FROM AVALIACAO WHERE usuarioAvaliado = email;
+	SELECT INTO media  AVG(nota) FROM AVALIACAO WHERE usuarioAvaliado = email AND tipo = tipo_usuario;
 	return media;
 END $$
 LANGUAGE PLPGSQL;
@@ -11,8 +12,12 @@ LANGUAGE PLPGSQL;
 CREATE OR REPLACE FUNCTION notausuario() 
 RETURNS TRIGGER as $$
 BEGIN
-	UPDATE USUARIO SET NOTA = mediausuario(NEW.usuarioAvaliado) where email = new.usuarioAvaliado;
-	return null;
+	if new.tipo = 'motorista' then
+	UPDATE USUARIO SET nota_motorista = mediausuario(NEW.usuarioAvaliado, NEW.tipo) where email = new.usuarioAvaliado;
+	else
+	UPDATE USUARIO SET nota_passageiro = mediausuario(NEW.usuarioAvaliado, NEW.tipo) where email = new.usuarioAvaliado;
+	end if;
+return null;
 	
 end $$
 LANGUAGE PLPGSQL;
@@ -20,8 +25,12 @@ LANGUAGE PLPGSQL;
 CREATE OR REPLACE FUNCTION atualizanota() 
 RETURNS TRIGGER as $$
 BEGIN
-	UPDATE USUARIO SET NOTA = mediausuario(old.usuarioAvaliado) where email = old.usuarioAvaliado;
-	return null;
+	if old.tipo = 'motorista' then	
+	UPDATE USUARIO SET NOTA_motorista = mediausuario(old.usuarioAvaliado, old.tipo) where email = old.usuarioAvaliado;
+	else 
+	UPDATE USUARIO SET nota_passageiro = mediausuario(old.usuarioAvaliado, old.tipo) where email = old.usuarioAvaliado;
+	end if;
+return null;
 	
 end $$
 LANGUAGE PLPGSQL;

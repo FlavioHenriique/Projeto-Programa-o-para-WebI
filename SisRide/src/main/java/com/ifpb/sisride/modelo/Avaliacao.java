@@ -6,28 +6,24 @@ import java.util.Objects;
 public class Avaliacao {
 
     private String comentario;
-    private String hora;
-    private LocalDate data;
     private float nota;
     private String usuarioAvaliado;
     private String avaliador;
     private int codigo;
+    private String tipo;
 
-    public Avaliacao(String comentario, String hora, LocalDate data,
-            float nota, String usuarioAvaliado, String avaliador) {
+    public Avaliacao(String comentario, float nota, String usuarioAvaliado,
+            String avaliador, String tipo) {
         this.comentario = comentario;
-        this.hora = hora;
-        this.data = data;
         this.nota = nota;
         this.usuarioAvaliado = usuarioAvaliado;
         this.avaliador = avaliador;
+        this.tipo = tipo;
     }
 
-    public Avaliacao(String comentario, String hora, LocalDate data, float nota,
+    public Avaliacao(String comentario, float nota,
             String usuarioAvaliado, String avaliador, int codigo) {
         this.comentario = comentario;
-        this.hora = hora;
-        this.data = data;
         this.nota = nota;
         this.usuarioAvaliado = usuarioAvaliado;
         this.avaliador = avaliador;
@@ -44,22 +40,6 @@ public class Avaliacao {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
     }
 
     public float getNota() {
@@ -86,15 +66,23 @@ public class Avaliacao {
         this.avaliador = avaliador;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.comentario);
-        hash = 37 * hash + Objects.hashCode(this.hora);
-        hash = 37 * hash + Objects.hashCode(this.data);
-        hash = 37 * hash + Float.floatToIntBits(this.nota);
-        hash = 37 * hash + Objects.hashCode(this.usuarioAvaliado);
-        hash = 37 * hash + Objects.hashCode(this.avaliador);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.comentario);
+        hash = 53 * hash + Float.floatToIntBits(this.nota);
+        hash = 53 * hash + Objects.hashCode(this.usuarioAvaliado);
+        hash = 53 * hash + Objects.hashCode(this.avaliador);
+        hash = 53 * hash + this.codigo;
+        hash = 53 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
@@ -113,10 +101,10 @@ public class Avaliacao {
         if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
             return false;
         }
-        if (!Objects.equals(this.comentario, other.comentario)) {
+        if (this.codigo != other.codigo) {
             return false;
         }
-        if (!Objects.equals(this.hora, other.hora)) {
+        if (!Objects.equals(this.comentario, other.comentario)) {
             return false;
         }
         if (!Objects.equals(this.usuarioAvaliado, other.usuarioAvaliado)) {
@@ -125,7 +113,7 @@ public class Avaliacao {
         if (!Objects.equals(this.avaliador, other.avaliador)) {
             return false;
         }
-        if (!Objects.equals(this.data, other.data)) {
+        if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
         return true;
@@ -133,7 +121,7 @@ public class Avaliacao {
 
     @Override
     public String toString() {
-        return "Avaliacao{" + "comentario=" + comentario + ", hora=" + hora + ", data=" + data + ", nota=" + nota + ", usuarioAvaliado=" + usuarioAvaliado + ", avaliador=" + avaliador + ", codigo=" + codigo + '}';
+        return "Avaliacao{" + "comentario=" + comentario + ", nota=" + nota + ", usuarioAvaliado=" + usuarioAvaliado + ", avaliador=" + avaliador + ", codigo=" + codigo + ", tipo=" + tipo + '}';
     }
 
 }

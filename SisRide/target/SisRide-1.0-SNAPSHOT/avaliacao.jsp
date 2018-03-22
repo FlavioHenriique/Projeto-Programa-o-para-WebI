@@ -34,18 +34,20 @@
                         <form method="post" action="front">
                           
                             <h5>Avaliação de passageiro</h5><br>
-                            <input type="hidden" name="command" value="AvaliarUsuario">
-                            <select>
+                            <input type="text" name="command" value="AvaliarUsuario">
+                            <input type="hidden" name="tipo" value="passageiro">
+                            <select name="passageiro">
                                 <c:forEach var="passageiro" items="${viagem.passageiros}">
                                     <option value="" disabled selected>Selecione o passageiro...</option>
                                     <option value="${passageiro.email}">${passageiro.nome}</option>
                                 </c:forEach>
                             </select> <br>
                             <input type="text" placeholder="Determine a nota" name="nota"><br>
-                            <textarea  class="materialize-textarea" placeholder="Digite um comentário sobre este passageiro..."></textarea>
+                            <textarea name="comentario" class="materialize-textarea" 
+                                      placeholder="Digite um comentário sobre este passageiro..."></textarea>
                             <br>
                             <center>
-                                <a href="#" class="waves-effect waves-light btn s12">Avaliar</a>
+                                <input type="submit" class="waves-effect waves-light btn s12" value="Avaliar">
                             </center>
                         </form>
                     </td>
@@ -56,3 +58,13 @@
         </table>
     </body>
 </html>
+<script>
+    var mensagem = "${param.mensagem}";
+    
+    switch(mensagem){
+        case "1":{
+                swal("OK!","A avaliação foi feita!","success");
+                break;
+        }
+    }
+</script>
