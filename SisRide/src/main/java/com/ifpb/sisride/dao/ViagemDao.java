@@ -20,15 +20,16 @@ import java.util.logging.Logger;
 
 public class ViagemDao implements Dao<Viagem> {
 
-    private final Connection con;
+    private Connection con = null;
 
     public ViagemDao() throws ClassNotFoundException, SQLException {
-
-        con = ConFactory.getConnection();
     }
 
     @Override
-    public boolean salvar(Viagem obj) throws SQLException {
+    public boolean salvar(Viagem obj) throws SQLException, ClassNotFoundException {
+
+        con = ConFactory.getConnection();
+
         String sql = "INSERT INTO Viagem (vagas,data,horario,valor,motorista,"
                 + "musica,animais,fumar,conversa,destino,partida,codcarro)"
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -65,6 +66,12 @@ public class ViagemDao implements Dao<Viagem> {
     @Override
     public Viagem buscar(Object obj) throws SQLException {
 
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "SELECT * from Viagem WHERE codigo = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
@@ -90,7 +97,7 @@ public class ViagemDao implements Dao<Viagem> {
                 carro = daoCarro.buscar(result.getInt("codCarro"));
                 List<Usuario> solicitadores = buscaSolicitadores((int) obj);
                 List<Usuario> passageiros = this.getPassageiros((int) obj);
-                
+
                 Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
                         toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
                         motorista, result.getString("musica"),
@@ -98,8 +105,10 @@ public class ViagemDao implements Dao<Viagem> {
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
                 viagem.setPassageiros(passageiros);
-                stmt.close();
+
                 result.close();
+                stmt.close();
+                con.close();
                 return viagem;
 
             } catch (ClassNotFoundException ex) {
@@ -111,6 +120,12 @@ public class ViagemDao implements Dao<Viagem> {
 
     @Override
     public boolean atualizar(Viagem obj) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (buscar(obj.getCodigo()) != null) {
             String sql = "UPDATE  Viagem set vagas = ?, data = ?, horario = ?,"
@@ -135,7 +150,9 @@ public class ViagemDao implements Dao<Viagem> {
                 stmt.setInt(11, obj.getPartida().getIdentificacao());
                 stmt.setInt(12, obj.getCarro().getCodigo());
                 stmt.setInt(13, obj.getCodigo());
-                return stmt.execute();
+                stmt.execute();
+                stmt.close();
+                con.close();
 
             } catch (ParseException ex) {
                 Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,15 +163,31 @@ public class ViagemDao implements Dao<Viagem> {
 
     @Override
     public boolean deletar(Object obj) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "DELETE FROM SOLICITA_VIAGEM WHERE CodViagem = ?;"
                 + "DELETE FROM Viagem WHERE codigo = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
         stmt.setInt(2, (int) obj);
-        return stmt.execute();
+
+        stmt.execute();
+        stmt.close();
+        con.close();
+        return true;
     }
 
     public List<Viagem> buscarNome(String nome) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "select v.codigo from viagem v, lugar l "
                 + "where l.nome ilike ? and v.destino = l.identificacao";
@@ -168,12 +201,20 @@ public class ViagemDao implements Dao<Viagem> {
             Viagem viagem = buscar(result.getInt("codigo"));
             lista.add(viagem);
         }
+        result.close();
+        stmt.close();
+        con.close();
 
         return lista;
     }
 
     public List<Viagem> minhasCaronas(String usuario) throws SQLException {
 
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "SELECT codigo FROM viagem where motorista = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, usuario);
@@ -188,11 +229,18 @@ public class ViagemDao implements Dao<Viagem> {
 
         rs.close();
         stmt.close();
+        con.close();
 
         return lista;
     }
 
     public void solicitaVaga(String email, int codigo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "INSERT INTO Solicita_Viagem (emailUsuario, codViagem, situacao)"
                 + "VALUES (?,?,?);"
@@ -206,11 +254,16 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.execute();
 
         stmt.close();
-
+        con.close();
     }
 
     public List<Usuario> buscaSolicitadores(int viagem) throws SQLException, ClassNotFoundException {
 
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "SELECT U.* FROM Usuario U, solicita_viagem s WHERE U.email = s.emailusuario "
                 + "AND s.situacao = 'pendente' AND s.codviagem = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -225,12 +278,19 @@ public class ViagemDao implements Dao<Viagem> {
         }
         result.close();
         stmt.close();
+        con.close();
 
         return lista;
 
     }
 
     public void confirmaVaga(String solicitante, int viagem, String resposta) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "";
 
@@ -243,6 +303,7 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(3, viagem);
 
             stmt.execute();
+            stmt.close();
 
         } else if (resposta.equals("nao")) {
             sql = "DELETE FROM SOLICITA_VIAGEM where codviagem = ? and emailusuario = ?;"
@@ -256,11 +317,18 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setString(4, "recusou sua solicitação de vaga.");
             stmt.setString(5, this.buscar(viagem).getMotorista().getEmail());
             stmt.execute();
+            stmt.close();
         }
-
+        con.close();
     }
 
     public List<Viagem> caronasSolicitadas(String email) throws SQLException, ClassNotFoundException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT V.*, s.situacao FROM solicita_viagem s, viagem v where v.codigo = s.codviagem and s.emailusuario = ?";
 
@@ -281,12 +349,19 @@ public class ViagemDao implements Dao<Viagem> {
         }
         result.close();
         stmt.close();
+        con.close();
 
         return lista;
     }
 
     public void recomendaCarona(String motorista, String passageiro, int carona)
             throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "INSERT INTO Recomendacao (motorista,passageiro,carona) "
                 + "values (?,?,?)";
@@ -297,9 +372,16 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.execute();
 
         stmt.close();
+        con.close();
     }
 
     public List<Viagem> getRecomendacoes(String passageiro) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT carona from Recomendacao WHERE passageiro = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -315,10 +397,19 @@ public class ViagemDao implements Dao<Viagem> {
         }
         rs.close();
         stmt.close();
+        con.close();
+
         return viagens;
     }
 
     public List<Usuario> getPassageiros(int viagem) throws SQLException, ClassNotFoundException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "SELECT U.email from usuario u, solicita_viagem s "
                 + "where u.email = s.emailusuario"
                 + " and s.situacao = 'aceita' "
@@ -336,7 +427,8 @@ public class ViagemDao implements Dao<Viagem> {
 
         rs.close();
         stmt.close();
-
+        con.close();
+        
         return lista;
 
     }

@@ -34,7 +34,20 @@ public class Caronas implements Command {
 
             session.setAttribute("lugares", lista);
 
-            minhasCaronas(request, response, u.getEmail());
+            List<Viagem> caronas = minhasCaronas(u.getEmail());
+
+            session.setAttribute("minhasCaronas", caronas);
+            session.setAttribute("caronasRealizadas", getCaronasRealizadas(caronas));
+
+            RequestDispatcher dispatcher;
+
+            if ((String) request.getAttribute("mensagem") != null) {
+                dispatcher = request.getRequestDispatcher("caronas.jsp?mensagem="
+                        + request.getAttribute("mensagem"));
+            } else {
+                dispatcher = request.getRequestDispatcher("caronas.jsp");
+            }
+            dispatcher.forward(request, response);
 
         } catch (SQLException ex) {
             Logger.getLogger(Caronas.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,37 +59,23 @@ public class Caronas implements Command {
 
     }
 
-    public static void minhasCaronas(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException,
+    public static List<Viagem> minhasCaronas(String email) throws SQLException,
             ClassNotFoundException,
             ServletException,
             IOException {
 
         GerenciadorViagem gerenciador = new GerenciadorViagem();
+        return gerenciador.minhasCaronas(email);
 
-        List<Viagem> caronas = gerenciador.minhasCaronas(email);
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("minhasCaronas", caronas);
-        session.setAttribute("caronasRealizadas", getCaronasRealizadas(caronas));
-        RequestDispatcher dispatcher;
-
-        if ((String) request.getAttribute("mensagem") != null) {
-            dispatcher = request.getRequestDispatcher("caronas.jsp?mensagem="
-                    + request.getAttribute("mensagem"));
-        } else {
-            dispatcher = request.getRequestDispatcher("caronas.jsp");
-        }
-        dispatcher.forward(request, response);
     }
-    
-    public static List<Viagem> getCaronasRealizadas(List<Viagem> caronas){
-        
+
+    public static List<Viagem> getCaronasRealizadas(List<Viagem> caronas) {
+
         List<Viagem> caronasRealizadas = new ArrayList<>();
-        
-        for(Viagem v: caronas){
-            if(v.getData().isBefore(LocalDate.now())){
+
+        for (Viagem v : caronas) {
+            if (v.getData().isBefore(LocalDate.now())) {
                 caronasRealizadas.add(v);
-                System.out.println(v.toString());
             }
         }
         return caronasRealizadas;

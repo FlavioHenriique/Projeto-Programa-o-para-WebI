@@ -20,7 +20,7 @@
         <!-- Imprimindo as viagens em que o usuário foi motorista -->
 
         <table width="100%">
-            <h4>Caronas nas quais fui motorista</h4>
+            <h4>Minhas caronas (motorista)</h4>
             <c:forEach var="viagem" items="${caronasRealizadas}">
 
                 <tr>
@@ -32,7 +32,7 @@
                     <td width="5%"></td>
                     <td width="33%">
                         <form method="post" action="front">
-
+                          
                             <h5>Avaliação de passageiro</h5><br>
                             <input type="hidden" name="command" value="AvaliarUsuario">
                             <select>
