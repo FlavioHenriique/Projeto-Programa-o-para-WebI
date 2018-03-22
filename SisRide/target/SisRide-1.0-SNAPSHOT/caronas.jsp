@@ -154,7 +154,7 @@
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <h5>Não existem solicitações de vagas para essa carona!</h5><br>
+                    <h5>Não existem novas solicitações de vaga!</h5><br>
                 </c:otherwise>
             </c:choose>
         </c:forEach>

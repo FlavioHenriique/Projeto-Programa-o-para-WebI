@@ -25,6 +25,7 @@ public class PaginaAvaliacoes implements Command {
                     
                RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
                dispatcher.forward(request, response);
+               
         } catch (SQLException ex) {
             Logger.getLogger(PaginaAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

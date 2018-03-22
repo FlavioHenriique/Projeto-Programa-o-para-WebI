@@ -11,22 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AvaliarUsuario implements Command{
+public class AvaliarUsuario implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        
+
         HttpSession session = request.getSession();
         Usuario atual = (Usuario) session.getAttribute("usuario");
-        
+
         try {
-            GerenciadorAvaliacao gerenciador = new GerenciadorAvaliacao();
-            gerenciador.adicionaAvaliacao(request.getParameter("comentario"),
-                    Float.parseFloat(request.getParameter("nota")), request.getParameter("passageiro"),
-                    atual.getEmail(), request.getParameter("tipo"));
-            
-            response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=1");
-            
+            if (request.getParameter("tipo").equals("motorista") && request.getParameter("nota") == "") {
+
+                response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=2");
+            } else if ((request.getParameter("tipo").equals("passageiro"))
+                    && (request.getParameter("nota") == "" || request.getParameter("passageiro") == null)) {
+
+                response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=2");
+
+            } else {
+
+                GerenciadorAvaliacao gerenciador = new GerenciadorAvaliacao();
+                gerenciador.adicionaAvaliacao(request.getParameter("comentario"),
+                        Float.parseFloat(request.getParameter("nota")), request.getParameter("avaliado"),
+                        atual.getEmail(), request.getParameter("tipo"));
+
+                response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=1");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AvaliarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -35,5 +45,5 @@ public class AvaliarUsuario implements Command{
             Logger.getLogger(AvaliarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

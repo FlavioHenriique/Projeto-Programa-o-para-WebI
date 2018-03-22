@@ -330,7 +330,7 @@ public class ViagemDao implements Dao<Viagem> {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT V.*, s.situacao FROM solicita_viagem s, viagem v where v.codigo = s.codviagem and s.emailusuario = ?";
+        String sql = "SELECT V.codigo, s.situacao FROM solicita_viagem s, viagem v where v.codigo = s.codviagem and s.emailusuario = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
@@ -340,10 +340,7 @@ public class ViagemDao implements Dao<Viagem> {
         LugarDao dao = new LugarDao();
 
         while (result.next()) {
-            Viagem v = new Viagem();
-            v.setPartida(dao.buscar(result.getInt("partida")));
-            v.setDestino(dao.buscar(result.getInt("destino")));
-            v.setData(result.getDate("data").toLocalDate());
+            Viagem v = buscar(result.getInt("codigo"));
             v.setSituacao(result.getString("situacao"));
             lista.add(v);
         }
@@ -428,7 +425,7 @@ public class ViagemDao implements Dao<Viagem> {
         rs.close();
         stmt.close();
         con.close();
-        
+
         return lista;
 
     }
