@@ -53,8 +53,7 @@ CREATE TABLE VIAGEM(
 CREATE TABLE AVALIACAO(
    Codigo serial PRIMARY KEY,
    Comentario VARCHAR(140),
-   Hora time not null,
-   Data date not null,
+   momento timestamp,
    Nota real,
    UsuarioAvaliado varchar(50),
    Avaliador varchar(50),
@@ -96,6 +95,7 @@ CREATE TABLE NOTIFICACAO (
 	notificador varchar,
 	situacao varchar,
 	tipo varchar,
+	momento timestamp,
 	codigo serial primary key,
 	foreign key (notificado) references usuario(email),
 	foreign key (notificador) references usuario(email)
