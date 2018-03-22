@@ -52,12 +52,14 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(12, obj.getCarro().getCodigo());
             stmt.execute();
             stmt.close();
+            con.close();
             return true;
 
         } catch (ParseException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         stmt.close();
+        con.close();
         return false;
     }
 
@@ -97,7 +99,7 @@ public class ViagemDao implements Dao<Viagem> {
                 viagem.setSolicitadores(solicitadores);
                 stmt.close();
                 result.close();
-
+                con.close();
                 return viagem;
 
             } catch (ClassNotFoundException ex) {

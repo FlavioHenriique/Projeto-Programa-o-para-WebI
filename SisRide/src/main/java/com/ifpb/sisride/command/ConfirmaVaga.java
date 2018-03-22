@@ -19,7 +19,7 @@ public class ConfirmaVaga implements Command {
             gerenciador.confirmaVaga(request.getParameter("solicitante"),
               Integer.parseInt(request.getParameter("codviagem")), request.getParameter("resposta"));
             
-            response.sendRedirect("front?command=ListarLugares&mensagem=4");
+            response.sendRedirect("front?command=Caronas&mensagem=4");
         } catch (SQLException ex) {
             Logger.getLogger(ConfirmaVaga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
