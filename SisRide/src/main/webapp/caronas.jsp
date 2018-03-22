@@ -92,7 +92,8 @@
                 Você não cadastrou nenhuma carona
             </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
-            <minhasTags:imprimeCarona viagem="${viagem}" />
+            <minhasTags:imprimeCarona  viagem="${viagem}" />
+            
             <br>
 
             <ul class="collapsible" data-collapsible="accordion">

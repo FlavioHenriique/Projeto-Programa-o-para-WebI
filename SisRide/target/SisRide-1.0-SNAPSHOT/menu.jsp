@@ -10,7 +10,7 @@
             <li><a href="front?command=MeusLugares">Lugares</a></li>
             <li><a href="front?command=Caronas">Minhas caronas</a></li>
             <li><a href="front?command=ListarAmigos">Amizades</a></li>
-            <li><a>Avaliações</a></li>
+            <li><a href="avaliacao.jsp">Avaliações</a></li>
             <li><a  href="front?command=ListarSolicitacoes">Solicitações</a></li>
             <li><a href="front?command=Sair">Sair</a></li>
         </ul>

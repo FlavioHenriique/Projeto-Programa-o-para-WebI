@@ -8,6 +8,8 @@ import com.ifpb.sisride.modelo.Usuario;
 import com.ifpb.sisride.modelo.Viagem;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,16 +26,15 @@ public class Caronas implements Command {
 
         try {
             GerenciadorLugar g = new GerenciadorLugar();
-                    
+
             List<Lugar> lista = g.buscaLugar();
-            
+
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
-            
-            
+
             session.setAttribute("lugares", lista);
 
-            minhasCaronas(request, response,u.getEmail());
+            minhasCaronas(request, response, u.getEmail());
 
         } catch (SQLException ex) {
             Logger.getLogger(Caronas.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,8 +54,10 @@ public class Caronas implements Command {
         GerenciadorViagem gerenciador = new GerenciadorViagem();
 
         List<Viagem> caronas = gerenciador.minhasCaronas(email);
-
-        request.setAttribute("minhasCaronas", caronas);
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("minhasCaronas", caronas);
+        session.setAttribute("caronasRealizadas", getCaronasRealizadas(caronas));
         RequestDispatcher dispatcher;
 
         if ((String) request.getAttribute("mensagem") != null) {
@@ -64,6 +67,19 @@ public class Caronas implements Command {
             dispatcher = request.getRequestDispatcher("caronas.jsp");
         }
         dispatcher.forward(request, response);
+    }
+    
+    public static List<Viagem> getCaronasRealizadas(List<Viagem> caronas){
+        
+        List<Viagem> caronasRealizadas = new ArrayList<>();
+        
+        for(Viagem v: caronas){
+            if(v.getData().isBefore(LocalDate.now())){
+                caronasRealizadas.add(v);
+                System.out.println(v.toString());
+            }
+        }
+        return caronasRealizadas;
     }
 
 }

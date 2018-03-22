@@ -23,7 +23,7 @@ public class ViagemDao implements Dao<Viagem> {
     private final Connection con;
 
     public ViagemDao() throws ClassNotFoundException, SQLException {
-       
+
         con = ConFactory.getConnection();
     }
 
@@ -52,7 +52,6 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(12, obj.getCarro().getCodigo());
             stmt.execute();
             stmt.close();
-            con.close();
             return true;
 
         } catch (ParseException ex) {
@@ -90,16 +89,17 @@ public class ViagemDao implements Dao<Viagem> {
                 destino = dao.buscar(result.getInt("destino"));
                 carro = daoCarro.buscar(result.getInt("codCarro"));
                 List<Usuario> solicitadores = buscaSolicitadores((int) obj);
-
+                List<Usuario> passageiros = this.getPassageiros((int) obj);
+                
                 Viagem viagem = new Viagem(result.getInt("vagas"), result.getDate("data").
                         toLocalDate(), result.getTime("horario").toString(), result.getFloat("valor"),
                         motorista, result.getString("musica"),
                         result.getBoolean("animais"), result.getBoolean("fumar"), result.getString("conversa"),
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
+                viagem.setPassageiros(passageiros);
                 stmt.close();
                 result.close();
-                con.close();
                 return viagem;
 
             } catch (ClassNotFoundException ex) {
@@ -195,11 +195,14 @@ public class ViagemDao implements Dao<Viagem> {
     public void solicitaVaga(String email, int codigo) throws SQLException {
 
         String sql = "INSERT INTO Solicita_Viagem (emailUsuario, codViagem, situacao)"
-                + "VALUES (?,?,?)";
+                + "VALUES (?,?,?);"
+                + "DELETE FROM RECOMENDACAO WHERE Passageiro = ? AND carona = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
         stmt.setInt(2, codigo);
         stmt.setString(3, "pendente");
+        stmt.setString(4, email);
+        stmt.setInt(5, codigo);
         stmt.execute();
 
         stmt.close();
@@ -218,7 +221,6 @@ public class ViagemDao implements Dao<Viagem> {
 
         while (result.next()) {
             Usuario u = dao.buscar(result.getString("email"));
-            System.out.println(u.toString());
             lista.add(u);
         }
         result.close();
@@ -313,9 +315,29 @@ public class ViagemDao implements Dao<Viagem> {
         }
         rs.close();
         stmt.close();
-        for(Viagem v: viagens){
-            System.out.println(v.toString());
-        }
         return viagens;
+    }
+
+    public List<Usuario> getPassageiros(int viagem) throws SQLException, ClassNotFoundException {
+        String sql = "SELECT U.email from usuario u, solicita_viagem s "
+                + "where u.email = s.emailusuario"
+                + " and s.situacao = 'aceita' "
+                + " and s.codviagem = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, viagem);
+        ResultSet rs = stmt.executeQuery();
+        List<Usuario> lista = new ArrayList<>();
+        UsuarioDao dao = new UsuarioDao();
+
+        while (rs.next()) {
+            Usuario u = dao.buscar(rs.getString("email"));
+            lista.add(u);
+        }
+
+        rs.close();
+        stmt.close();
+
+        return lista;
+
     }
 }

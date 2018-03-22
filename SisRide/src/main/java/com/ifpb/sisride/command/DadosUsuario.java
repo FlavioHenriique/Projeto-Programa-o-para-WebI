@@ -20,7 +20,7 @@ public class DadosUsuario implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         try {
-
+            HttpSession session = request.getSession();
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             GerenciadorUsuario user = new GerenciadorUsuario();
 
@@ -29,7 +29,7 @@ public class DadosUsuario implements Command {
             request.setAttribute("recomendacoes", gerenciador.getRecomendacoes(request.getParameter("email")));
             request.setAttribute("notificacoes", user.getNotificacoes(request.getParameter("email")));
 
-            request.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));
+            session.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));
             RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
             dispatcher.forward(request, response);
 

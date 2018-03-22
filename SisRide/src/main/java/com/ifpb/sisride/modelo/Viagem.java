@@ -21,6 +21,7 @@ public class Viagem {
     private Carro carro;
     private String situacao;
     private List<Usuario> solicitadores;
+    private List<Usuario> passageiros;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
@@ -94,6 +95,14 @@ public class Viagem {
 
     public String getHora() {
         return hora;
+    }
+
+    public List<Usuario> getPassageiros() {
+        return passageiros;
+    }
+
+    public void setPassageiros(List<Usuario> passageiros) {
+        this.passageiros = passageiros;
     }
 
     public void setHora(String hora) {

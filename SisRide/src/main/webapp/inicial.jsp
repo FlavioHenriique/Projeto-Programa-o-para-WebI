@@ -32,6 +32,7 @@
                         </c:choose>
 
                         <label id="nome">${usuario.nome}</label>
+                       
                     </div>
                     <br><br>
                     <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button>

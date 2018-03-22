@@ -1,12 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  %>
-<%
-    if (session.getAttribute("usuario") != null) {
-        request.setCharacterEncoding("UTF-8");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=Login");
-        dispatcher.forward(request, response);
-    }
-%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
