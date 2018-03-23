@@ -22,9 +22,7 @@
                     <div class="row">
                         <c:choose>
                             <c:when test="${usuario.foto2 != null}">
-
                                 <img src="front?command=FotoUsuario" class="circle">
-
                             </c:when>
                             <c:otherwise>
                                 <img src="Imagens/user.png" class="circle">
@@ -46,14 +44,9 @@
                 <td width="50%">
                     <div class="row" id="busca" width="100%">
                         <form method="get" action="front">
-
                             <input type="hidden" name="command" value="BuscaUsuario">
-
                             <input type="text" name="buscado"  placeholder="Buscar usuários">
-
-
                             <button type="submit" class="waves-effect waves-light btn" >Buscar</button>
-
                         </form>
                     </div>
                     <div>
