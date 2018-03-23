@@ -1,8 +1,10 @@
 package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.modelo.Usuario;
+import com.ifpb.sisride.modelo.Viagem;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -20,9 +22,12 @@ public class PaginaAvaliacoes implements Command {
         Usuario atual = (Usuario) session.getAttribute("usuario");
 
         try {
-            session.setAttribute("caronasRealizadas", Caronas.getCaronasRealizadas
+            session.setAttribute("avaliacao_motorista", Caronas.getCaronasRealizadas
                     (Caronas.minhasCaronas(atual.getEmail())));
                     
+            session.setAttribute("avaliacao_passageiro", Caronas.getCaronasRealizadas
+                    ((List<Viagem>) session.getAttribute("caronasSolicitadas")));
+            
                RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
                dispatcher.forward(request, response);
                

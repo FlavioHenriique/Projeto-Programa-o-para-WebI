@@ -20,12 +20,11 @@ public class CancelarCarona implements Command {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             gerenciador.removeViagem(Integer.parseInt(request.getParameter("codCarona")));
 
-            request.setAttribute("mensagem", "3");
             HttpSession session = request.getSession();
             Usuario atual = (Usuario) session.getAttribute("usuario");
 
             session.setAttribute("minhasCaronas", Caronas.minhasCaronas(atual.getEmail()));
-
+            response.sendRedirect("caronas.jsp?mensagem=3");
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CancelarCarona.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

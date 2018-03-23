@@ -129,7 +129,7 @@
             </ul>
 
             <a class="waves-effect waves-light btn s12 alinhado cancelar"
-               href="front?command=CancelarCarona&codCarona=${viagem.codigo}&mensagem=3">Cancelar esta carona</a>
+               href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
             <hr>
             </div>
 
@@ -178,7 +178,7 @@
     switch (mensagem) {
         case "1":
         {
-            window.location.replace("front?command=ListarLugares");
+            swal("OK!","Sua carona foi cadastrada!","success");
             break;
         }
         case "3":

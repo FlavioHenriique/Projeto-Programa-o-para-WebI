@@ -21,7 +21,7 @@
 
         <table width="100%">
             <h4>Minhas caronas (motorista)</h4>
-            <c:forEach var="viagem" items="${caronasRealizadas}">
+            <c:forEach var="viagem" items="${avaliacao_motorista}">
 
                 <tr>
                     <td width="60%">
@@ -61,8 +61,8 @@
                     <h4>Minhas caronas (passageiro)</h4>
                 </td>
             </tr>
-            <c:forEach var="viagem" items="${caronasSolicitadas}">
-
+            <c:forEach var="viagem" items="${avaliacao_passageiro}">
+                
                 <tr>
                     <td width="60%">
                         <minhasTags:imprimeCarona viagem="${viagem}" />
@@ -90,6 +90,7 @@
                     </td>
                     <td width="2%"></td>
                 </tr>
+                
             </c:forEach>
 
         </table>

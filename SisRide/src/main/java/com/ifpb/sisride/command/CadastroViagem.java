@@ -70,7 +70,7 @@ public class CadastroViagem implements Command {
                         Boolean.parseBoolean(request.getParameter("animais")), Boolean.parseBoolean(request.getParameter("fumar")), request.getParameter("conversa"),
                         destino, partida, carro);
 
-                response.sendRedirect("caronas.jsp?mensagem=1");
+                response.sendRedirect("front?command=Caronas&mensagem=1");
             }
 
         } catch (SQLException ex) {
