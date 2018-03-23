@@ -22,21 +22,23 @@ public class BuscaUsuario implements Command {
 
             Usuario buscado = gerenciador.buscarNome(request.getParameter("buscado"));
 
-           HttpSession session = request.getSession();
-           session.setAttribute("buscado", buscado);
-           
+            HttpSession session = request.getSession();
+            session.setAttribute("buscado", buscado);
+
             response.setCharacterEncoding("utf-8");
-            
+
             if (buscado == null) {
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp?erro=1");
                 dispatcher.forward(request, response);
 
             } else {
-                
+
                 ListarSolicitacoes listar = new ListarSolicitacoes();
                 listar.listar(session, (Usuario) session.getAttribute("usuario"));
                 
+                request.setAttribute("avaliacoesUsuario", Avaliacoes.avaliacoesUsuario(buscado.getEmail()));
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("usuario.jsp");
                 dispatcher.forward(request, response);
             }

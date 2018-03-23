@@ -61,6 +61,9 @@ public class UsuarioDao implements Dao<Usuario> {
                     resultado.getString("senha"), resultado.getString("nome"),
                     resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissão"),
                     resultado.getString("cidade"), resultado.getString("sexo"), resultado.getBytes("foto"));
+           u.setNota_motorista(resultado.getFloat("nota_motorista"));
+           u.setNota_passageiro(resultado.getFloat("nota_passageiro"));
+            
             resultado.close();
             stmt.close();
             return u;

@@ -4,8 +4,10 @@ import com.ifpb.sisride.dao.AvaliacaoDao;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
 import com.ifpb.sisride.modelo.Avaliacao;
+import com.ifpb.sisride.modelo.Usuario;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class GerenciadorAvaliacao {
 
@@ -17,8 +19,8 @@ public class GerenciadorAvaliacao {
         dao = fabrica.criaAvaliacaoDao();
     }
 
-    public void adicionaAvaliacao(String comentario, float nota, String usuarioAvaliado,
-            String avaliador, String tipo) throws SQLException {
+    public void adicionaAvaliacao(String comentario, float nota, Usuario usuarioAvaliado,
+            Usuario avaliador, String tipo) throws SQLException {
         Avaliacao a = new Avaliacao(comentario, nota, usuarioAvaliado, avaliador, tipo);
         dao.salvar(a);
     }
@@ -27,13 +29,17 @@ public class GerenciadorAvaliacao {
         dao.deletar(codigo);
     }
 
-    public void atualizaAvaliacao(String comentario, float nota, String usuarioAvaliado,
-            String avaliador, int codigo) throws SQLException {
+    public void atualizaAvaliacao(String comentario, float nota, Usuario usuarioAvaliado,
+            Usuario avaliador, int codigo) throws SQLException {
         Avaliacao a = new Avaliacao(comentario, nota, usuarioAvaliado, avaliador, codigo);
         dao.atualizar(a);
     }
 
     public Avaliacao buscaAvaliacao(int codigo) throws SQLException {
         return dao.buscar(codigo);
+    }
+    
+    public List<Avaliacao> avaliacoesUsuario(String avaliado) throws SQLException{
+        return dao.AvaliacoesUsuario(avaliado);
     }
 }

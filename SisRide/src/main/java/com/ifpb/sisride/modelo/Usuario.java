@@ -13,12 +13,13 @@ public class Usuario implements Serializable {
     private String nome;
     private LocalDate nascimento;
     private String profissao;
-    private float nota;
+    private float nota_motorista;
+    private float nota_passageiro;
     private String cidade;
     private String sexo;
     private InputStream foto;
     private byte[] foto2;
-  
+
     public Usuario(String email, String senha, String nome, LocalDate nascimento,
             String profissao, String cidade, String sexo, InputStream foto) {
         this.email = email;
@@ -66,8 +67,25 @@ public class Usuario implements Serializable {
     public Usuario() {
 
     }
+
     public InputStream getFoto() {
         return foto;
+    }
+
+    public float getNota_motorista() {
+        return nota_motorista;
+    }
+
+    public void setNota_motorista(float nota_motorista) {
+        this.nota_motorista = nota_motorista;
+    }
+
+    public float getNota_passageiro() {
+        return nota_passageiro;
+    }
+
+    public void setNota_passageiro(float nota_passageiro) {
+        this.nota_passageiro = nota_passageiro;
     }
 
     public void setFoto(InputStream foto) {
@@ -114,13 +132,6 @@ public class Usuario implements Serializable {
         this.profissao = profissao;
     }
 
-    public float getNota() {
-        return nota;
-    }
-
-    public void setNota(float nota) {
-        this.nota = nota;
-    }
 
     public String getCidade() {
         return cidade;
@@ -136,68 +147,6 @@ public class Usuario implements Serializable {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.email);
-        hash = 83 * hash + Objects.hashCode(this.senha);
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.nascimento);
-        hash = 83 * hash + Objects.hashCode(this.profissao);
-        hash = 83 * hash + Float.floatToIntBits(this.nota);
-        hash = 83 * hash + Objects.hashCode(this.cidade);
-        hash = 83 * hash + Objects.hashCode(this.sexo);
-        hash = 83 * hash + Objects.hashCode(this.foto);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.profissao, other.profissao)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidade, other.cidade)) {
-            return false;
-        }
-        if (!Objects.equals(this.sexo, other.sexo)) {
-            return false;
-        }
-        if (!Objects.equals(this.nascimento, other.nascimento)) {
-            return false;
-        }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", nascimento=" + nascimento + ", profissao=" + profissao + ", nota=" + nota + ", cidade=" + cidade + ", sexo=" + sexo + ", foto=" + foto + ", foto2=" + foto2 + '}';
     }
 
 }

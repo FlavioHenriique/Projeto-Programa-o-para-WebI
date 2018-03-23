@@ -1,6 +1,7 @@
 package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorAvaliacao;
+import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,19 +22,22 @@ public class AvaliarUsuario implements Command {
 
         try {
             if (request.getParameter("tipo").equals("motorista") && request.getParameter("nota") == "") {
-
+                System.out.println("motorista");
                 response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=2");
-            } else if ((request.getParameter("tipo").equals("passageiro"))
-                    && (request.getParameter("nota") == "" || request.getParameter("passageiro") == null)) {
-
+                
+            } else if ((request.getParameter("tipo").equals("passageiro")
+                    && request.getParameter("nota") == "") || request.getParameter("avaliado") == null) {
+                
                 response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=2");
 
             } else {
-
+                    GerenciadorUsuario gUser = new GerenciadorUsuario();
+                    Usuario avaliado = gUser.buscaUsuario(request.getParameter("avaliado"));
+                    
                 GerenciadorAvaliacao gerenciador = new GerenciadorAvaliacao();
                 gerenciador.adicionaAvaliacao(request.getParameter("comentario"),
-                        Float.parseFloat(request.getParameter("nota")), request.getParameter("avaliado"),
-                        atual.getEmail(), request.getParameter("tipo"));
+                        Float.parseFloat(request.getParameter("nota")), avaliado,
+                        atual, request.getParameter("tipo"));
 
                 response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=1");
             }

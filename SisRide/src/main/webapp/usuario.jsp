@@ -36,6 +36,9 @@
                     <label>Profissão: ${buscado.profissao}</label>
                     <br><label>Data de nascimento: ${buscado.nascimento}</label>
                     <br><label> Cidade: ${buscado.cidade}</label>
+                    <br><br>
+                    <h5>Nota como motorista: ${buscado.nota_motorista}</h5>
+                    <h5>Nota como passageiro: ${buscado.nota_passageiro}</h5>
                 </td>
                 <td>
             <center>
@@ -102,10 +105,44 @@
             </center>
         </td>
     </tr>
+    <tr>
+        <!-- Comentários que o usuário recebeu-->
+        <td>
+            <h5>Comentários dos usuários (motorista)</h5>
+
+            <c:forEach var="avaliacao" items="${avaliacoesUsuario}">
+                <c:if test="${avaliacao.tipo eq 'motorista' && avaliacao.comentario != ''}">
+                    <div class="solicitacoes">
+                        <img src="front?command=ImprimeFoto&avaliador=${avaliacao.avaliador.email}" class="circle comentario">
+                        <b class="comentario">${avaliacao.avaliador.nome}</b><br>
+                        ${avaliacao.comentario}<hr>
+                    </div>
+                </c:if>
+            </c:forEach>
+            <br>
+            <h5>Comentários dos usuários (passageiro)</h5>
+            <c:forEach var="avaliacao" items="${avaliacoesUsuario}">
+                <c:if test="${avaliacao.tipo eq 'passageiro' && avaliacao.comentario != ''}">
+                    <div class="solicitacoes">
+                        <c:choose>
+                            <c:when test="${avaliacao.avaliador.foto2 eq null}">
+                                <img src="Imagens/user.png" class="circle comentario">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="front?command=ImprimeFoto&avaliador=${avaliacao.avaliador.email}" class="circle comentario">
+                            </c:otherwise>
+                        </c:choose>
+
+                        <b class="comentario">${avaliacao.avaliador.nome}</b><br>
+                        ${avaliacao.comentario}<hr>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </td>
+        <td></td>
+    </tr>
 </table>
 </body>
-
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>
