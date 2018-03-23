@@ -37,7 +37,7 @@ public class BuscaUsuario implements Command {
                 ListarSolicitacoes listar = new ListarSolicitacoes();
                 listar.listar(session, (Usuario) session.getAttribute("usuario"));
                 
-                request.setAttribute("avaliacoesUsuario", Avaliacoes.avaliacoesUsuario(buscado.getEmail()));
+                request.setAttribute("avaliacoesBuscado", Avaliacoes.avaliacoesUsuario(buscado.getEmail()));
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("usuario.jsp");
                 dispatcher.forward(request, response);

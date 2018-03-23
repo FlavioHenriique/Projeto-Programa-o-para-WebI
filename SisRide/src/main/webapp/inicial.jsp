@@ -31,12 +31,16 @@
                             </c:otherwise>
                         </c:choose>
 
-                        <label id="nome">${usuario.nome}</label>
+                        <label id="nome">${usuario.nome}</label><br><br>
+                        <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button>
+                        </a>
+                        <br><br>
+                        <minhasTags:informacoesUsuario usuario="${usuario}" /><br><br>
 
                     </div>
+                    <minhasTags:imprimeComentarios lista="${avaliacoesUsuario}" />
                     <br><br>
-                    <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button>
-                    </a>
+
                     <br>
                 </td>
                 <td width="50%">
@@ -154,7 +158,7 @@
     }
     var erro = "${param.erro}";
     if (erro == "1") {
-        swal("Infelizmente...","Não encontramos este usuário.","error");
+        swal("Infelizmente...", "Não encontramos este usuário.", "error");
     }
 
 </script>

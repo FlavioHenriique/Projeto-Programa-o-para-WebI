@@ -1,5 +1,6 @@
 package com.ifpb.sisride.command;
 
+import com.ifpb.sisride.controle.GerenciadorAvaliacao;
 import com.ifpb.sisride.controle.GerenciadorSolicitacao;
 import com.ifpb.sisride.controle.GerenciadorUsuario;
 import com.ifpb.sisride.controle.GerenciadorViagem;
@@ -23,11 +24,13 @@ public class DadosUsuario implements Command {
             HttpSession session = request.getSession();
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             GerenciadorUsuario user = new GerenciadorUsuario();
-
+            GerenciadorAvaliacao gAvaliacao = new GerenciadorAvaliacao();
             request = ListarAmigos.listar(request);
-            
+
             request.setAttribute("recomendacoes", gerenciador.getRecomendacoes(request.getParameter("email")));
             request.setAttribute("notificacoes", user.getNotificacoes(request.getParameter("email")));
+
+            request.setAttribute("avaliacoesUsuario", gAvaliacao.avaliacoesUsuario(request.getParameter("email")));
 
             session.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));
             RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
