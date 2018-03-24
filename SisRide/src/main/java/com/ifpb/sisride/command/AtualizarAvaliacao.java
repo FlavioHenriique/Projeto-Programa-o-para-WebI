@@ -12,24 +12,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AtualizarAvaliacao implements Command{
+public class AtualizarAvaliacao implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-    
+
         try {
             GerenciadorAvaliacao g = new GerenciadorAvaliacao();
             HttpSession session = request.getSession();
             Usuario atual = (Usuario) session.getAttribute("usuario");
             GerenciadorUsuario gUser = new GerenciadorUsuario();
             Usuario avaliado = gUser.buscaUsuario(request.getParameter("avaliado"));
-            
+            int codigo = g.getCodigo(avaliado.getEmail(), atual.getEmail(),
+                    request.getParameter("tipo"), Integer.parseInt(request.getParameter("viagem")));
+
             g.atualizaAvaliacao(request.getParameter("comentario"), Float.parseFloat(request.getParameter("nota")),
-                    avaliado, atual, Integer.parseInt(request.getParameter("codigo")), request.getParameter("tipo"),
+                    avaliado, atual, codigo, request.getParameter("tipo"),
                     Integer.parseInt(request.getParameter("viagem")));
-            
+
             response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=3");
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AtualizarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -38,5 +40,5 @@ public class AtualizarAvaliacao implements Command{
             Logger.getLogger(AtualizarAvaliacao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

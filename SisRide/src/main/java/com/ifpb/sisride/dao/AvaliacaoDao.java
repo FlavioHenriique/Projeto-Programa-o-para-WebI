@@ -177,7 +177,6 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
 
         while (rs.next()) {
             Avaliacao a = buscar(rs.getInt("codigo"));
-            System.out.println(a.toString());
             avaliacoes.add(a);
         }
         rs.close();
@@ -185,5 +184,29 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
         con.close();
 
         return avaliacoes;
+    }
+
+    public int getCodigo(String avaliado, String avaliador, String tipo, int viagem) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "SELECT codigo FROM Avaliacao WHERE usuarioAvaliado = ? "
+                + "AND avaliador = ? AND tipo = ? AND viagem = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, avaliado);
+        stmt.setString(2, avaliador);
+        stmt.setString(3, tipo);
+        stmt.setInt(4, viagem);
+
+        ResultSet rs = stmt.executeQuery();
+        int codigo = -1;
+
+        if (rs.next()) {
+            codigo = rs.getInt("codigo");
+        }
+        return codigo;
     }
 }

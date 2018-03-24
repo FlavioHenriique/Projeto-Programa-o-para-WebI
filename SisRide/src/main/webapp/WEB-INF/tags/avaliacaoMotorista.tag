@@ -3,12 +3,13 @@
 
 <h5>Avaliação de motorista</h5><br>
 
-
+<!-- Verificando se a lista de avaliações do usuário está vazia. Se estiver, cria-se uma variável que será 
+utilizada posteriormente para fazer essa verificação-->
 <c:if test="${empty minhasAvaliacoes}">
     <c:set var="vazio" value="true" />
 
     <form method="post" action="front">
-
+   
         <input type="hidden" name="command" value="AvaliarUsuario">
         <input type="hidden" name="viagem" value="${viagem.codigo}">
         <input type="hidden" name="avaliado" value="${viagem.motorista.email}">
@@ -25,9 +26,10 @@
     </form>
 </c:if>
 
-
+<!-- variável criada para verificar se o usuário já avaliou o motorista desta viagem -->
 <c:set var="jaAvaliou" value="false" />
 
+<!-- Verificando se a avaliação foi feita e alterando valor da variável criada anteriormente-->
 <c:forEach var="avaliacao" items="${minhasAvaliacoes}">
     <c:if test="${avaliacao.usuarioAvaliado.email eq viagem.motorista.email && 
                   avaliacao.tipo eq 'motorista' && avaliacao.viagem eq viagem.codigo}">
@@ -36,8 +38,11 @@
     </c:if>
 </c:forEach>
 
+
 <c:choose>
     <c:when test="${jaAvaliou eq 'true'}">
+        
+        <!-- Se a avaliação existir, o formulário será organizado da seguinte maneira-->
         <form method="post" action="front">
             <input type="hidden" name="avaliado" value="${viagem.motorista.email}">
             <input type="hidden" name="tipo" value="motorista">
@@ -60,10 +65,10 @@
                href="front?command=CancelaAvaliacao&codigo=${avaliacaoRealizada.codigo}">Cancelar avaliação</a>
         </center>
     </c:when>
-    <c:otherwise>
-        <c:if test="${vazio != 'true'}">
+        <c:when test="${jaAvaliou eq 'false'&& vazio != 'true'}">
+            <!-- se a avaliação não tiver sido feita, o formulário será o seguinte: -->
             <form method="post" action="front">
-
+           
                 <input type="hidden" name="command" value="AvaliarUsuario">
                 <input type="hidden" name="avaliado" value="${viagem.motorista.email}">
                 <input type="hidden" name="viagem" value="${viagem.codigo}">
@@ -78,6 +83,5 @@
                     <button type="submit" class="waves-effect waves-light btn s12" >Avaliar motorista</button>
                 </center>
             </form>
-        </c:if>
-    </c:otherwise>
+    </c:when>
 </c:choose>

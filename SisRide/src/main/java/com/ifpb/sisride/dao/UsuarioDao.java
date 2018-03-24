@@ -13,18 +13,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UsuarioDao implements Dao<Usuario> {
 
-    private final Connection con;
+    private Connection con;
 
     public UsuarioDao() throws ClassNotFoundException, SQLException {
-       
-        con = ConFactory.getConnection();
+
     }
 
     @Override
     public boolean salvar(Usuario obj) throws SQLException, CadastroException, ClassNotFoundException {
+
+        con = ConFactory.getConnection();
 
         String sql = "INSERT INTO USUARIO(Email,Nome,Nascimento,Senha,Profissão,"
                 + "Cidade,Sexo) VALUES (?,?,?,?,?,?,?);";
@@ -45,12 +48,20 @@ public class UsuarioDao implements Dao<Usuario> {
 
         stmt.execute();
         stmt.close();
+        con.close();
 
         return true;
     }
 
     @Override
     public Usuario buscar(Object obj) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "SELECT * FROM USUARIO WHERE email= ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setObject(1, obj);
@@ -61,18 +72,29 @@ public class UsuarioDao implements Dao<Usuario> {
                     resultado.getString("senha"), resultado.getString("nome"),
                     resultado.getDate("nascimento").toLocalDate(), resultado.getString("profissão"),
                     resultado.getString("cidade"), resultado.getString("sexo"), resultado.getBytes("foto"));
-           u.setNota_motorista(resultado.getFloat("nota_motorista"));
-           u.setNota_passageiro(resultado.getFloat("nota_passageiro"));
-            
+            u.setNota_motorista(resultado.getFloat("nota_motorista"));
+            u.setNota_passageiro(resultado.getFloat("nota_passageiro"));
+
             resultado.close();
             stmt.close();
+            con.close();
             return u;
         }
+        resultado.close();
+        stmt.close();
+        con.close();
+
         return null;
     }
 
     @Override
     public boolean atualizar(Usuario obj) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Usuario u = buscar(obj.getEmail());
         if (u == null) {
@@ -94,6 +116,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.execute();
 
             stmt.close();
+            con.close();
             if (obj.getFoto() instanceof FileInputStream) {
                 setFoto(obj.getEmail(), obj.getFoto());
             }
@@ -104,11 +127,19 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean deletar(Object obj) throws SQLException {
         if (buscar(obj) != null) {
+
+            try {
+                con = ConFactory.getConnection();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String sql = "DELETE FROM Usuario WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setObject(1, obj);
             stmt.execute();
             stmt.close();
+            con.close();
             return true;
         }
         return false;
@@ -116,12 +147,20 @@ public class UsuarioDao implements Dao<Usuario> {
 
     public boolean autenticar(String email, String senha) throws SQLException {
         if (email != "" && senha != "") {
+
+            try {
+                con = ConFactory.getConnection();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String sql = "SELECT * FROM Usuario WHERE email = ? AND senha = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, senha);
             if (stmt.executeQuery().next()) {
                 stmt.close();
+                con.close();
                 return true;
             }
         }
@@ -130,6 +169,12 @@ public class UsuarioDao implements Dao<Usuario> {
 
     public void setFoto(String email, InputStream foto) throws SQLException {
 
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "UPDATE Usuario SET foto = ? WHERE email = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -137,10 +182,16 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setBinaryStream(1, foto);
         stmt.execute();
         stmt.close();
+        con.close();
     }
 
     public Usuario buscaNome(String email) throws SQLException {
 
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String sql = "SELECT email FROM Usuario WHERE nome ilike ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -155,13 +206,24 @@ public class UsuarioDao implements Dao<Usuario> {
 
             result.close();
             stmt.close();
+            con.close();
             u = u2;
             return u;
         }
+
+        result.close();
+        stmt.close();
+        con.close();
         return null;
     }
 
     public void solicitacao(String usuario, String amigo, String tipo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "INSERT INTO Solicitacao (EmailUsuario, EmailAmigo, "
                 + "Situacao,tipo) VALUES (?,?,?,?)";
@@ -173,10 +235,17 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(4, tipo);
         stmt.execute();
         stmt.close();
+        con.close();
 
     }
 
     public List<Notificacao> getNotificacoes(String email) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT u.nome,n.* FROM NOTIFICACAO n, usuario u WHERE notificado = ?"
                 + "and n.notificador = u.email order by momento desc";
@@ -194,9 +263,10 @@ public class UsuarioDao implements Dao<Usuario> {
 
             notificacoes.add(n);
         }
-        
+
         result.close();
         stmt.close();
+        con.close();
         return notificacoes;
     }
 

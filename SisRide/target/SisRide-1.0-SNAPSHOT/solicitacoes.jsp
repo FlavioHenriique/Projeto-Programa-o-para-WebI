@@ -68,8 +68,14 @@
                                         <c:if test="${solicitador.email eq usuario.email}">
                                             <c:set  var="jaSolicitou" value="true" />
                                         </c:if>
-
                                     </c:forEach>
+                                    
+                                    <c:forEach var="passageiro" items="${viagem.passageiros}">
+                                        <c:if test="${passageiro.email eq usuario.email}">
+                                            <c:set value="true" var="jaSolicitou" />
+                                        </c:if>
+                                    </c:forEach>
+                                    
                                     <c:if test="${jaSolicitou eq 'false'}">
                                         <a class="waves-effect waves-light btn s12 alinhado"
                                            href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>

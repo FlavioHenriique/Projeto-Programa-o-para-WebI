@@ -32,23 +32,31 @@
                     <td width="5%"></td>
                     <td width="33%">
 
+
                         <form method="post" action="front">
 
                             <h5>Avaliação de passageiro</h5><br>
-                            <input type="hidden" name="command" value="AvaliarUsuario">
-                            <input type="hidden" name="tipo" value="passageiro">
+                            <input type="hidden" id="viagem" value="${viagem.codigo}">
+
                             <select name="avaliado">
+                                <option value="" disabled selected>Selecione o passageiro...</option>
                                 <c:forEach var="passageiro" items="${viagem.passageiros}">
-                                    <option value="" disabled selected>Selecione o passageiro...</option>
                                     <option value="${passageiro.email}">${passageiro.nome}</option>
                                 </c:forEach>
-                            </select> <br>
+                            </select>
+                            <input type="hidden" name="command" value="AvaliarUsuario">
+                            <input type="hidden" name="tipo" value="passageiro">
+                            <input type="hidden" name="viagem" value="${viagem.codigo}">
+                            <br>
                             <input type="text" placeholder="Determine a nota" name="nota"><br>
                             <textarea name="comentario" class="materialize-textarea" 
                                       placeholder="Digite um comentário sobre este passageiro..."></textarea>
                             <br>
                             <center>
                                 <button type="submit" class="waves-effect waves-light btn s12" >Avaliar passageiro</button>
+                                <br>
+                                <a class="waves-effect waves-light btn s12 cancelar" 
+                                   href="front?command=CancelaAvaliacao&codigo=${avaliacaoRealizada.codigo}">Cancelar avaliação</a>
                             </center>
                         </form>
 
@@ -60,6 +68,9 @@
             <tr>
                 <td>
                     <br><br>
+
+                    <!-- Imprimindo as caronas em que o usuário foi passageiro-->
+
                     <h4>Minhas caronas (passageiro)</h4>
                 </td>
             </tr>
@@ -109,4 +120,5 @@
             break;
         }
     }
+
 </script>

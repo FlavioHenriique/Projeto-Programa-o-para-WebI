@@ -49,4 +49,8 @@ public class GerenciadorAvaliacao {
     public List<Avaliacao> minhasAvaliacoes(String avaliador) throws SQLException {
         return dao.minhasAvaliacoes(avaliador);
     }
+    
+    public int getCodigo(String avaliado, String avaliador, String tipo ,int viagem) throws SQLException{
+        return dao.getCodigo(avaliado, avaliador, tipo, viagem);
+    }
 }
