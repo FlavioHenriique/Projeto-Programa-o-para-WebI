@@ -22,17 +22,15 @@ public class PaginaAvaliacoes implements Command {
         Usuario atual = (Usuario) session.getAttribute("usuario");
 
         try {
-            session.setAttribute("avaliacao_motorista", Caronas.getCaronasRealizadas
-                    (Caronas.minhasCaronas(atual.getEmail())));
-                    
-            session.setAttribute("avaliacao_passageiro", Caronas.getCaronasRealizadas
-                    ((List<Viagem>) session.getAttribute("caronasSolicitadas")));
+            session.setAttribute("avaliacao_motorista", Caronas.getCaronasRealizadas(Caronas.minhasCaronas(atual.getEmail())));
+
+            session.setAttribute("avaliacao_passageiro", Caronas.getCaronasRealizadas((List<Viagem>) session.getAttribute("caronasSolicitadas")));
+
+            atualizaMinhasAvaliacoes(request);
             
-            session.setAttribute("minhasAvaliacoes", Avaliacoes.minhasAvaliacoes(atual.getEmail()));
-            
-               RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
-               dispatcher.forward(request, response);
-               
+            RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
+            dispatcher.forward(request, response);
+
         } catch (SQLException ex) {
             Logger.getLogger(PaginaAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -40,6 +38,15 @@ public class PaginaAvaliacoes implements Command {
         } catch (IOException ex) {
             Logger.getLogger(PaginaAvaliacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void atualizaMinhasAvaliacoes(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+
+        HttpSession session = request.getSession();
+        Usuario atual = (Usuario) session.getAttribute("usuario");
+
+        session.setAttribute("minhasAvaliacoes", Avaliacoes.minhasAvaliacoes(atual.getEmail()));
+
     }
 
 }

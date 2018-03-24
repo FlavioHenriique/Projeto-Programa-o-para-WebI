@@ -97,9 +97,15 @@
             swal("Erro!", "Preencha todos os campos!", "error");
             break;
         }
-        case "3":{
+        case "3":
+        {
             swal("OK!", "A avaliação foi atualizada!", "success");
-            break;    
+            break;
+        }
+        case "4":
+        {
+            swal("OK!", "A avaliação foi cancelada.", "success");
+            break;
         }
     }
 </script>

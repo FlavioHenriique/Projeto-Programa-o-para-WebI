@@ -175,6 +175,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
 
         while (rs.next()) {
             Avaliacao a = buscar(rs.getInt("codigo"));
+            System.out.println(a.toString());
             avaliacoes.add(a);
         }
         rs.close();
