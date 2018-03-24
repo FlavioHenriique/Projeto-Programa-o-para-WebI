@@ -38,7 +38,7 @@
                             <h5>Avaliação de passageiro</h5><br>
                             <input type="hidden" id="viagem" value="${viagem.codigo}">
 
-                            <select name="avaliado">
+                            <select name="avaliado" id="avaliado">
                                 <option value="" disabled selected>Selecione o passageiro...</option>
                                 <c:forEach var="passageiro" items="${viagem.passageiros}">
                                     <option value="${passageiro.email}">${passageiro.nome}</option>
@@ -54,46 +54,48 @@
                             <br>
                             <center>
                                 <button type="submit" class="waves-effect waves-light btn s12" >Avaliar passageiro</button>
-                                <br>
-                                <a class="waves-effect waves-light btn s12 cancelar" 
-                                   href="front?command=CancelaAvaliacao&codigo=${avaliacaoRealizada.codigo}">Cancelar avaliação</a>
+                                <br><br>
+
                             </center>
-                        </form>
+                        </form><center>
+                    <button class="waves-effect waves-light btn s12 cancelar"
+                            onclick="cancela('${usuario.email}', '${viagem.codigo}')">
+                        Cancelar avaliação</button>
+                </center>
+            </td>
+            <td width="2%"></td>
 
-                    </td>
-                    <td width="2%"></td>
+        </tr>
+    </c:forEach>
+    <tr>
+        <td>
+            <br><br>
 
-                </tr>
-            </c:forEach>
-            <tr>
-                <td>
-                    <br><br>
+            <!-- Imprimindo as caronas em que o usuário foi passageiro-->
 
-                    <!-- Imprimindo as caronas em que o usuário foi passageiro-->
+            <h4>Minhas caronas (passageiro)</h4>
+        </td>
+    </tr>
+    <c:forEach var="viagem" items="${avaliacao_passageiro}">
 
-                    <h4>Minhas caronas (passageiro)</h4>
-                </td>
-            </tr>
-            <c:forEach var="viagem" items="${avaliacao_passageiro}">
+        <tr>
+            <td width="60%">
+                <minhasTags:imprimeCarona viagem="${viagem}" />
+                </div>
+                <br>
+            </td>
+            <td width="5%"></td>
+            <td width="33%">
+                <minhasTags:avaliacaoMotorista viagem="${viagem}" />
+                <br>
+            </td>
+            <td width="2%"></td>
+        </tr>
 
-                <tr>
-                    <td width="60%">
-                        <minhasTags:imprimeCarona viagem="${viagem}" />
-                        </div>
-                        <br>
-                    </td>
-                    <td width="5%"></td>
-                    <td width="33%">
-                        <minhasTags:avaliacaoMotorista viagem="${viagem}" />
-                        <br>
-                    </td>
-                    <td width="2%"></td>
-                </tr>
+    </c:forEach>
 
-            </c:forEach>
-
-        </table>
-    </body>
+</table>
+</body>
 </html>
 <script>
     var mensagem = "${param.mensagem}";
@@ -119,6 +121,19 @@
             swal("OK!", "A avaliação foi cancelada.", "success");
             break;
         }
+        case "5":
+        {
+            swal("Erro!", "Você ainda não avaliou este passageiro.", "error");
+            break;
+        }
+
     }
+
+    function cancela(avaliador, viagem) {
+
+        var useravaliado = avaliado.value;
+        window.location.replace("front?command=CancelaAvaliacaoPassageiro&avaliado=" + useravaliado + "&avaliador=" + avaliador + "&viagem=" + viagem + "&tipo=passageiro");
+    }
+    ;
 
 </script>
