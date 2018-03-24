@@ -11,6 +11,7 @@ public class Avaliacao {
     private Usuario avaliador;
     private int codigo;
     private String tipo;
+    private int viagem;
 
     public Avaliacao(String comentario, float nota, Usuario usuarioAvaliado,
             Usuario avaliador, String tipo) {
@@ -20,10 +21,10 @@ public class Avaliacao {
         this.avaliador = avaliador;
         this.tipo = tipo;
     }
-    
-    public Avaliacao(){
+
+    public Avaliacao() {
     }
-    
+
     public Avaliacao(String comentario, float nota,
             Usuario usuarioAvaliado, Usuario avaliador, int codigo) {
         this.comentario = comentario;
@@ -51,6 +52,14 @@ public class Avaliacao {
 
     public void setNota(float nota) {
         this.nota = nota;
+    }
+
+    public int getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(int viagem) {
+        this.viagem = viagem;
     }
 
     public Usuario getUsuarioAvaliado() {

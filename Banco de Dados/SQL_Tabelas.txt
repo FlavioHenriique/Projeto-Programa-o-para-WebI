@@ -58,6 +58,8 @@ CREATE TABLE AVALIACAO(
    UsuarioAvaliado varchar(50),
    Avaliador varchar(50),
    tipo varchar,
+   viagem int,
+   FOREIGN KEY (viagem) REFERENCES viagem(codigo),
    FOREIGN KEY (UsuarioAvaliado) REFERENCES Usuario(Email),
    FOREIGN KEY (Avaliador) REFERENCES Usuario(Email)
 );

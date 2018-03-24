@@ -74,6 +74,7 @@
                     <td width="5%"></td>
                     <td width="33%">
                         <minhasTags:avaliacaoMotorista viagem="${viagem}" />
+                        <br>
                     </td>
                     <td width="2%"></td>
                 </tr>

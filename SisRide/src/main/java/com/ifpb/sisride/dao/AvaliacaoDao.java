@@ -34,7 +34,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
         }
 
         String sql = "INSERT INTO Avaliacao (comentario,nota,"
-                + "usuarioavaliado,avaliador,tipo,momento) VALUES (?,?,?,?,?, current_timestamp)";
+                + "usuarioavaliado,avaliador,tipo,momento,viagem) VALUES (?,?,?,?,?, current_timestamp, ?)";
 
         SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
 
@@ -44,6 +44,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
         stmt.setString(3, obj.getUsuarioAvaliado().getEmail());
         stmt.setString(4, obj.getAvaliador().getEmail());
         stmt.setString(5, obj.getTipo());
+        stmt.setInt(6, obj.getViagem());
         stmt.execute();
         stmt.close();
         con.close();
@@ -73,7 +74,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
                 Avaliacao a = new Avaliacao(resultado.getString("comentario"),
                         resultado.getFloat("nota"), avaliado, avaliador, resultado.getInt("codigo"));
                 a.setTipo(resultado.getString("tipo"));
-
+                a.setViagem(resultado.getInt("viagem"));
                 stmt.close();
                 con.close();
                 return a;
@@ -98,7 +99,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
         }
 
         String sql = "UPDATE Avaliacao SET comentario =?,nota=?,usuarioavaliado=?,"
-                + "avaliador=? WHERE codigo = ? and tipo = ?";
+                + "avaliador=? WHERE codigo = ? and tipo = ? and viagem = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         if (buscar(obj.getCodigo()) != null) {
 
@@ -108,6 +109,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
             stmt.setString(4, obj.getAvaliador().getEmail());
             stmt.setInt(5, obj.getCodigo());
             stmt.setString(6, obj.getTipo());
+            stmt.setInt(7, obj.getViagem());
             stmt.execute();
             stmt.close();
         }

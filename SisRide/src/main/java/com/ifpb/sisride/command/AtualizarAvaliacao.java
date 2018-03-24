@@ -25,7 +25,8 @@ public class AtualizarAvaliacao implements Command{
             Usuario avaliado = gUser.buscaUsuario(request.getParameter("avaliado"));
             
             g.atualizaAvaliacao(request.getParameter("comentario"), Float.parseFloat(request.getParameter("nota")),
-                    avaliado, atual, Integer.parseInt(request.getParameter("codigo")), request.getParameter("tipo"));
+                    avaliado, atual, Integer.parseInt(request.getParameter("codigo")), request.getParameter("tipo"),
+                    Integer.parseInt(request.getParameter("viagem")));
             
             response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=3");
             

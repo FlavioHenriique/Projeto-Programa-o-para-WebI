@@ -20,8 +20,9 @@ public class GerenciadorAvaliacao {
     }
 
     public void adicionaAvaliacao(String comentario, float nota, Usuario usuarioAvaliado,
-            Usuario avaliador, String tipo) throws SQLException {
+            Usuario avaliador, String tipo, int viagem) throws SQLException {
         Avaliacao a = new Avaliacao(comentario, nota, usuarioAvaliado, avaliador, tipo);
+        a.setViagem(viagem);
         dao.salvar(a);
     }
 
@@ -30,8 +31,9 @@ public class GerenciadorAvaliacao {
     }
 
     public void atualizaAvaliacao(String comentario, float nota, Usuario usuarioAvaliado,
-            Usuario avaliador, int codigo, String tipo) throws SQLException {
+            Usuario avaliador, int codigo, String tipo, int viagem) throws SQLException {
         Avaliacao a = new Avaliacao(comentario, nota, usuarioAvaliado, avaliador, codigo);
+        a.setViagem(viagem);
         a.setTipo(tipo);
         dao.atualizar(a);
     }

@@ -22,7 +22,7 @@ public class AvaliarUsuario implements Command {
 
         try {
             if (request.getParameter("tipo").equals("motorista") && request.getParameter("nota") == "") {
-                System.out.println("motorista");
+                
                 response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=2");
                 
             } else if ((request.getParameter("tipo").equals("passageiro")
@@ -37,7 +37,7 @@ public class AvaliarUsuario implements Command {
                 GerenciadorAvaliacao gerenciador = new GerenciadorAvaliacao();
                 gerenciador.adicionaAvaliacao(request.getParameter("comentario"),
                         Float.parseFloat(request.getParameter("nota")), avaliado,
-                        atual, request.getParameter("tipo"));
+                        atual, request.getParameter("tipo"), Integer.parseInt(request.getParameter("viagem")));
 
                 response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=1");
             }

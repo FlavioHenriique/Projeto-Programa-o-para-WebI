@@ -16,6 +16,7 @@ public class CancelaAvaliacao implements Command{
     
         try {
             GerenciadorAvaliacao g = new GerenciadorAvaliacao();
+            System.out.println(request.getParameter("codigo"));
             g.removeAvaliacao(Integer.parseInt(request.getParameter("codigo")));
                 
             response.sendRedirect("front?command=PaginaAvaliacoes&mensagem=4");
