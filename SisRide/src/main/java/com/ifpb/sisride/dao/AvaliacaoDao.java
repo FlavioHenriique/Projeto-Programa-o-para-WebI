@@ -73,7 +73,7 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
                 Avaliacao a = new Avaliacao(resultado.getString("comentario"),
                         resultado.getFloat("nota"), avaliado, avaliador, resultado.getInt("codigo"));
                 a.setTipo(resultado.getString("tipo"));
-                
+
                 stmt.close();
                 con.close();
                 return a;
@@ -97,10 +97,10 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
             Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        String sql = "UPDATE Avaliacao SET comentario =?,nota=?,usuarioavaliado=?,"
+                + "avaliador=? WHERE codigo = ? and tipo = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
         if (buscar(obj.getCodigo()) != null) {
-            String sql = "UPDATE Avaliacao SET comentario =?,nota=?,usuarioavaliado=?,"
-                    + "avaliador=? WHERE codigo = ? and tipo = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, obj.getComentario());
             stmt.setFloat(2, obj.getNota());
@@ -142,20 +142,45 @@ public class AvaliacaoDao implements Dao<Avaliacao> {
             Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT codigo FROM Avaliacao WHERE UsuarioAvaliado = ?";
+        String sql = "SELECT codigo FROM Avaliacao WHERE UsuarioAvaliado = ? order by momento desc";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, avaliado);
         ResultSet rs = stmt.executeQuery();
-        
+
         List<Avaliacao> lista = new ArrayList<>();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Avaliacao avaliacao = this.buscar(rs.getInt("codigo"));
             lista.add(avaliacao);
         }
         rs.close();
         stmt.close();
-        
+
         return lista;
+    }
+
+    public List<Avaliacao> minhasAvaliacoes(String avaliador) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AvaliacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "SELECT codigo FROM Avaliacao WHERE avaliador = ? ORDER BY Momento DESC";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, avaliador);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        while (rs.next()) {
+            Avaliacao a = buscar(rs.getInt("codigo"));
+            avaliacoes.add(a);
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+
+        return avaliacoes;
     }
 }

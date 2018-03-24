@@ -9,7 +9,7 @@
         <div class="solicitacoes">
             <img src="front?command=ImprimeFoto&avaliador=${avaliacao.avaliador.email}" class="circle comentario">
             <b class="comentario">${avaliacao.avaliador.nome}</b><br>
-            ${avaliacao.comentario}<hr>
+            ${avaliacao.comentario} (${avaliacao.nota}) <hr>
         </div>
     </c:if>
 </c:forEach>
@@ -28,7 +28,7 @@
             </c:choose>
 
             <b class="comentario">${avaliacao.avaliador.nome}</b><br>
-            ${avaliacao.comentario}<hr>
+            ${avaliacao.comentario} (${avaliacao.nota})<hr> 
         </div>
     </c:if>
 </c:forEach>

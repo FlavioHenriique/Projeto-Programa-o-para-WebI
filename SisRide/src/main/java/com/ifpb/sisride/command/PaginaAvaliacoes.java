@@ -28,6 +28,8 @@ public class PaginaAvaliacoes implements Command {
             session.setAttribute("avaliacao_passageiro", Caronas.getCaronasRealizadas
                     ((List<Viagem>) session.getAttribute("caronasSolicitadas")));
             
+            session.setAttribute("minhasAvaliacoes", Avaliacoes.minhasAvaliacoes(atual.getEmail()));
+            
                RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
                dispatcher.forward(request, response);
                

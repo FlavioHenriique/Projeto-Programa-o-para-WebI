@@ -31,6 +31,7 @@
                     </td>
                     <td width="5%"></td>
                     <td width="33%">
+
                         <form method="post" action="front">
 
                             <h5>Avaliação de passageiro</h5><br>
@@ -50,6 +51,7 @@
                                 <button type="submit" class="waves-effect waves-light btn s12" >Avaliar passageiro</button>
                             </center>
                         </form>
+
                     </td>
                     <td width="2%"></td>
 
@@ -62,7 +64,7 @@
                 </td>
             </tr>
             <c:forEach var="viagem" items="${avaliacao_passageiro}">
-                
+
                 <tr>
                     <td width="60%">
                         <minhasTags:imprimeCarona viagem="${viagem}" />
@@ -71,26 +73,11 @@
                     </td>
                     <td width="5%"></td>
                     <td width="33%">
-                        <form method="post" action="front">
-                           
-                            <h5>Avaliação de motorista</h5><br>
-                            <input type="hidden" name="command" value="AvaliarUsuario">
-                            <input type="hidden" name="avaliado" value="${viagem.motorista.email}">
-                            <input type="hidden" name="tipo" value="motorista">
-                            Motorista: ${viagem.motorista.nome}<br>
-                            <br>
-                            <input type="text" placeholder="Determine a nota" name="nota"><br>
-                            <textarea name="comentario" class="materialize-textarea" 
-                                      placeholder="Digite um comentário sobre este passageiro..."></textarea>
-                            <br>
-                            <center>
-                                <button type="submit" class="waves-effect waves-light btn s12" >Avaliar motorista</button>
-                            </center>
-                        </form>
+                        <minhasTags:avaliacaoMotorista viagem="${viagem}" />
                     </td>
                     <td width="2%"></td>
                 </tr>
-                
+
             </c:forEach>
 
         </table>
@@ -109,6 +96,10 @@
         {
             swal("Erro!", "Preencha todos os campos!", "error");
             break;
+        }
+        case "3":{
+            swal("OK!", "A avaliação foi atualizada!", "success");
+            break;    
         }
     }
 </script>

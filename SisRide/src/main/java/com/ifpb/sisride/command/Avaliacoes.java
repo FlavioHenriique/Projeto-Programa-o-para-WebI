@@ -23,5 +23,10 @@ public class Avaliacoes implements Command {
         GerenciadorAvaliacao g = new GerenciadorAvaliacao();
         return g.avaliacoesUsuario(avaliado);
     }
+    
+    public static List<Avaliacao> minhasAvaliacoes(String avaliador) throws SQLException, ClassNotFoundException{
+       GerenciadorAvaliacao g = new GerenciadorAvaliacao();
+       return g.minhasAvaliacoes(avaliador);
+    }
 
 }

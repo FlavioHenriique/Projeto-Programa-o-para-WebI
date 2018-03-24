@@ -30,16 +30,21 @@ public class GerenciadorAvaliacao {
     }
 
     public void atualizaAvaliacao(String comentario, float nota, Usuario usuarioAvaliado,
-            Usuario avaliador, int codigo) throws SQLException {
+            Usuario avaliador, int codigo, String tipo) throws SQLException {
         Avaliacao a = new Avaliacao(comentario, nota, usuarioAvaliado, avaliador, codigo);
+        a.setTipo(tipo);
         dao.atualizar(a);
     }
 
     public Avaliacao buscaAvaliacao(int codigo) throws SQLException {
         return dao.buscar(codigo);
     }
-    
-    public List<Avaliacao> avaliacoesUsuario(String avaliado) throws SQLException{
+
+    public List<Avaliacao> avaliacoesUsuario(String avaliado) throws SQLException {
         return dao.AvaliacoesUsuario(avaliado);
+    }
+
+    public List<Avaliacao> minhasAvaliacoes(String avaliador) throws SQLException {
+        return dao.minhasAvaliacoes(avaliador);
     }
 }
