@@ -64,7 +64,6 @@
                 </center>
             </td>
             <td width="2%"></td>
-
         </tr>
     </c:forEach>
     <tr>

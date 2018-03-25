@@ -62,6 +62,7 @@
             <td width="80%">
                 
                 <!-- Imprimindo as caronas solicitadas em uma tabela -->
+                
                 <c:if test="${!empty caronasSolicitadas}">
             <center>
                 <h4>Minhas solicitações de vaga</h4>
@@ -70,6 +71,7 @@
                         <td><b>Situação</b></td>
                         <td><b>Trajeto</b></td>
                         <td><b>Data</b></td>
+                        <td><b>Cancelar</b></td>
                     </tr>
                     <c:forEach var="viagem" items="${caronasSolicitadas}">
                         <tr>
@@ -80,6 +82,11 @@
                             </td>
                             <td>
                                 ${viagem.data}
+                            </td>
+                            <td>
+                                <a class="waves-effect waves-light btn s12 cancelar"
+                                   href="front?command=CancelaSolicitacao&carona=${viagem.codigo}">
+                                    <i class="material-icons">cancel</i>  Cancelar solicitação</a>
                             </td>
                         </tr>
                     </c:forEach>    
@@ -148,6 +155,11 @@
         case "2":
         {
             swal("OK!", "Sua solicitação foi realizada.", "success");
+            break;
+        }
+        case "3":
+        {
+            swal("OK!", "Sua solicitação de vaga foi cancelada.", "success");
             break;
         }
     }

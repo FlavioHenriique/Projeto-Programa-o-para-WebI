@@ -429,4 +429,22 @@ public class ViagemDao implements Dao<Viagem> {
         return lista;
 
     }
+    
+    public void cancelaSolicitacao(int viagem, String usuario) throws SQLException{
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "DELETE FROM SOLICITA_VIAGEM WHERE codviagem = ? AND emailUsuario = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, viagem);
+        stmt.setString(2, usuario);
+        
+        stmt.execute();
+        stmt.close();
+        con.close();
+        
+        
+    }
 }

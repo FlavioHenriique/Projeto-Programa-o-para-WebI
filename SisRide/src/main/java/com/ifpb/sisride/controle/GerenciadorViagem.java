@@ -76,4 +76,8 @@ public class GerenciadorViagem {
 
         return dao.getRecomendacoes(passageiro);
     }
+    
+     public void cancelaSolicitacao(int viagem, String usuario) throws SQLException{
+         dao.cancelaSolicitacao(viagem, usuario);
+     }
 }
