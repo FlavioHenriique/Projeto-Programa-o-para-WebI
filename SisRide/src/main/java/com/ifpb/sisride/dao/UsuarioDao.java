@@ -41,9 +41,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(7, obj.getSexo());
 
         if (obj.getFoto() != null) {
-            sql.concat(" UPDATE USUARIO SET foto = ? WHERE email = ?");
-            stmt.setBinaryStream(8, obj.getFoto());
-            stmt.setString(9, obj.getEmail());
+           this.setFoto(obj.getEmail(), obj.getFoto());
         }
 
         stmt.execute();
@@ -90,16 +88,16 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean atualizar(Usuario obj) throws SQLException {
 
-        try {
-            con = ConFactory.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         Usuario u = buscar(obj.getEmail());
         if (u == null) {
             return false;
         } else {
+
+            try {
+                con = ConFactory.getConnection();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
             String sql = "UPDATE USUARIO SET email=?, senha =?, nome=?,"
                     + " nascimento=?, profissão=?,cidade=?,sexo=? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);

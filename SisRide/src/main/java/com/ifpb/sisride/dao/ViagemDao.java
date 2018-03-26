@@ -436,10 +436,12 @@ public class ViagemDao implements Dao<Viagem> {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "DELETE FROM SOLICITA_VIAGEM WHERE codviagem = ? AND emailUsuario = ?";
+        String sql = "DELETE FROM SOLICITA_VIAGEM WHERE codviagem = ? AND emailUsuario = ? ;"
+                + "UPDATE Viagem set vagas = vagas + 1 WHERE codigo = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, viagem);
         stmt.setString(2, usuario);
+        stmt.setInt(3, viagem);
         
         stmt.execute();
         stmt.close();

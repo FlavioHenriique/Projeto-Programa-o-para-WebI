@@ -48,5 +48,9 @@
     if (erro == 1) {
         swal("Erro!", "Usuário não encontrado!", "error");
     }
+    var mensagem = "${param.mensagem}";
+    if(mensagem == "1"){
+        swal("OK!","A conta foi excluida.","success");
+    }
 </script>
 </html>

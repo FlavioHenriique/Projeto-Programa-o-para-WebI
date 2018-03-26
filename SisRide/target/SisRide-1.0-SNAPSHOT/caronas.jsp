@@ -129,7 +129,8 @@
             </ul>
 
             <a class="waves-effect waves-light btn s12 alinhado cancelar"
-               href="front?command=CancelarCarona&codCarona=${viagem.codigo}">Cancelar esta carona</a>
+               href="front?command=CancelarCarona&codCarona=${viagem.codigo}"><i class="material-icons left">cancel</i>
+                Cancelar esta carona</a>
             <hr>
             </div>
 

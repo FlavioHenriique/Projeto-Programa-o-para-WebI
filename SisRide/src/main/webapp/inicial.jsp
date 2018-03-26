@@ -28,112 +28,114 @@
                                 <img src="Imagens/user.png" class="circle">
                             </c:otherwise>
                         </c:choose>
-
+                                
                         <label id="nome">${usuario.nome}</label><br><br>
-                        <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">Editar perfil</button>
+                        <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">
+                                <i class="material-icons left">build</i>Editar perfil</button>
                         </a>
                         <br><br>
                         <minhasTags:informacoesUsuario usuario="${usuario}" /><br><br>
 
                     </div>
-                <minhasTags:imprimeComentarios lista="${avaliacoesUsuario}" />
-            
-            <br><br>
+                    <minhasTags:imprimeComentarios lista="${avaliacoesUsuario}" />
 
-            <br>
-            </td>
-            <td width="50%">
-                <div class="row" id="busca" width="100%">
-                    <form method="get" action="front">
-                        <input type="hidden" name="command" value="BuscaUsuario">
-                        <input type="text" name="buscado"  placeholder="Buscar usuários">
-                        <button type="submit" class="waves-effect waves-light btn" >Buscar</button>
-                    </form>
-                </div>
-                <div>
+                    <br><br>
 
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table width="100%">
-        <tr>
-            <td width="10%"></td>
-            <td width="80%">
-                
-                <!-- Imprimindo as caronas solicitadas em uma tabela -->
-                
-                <c:if test="${!empty caronasSolicitadas}">
-            <center>
-                <h4>Minhas solicitações de vaga</h4>
-                <table class="highlight centered responsive-table bordered">
-                    <tr>
-                        <td><b>Situação</b></td>
-                        <td><b>Trajeto</b></td>
-                        <td><b>Data</b></td>
-                        <td><b>Cancelar</b></td>
-                    </tr>
-                    <c:forEach var="viagem" items="${caronasSolicitadas}">
+                    <br>
+                </td>
+                <td width="50%">
+                    <div class="row" id="busca" width="100%">
+                        <form method="get" action="front">
+                            <input type="hidden" name="command" value="BuscaUsuario">
+                            <input type="text" name="buscado"  placeholder="Buscar usuários">
+                            <button type="submit" class="waves-effect waves-light btn" ><i class="material-icons left">search</i>
+                                Buscar</button>
+                        </form>
+                    </div>
+                    <div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr>
+                <td width="10%"></td>
+                <td width="80%">
+
+                    <!-- Imprimindo as caronas solicitadas em uma tabela -->
+
+                    <c:if test="${!empty caronasSolicitadas}">
+                <center>
+                    <h4>Minhas solicitações de vaga</h4>
+                    <table class="highlight centered responsive-table bordered">
                         <tr>
-                            <td>${viagem.situacao}</td>
-                            <td>
-
-                                ${viagem.partida.nome} - ${viagem.destino.nome}    
-                            </td>
-                            <td>
-                                ${viagem.data}
-                            </td>
-                            <td>
-                                <a class="waves-effect waves-light btn s12 cancelar"
-                                   href="front?command=CancelaSolicitacao&carona=${viagem.codigo}">
-                                    <i class="material-icons">cancel</i>  Cancelar solicitação</a>
-                            </td>
+                            <td><b>Situação</b></td>
+                            <td><b>Trajeto</b></td>
+                            <td><b>Data</b></td>
+                            <td><b>Cancelar</b></td>
                         </tr>
-                    </c:forEach>    
+                        <c:forEach var="viagem" items="${caronasSolicitadas}">
+                            <tr>
+                                <td>${viagem.situacao}</td>
+                                <td>
 
-                </table>
-            </center>
+                                    ${viagem.partida.nome} - ${viagem.destino.nome}    
+                                </td>
+                                <td>
+                                    ${viagem.data}
+                                </td>
+                                <td>
+                                    <a class="waves-effect waves-light btn s12 cancelar"
+                                       href="front?command=CancelaSolicitacao&carona=${viagem.codigo}">
+                                        <i class="material-icons">cancel</i>  Cancelar solicitação</a>
+                                </td>
+                            </tr>
+                        </c:forEach>    
+
+                    </table>
+                </center>
+            </c:if>
+            <c:if test="${empty caronasSolicitadas}">
+                <label>Você ainda não solicitou nenhuma carona</label> <br>
+            </c:if><br>
+
+            <!--Imprimindo as recomendações que o usuário recebeu-->
+
+            <c:if test="${!empty recomendacoes}">
+                <h4>Recomendações de caronas</h4>
+                <br>
+                <c:forEach var="recomendacao" items="${recomendacoes}">
+                    <minhasTags:imprimeCarona viagem="${recomendacao}" />
+
+                    <a class="waves-effect waves-light btn s12 alinhado"
+                       href="front?command=SolicitaVaga&codViagem=${recomendacao.codigo}&pagina=inicial">Solicitar vaga</a>
+                </div>
+            </c:forEach>
         </c:if>
-        <c:if test="${empty caronasSolicitadas}">
-            <label>Você ainda não solicitou nenhuma carona</label> <br>
-        </c:if><br>
 
-        <!--Imprimindo as recomendações que o usuário recebeu-->
+        <!-- Imprimindo as notificações que o usuário recebeu-->
 
-        <c:if test="${!empty recomendacoes}">
-            <h4>Recomendações de caronas</h4>
+        <c:if test="${!empty notificacoes}">
+            <h4>Notificações</h4>
             <br>
-            <c:forEach var="recomendacao" items="${recomendacoes}">
-                <minhasTags:imprimeCarona viagem="${recomendacao}" />
+            <c:forEach var="notificacao" items="${notificacoes}">
+                <div class="solicitacoes col s12">
+                    <c:choose>
+                        <c:when test="${notificacao.tipo eq 'rejeita'}">
 
-                <a class="waves-effect waves-light btn s12 alinhado"
-                   href="front?command=SolicitaVaga&codViagem=${recomendacao.codigo}&pagina=inicial">Solicitar vaga</a>
-            </div>
-        </c:forEach>
-    </c:if>
-
-    <!-- Imprimindo as notificações que o usuário recebeu-->
-
-    <c:if test="${!empty notificacoes}">
-        <h4>Notificações</h4>
-        <br>
-        <c:forEach var="notificacao" items="${notificacoes}">
-            <div class="solicitacoes col s12">
-                <c:choose>
-                    <c:when test="${notificacao.tipo eq 'rejeita'}">
-
-                        <i class="material-icons icone_recusa">thumb_down</i>
-                    </c:when>
-                    <c:otherwise>
-                        <i class="material-icons icone_confirma">thumb_up</i>
-                    </c:otherwise>
-                </c:choose>
-                <label class="amizade">${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
-            </div>
-        </c:forEach>
-    </c:if>
-</td>
-<td width="10%"></td>
+                            <i class="material-icons icone_recusa">thumb_down</i>
+                        </c:when>
+                        <c:otherwise>
+                            <i class="material-icons icone_confirma">thumb_up</i>
+                        </c:otherwise>
+                    </c:choose>
+                    <label class="amizade">${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
+                </div>
+            </c:forEach>
+        </c:if>
+    </td>
+    <td width="10%"></td>
 </tr>
 </table>
 <br>

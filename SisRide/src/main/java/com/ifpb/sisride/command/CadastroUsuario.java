@@ -28,11 +28,9 @@ public class CadastroUsuario implements Command {
 
             String foto = request.getParameter("foto");
             InputStream input = null;
-            
-            if (foto != null && !foto.isEmpty()) {
-                Part part = request.getPart("foto");
-                 input = part.getInputStream();
-            }
+
+            Part part = request.getPart("foto");
+            input = part.getInputStream();
 
             if (request.getParameter("email") == null || request.getParameter("senha") == null
                     || request.getParameter("nome") == null || request.getParameter("data") == null

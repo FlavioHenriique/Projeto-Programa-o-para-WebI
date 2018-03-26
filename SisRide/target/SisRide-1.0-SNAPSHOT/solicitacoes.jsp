@@ -21,7 +21,8 @@
                     <form method="get" action="front">
                         <input type="text" name="nomeLugar" placeholder="Para onde deseja ir?" class="validate">
                         <input type="hidden" name="command" value="BuscarCaronas">
-                        <button class="waves-effect waves-light btn s12">Buscar caronas</button>
+                        <button class="waves-effect waves-light btn s12"><i class="material-icons left">search</i>
+                                 Buscar caronas</button>
                     </form>
 
 
@@ -102,10 +103,11 @@
 
                                   <a  class="waves-effect waves-light btn s12 alinhado"
                                       href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}">
-                                      Aceitar</a>
+                                      <i class="material-icons left">thumb_up</i>Aceitar</a>
 
                                   <a href="front?command=RecusarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}"
-                                     class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                     class="waves-effect waves-light btn s12 alinhado cancelar">
+                                      <i class="material-icons left">thumb_down</i>Recusar</a>
                                   <hr>
                               </div>    
                         </c:if>
@@ -123,10 +125,12 @@
                                   <a href="front?command=BuscaUsuario&buscado=${solicitacao.usuario.nome}">Ver perfil</a>
 
                                   <a href="front?command=AceitarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}"
-                                     class="waves-effect waves-light btn s12 alinhado"  >Aceitar</a>
+                                     class="waves-effect waves-light btn s12 alinhado">
+                                      <i class="material-icons left">thumb_up</i>Aceitar</a>
 
                                   <a  href="front?command=RecusarSolicitacao&tipoSolicitacao=${solicitacao.tipo}&solicitador=${solicitacao.usuario.email}&requisitado=${solicitacao.amigo.email}"
-                                      class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                      class="waves-effect waves-light btn s12 alinhado cancelar">
+                                      <i class="material-icons left">thumb_down</i>Recusar</a>
                                   <hr>
                               </div>    
                         </c:if>
