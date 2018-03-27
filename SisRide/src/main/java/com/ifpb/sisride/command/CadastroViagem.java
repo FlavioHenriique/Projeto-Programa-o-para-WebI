@@ -32,7 +32,7 @@ public class CadastroViagem implements Command {
                     || request.getParameter("fumar") == null || request.getParameter("conversa") == null
                     || request.getParameter("partida") == null || request.getParameter("destino") == null
                     || request.getParameter("ar") == null || request.getParameter("modelo") == null
-                    || request.getParameter("ano") == null || request.getParameter("soelas") == null) {
+                    || request.getParameter("ano") == null) {
 
                 response.sendRedirect("caronas.jsp?erroCadastroCarona=1");
             } else {
@@ -56,6 +56,7 @@ public class CadastroViagem implements Command {
 
                 Lugar partida = null;
                 Lugar destino = null;
+                
                 List<Lugar> lista = gLugar.buscaLugar();
                 for (Lugar l : lista) {
                     if (l.getIdentificacao() == Integer.parseInt(request.getParameter("partida"))) {
@@ -65,10 +66,19 @@ public class CadastroViagem implements Command {
                         destino = l;
                     }
                 }
+                boolean soElas = false;
+                
+                if(request.getParameter("soelas") != null){
+                    soElas = Boolean.parseBoolean(request.getParameter("soelas"));
+                    System.out.println("Nao nulo");
+                }else{
+                    System.out.println("nulo");
+                }
+                
                 g.adicionaViagem(Integer.parseInt(request.getParameter("vagas")), LocalDate.parse(request.getParameter("data"), formatter),
                         request.getParameter("hora"), Float.parseFloat(request.getParameter("valor")), u, request.getParameter("musica"),
                         Boolean.parseBoolean(request.getParameter("animais")), Boolean.parseBoolean(request.getParameter("fumar")), request.getParameter("conversa"),
-                        destino, partida, carro,Boolean.parseBoolean(request.getParameter("soelas")));
+                        destino, partida, carro, soElas);
 
                 response.sendRedirect("front?command=Caronas&mensagem=1");
             }
