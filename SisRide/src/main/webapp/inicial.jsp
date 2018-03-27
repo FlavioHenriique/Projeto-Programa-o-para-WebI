@@ -28,10 +28,10 @@
                                 <img src="Imagens/user.png" class="circle">
                             </c:otherwise>
                         </c:choose>
-                                
+
                         <label id="nome">${usuario.nome}</label><br><br>
                         <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">
-                                <i class="material-icons left">build</i>Editar perfil</button>
+                                <i class="material-icons left">settings</i>Editar perfil</button>
                         </a>
                         <br><br>
                         <minhasTags:informacoesUsuario usuario="${usuario}" /><br><br>
@@ -60,8 +60,8 @@
         </table>
         <table width="100%">
             <tr>
-                <td width="10%"></td>
-                <td width="80%">
+                <td width="20%"></td>
+                <td width="60%">
 
                     <!-- Imprimindo as caronas solicitadas em uma tabela -->
 
@@ -88,7 +88,7 @@
                                 <td>
                                     <a class="waves-effect waves-light btn s12 cancelar"
                                        href="front?command=CancelaSolicitacao&carona=${viagem.codigo}">
-                                        <i class="material-icons">cancel</i>  Cancelar solicitação</a>
+                                        <i class="material-icons left">cancel</i>  Cancelar</a>
                                 </td>
                             </tr>
                         </c:forEach>    
@@ -107,35 +107,49 @@
                 <br>
                 <c:forEach var="recomendacao" items="${recomendacoes}">
                     <minhasTags:imprimeCarona viagem="${recomendacao}" />
-
-                    <a class="waves-effect waves-light btn s12 alinhado"
-                       href="front?command=SolicitaVaga&codViagem=${recomendacao.codigo}&pagina=inicial">Solicitar vaga</a>
-                </div>
+                    
+                    <minhasTags:jaSolicitou viagem="${recomendacao}" /> 
+                    </div>
             </c:forEach>
         </c:if>
 
-        <!-- Imprimindo as notificações que o usuário recebeu-->
+        <!-- Imprimindo as caronas divulgadas por outros usuários-->
 
-        <c:if test="${!empty notificacoes}">
-            <h4>Notificações</h4>
-            <br>
-            <c:forEach var="notificacao" items="${notificacoes}">
-                <div class="solicitacoes col s12">
-                    <c:choose>
-                        <c:when test="${notificacao.tipo eq 'rejeita'}">
+        <h4>Caronas divulgadas pelos usuários</h4><br>
 
-                            <i class="material-icons icone_recusa">thumb_down</i>
-                        </c:when>
-                        <c:otherwise>
-                            <i class="material-icons icone_confirma">thumb_up</i>
-                        </c:otherwise>
-                    </c:choose>
-                    <label class="amizade">${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
-                </div>
-            </c:forEach>
+        <c:forEach var="viagem" items="${divulgadas}">
+            <c:if test="${(viagem.divulgada) && (viagem.motorista.email != usuario.email)}">
+
+                <minhasTags:imprimeCarona viagem="${viagem}" />
+                
+                <minhasTags:jaSolicitou viagem="${viagem}" />
+            </div>
         </c:if>
-    </td>
-    <td width="10%"></td>
+    </c:forEach>
+
+
+    <!-- Imprimindo as notificações que o usuário recebeu-->
+
+    <c:if test="${!empty notificacoes}">
+        <h4>Notificações</h4>
+        <br>
+        <c:forEach var="notificacao" items="${notificacoes}">
+            <div class="solicitacoes col s12">
+                <c:choose>
+                    <c:when test="${notificacao.tipo eq 'rejeita'}">
+
+                        <i class="material-icons icone_recusa">thumb_down</i>
+                    </c:when>
+                    <c:otherwise>
+                        <i class="material-icons icone_confirma">thumb_up</i>
+                    </c:otherwise>
+                </c:choose>
+                <label class="amizade">${notificacao.notificador} ${notificacao.mensagem}</label> <hr>
+            </div>
+        </c:forEach>
+    </c:if>
+</td>
+<td width="20%"></td>
 </tr>
 </table>
 <br>

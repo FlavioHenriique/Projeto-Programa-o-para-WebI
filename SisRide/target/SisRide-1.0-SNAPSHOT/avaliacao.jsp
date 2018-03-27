@@ -53,13 +53,15 @@
                                       placeholder="Digite um comentário sobre este passageiro..."></textarea>
                             <br>
                             <center>
-                                <button type="submit" class="waves-effect waves-light btn s12" >Avaliar passageiro</button>
+                                <button type="submit" class="waves-effect waves-light btn s12">
+                                     <i class="material-icons right">send</i>Avaliar passageiro</button>
                                 <br><br>
 
                             </center>
                         </form><center>
                     <button class="waves-effect waves-light btn s12 cancelar"
                             onclick="cancela('${usuario.email}', '${viagem.codigo}')">
+                         <i class="material-icons right">cancel</i>
                         Cancelar avaliação</button>
                 </center>
             </td>

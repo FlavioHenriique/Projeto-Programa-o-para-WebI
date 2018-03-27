@@ -22,6 +22,7 @@ public class Viagem {
     private String situacao;
     private List<Usuario> solicitadores;
     private List<Usuario> passageiros;
+    private boolean divulgada;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
@@ -67,6 +68,14 @@ public class Viagem {
     }
 
     public Viagem() {
+    }
+
+    public boolean isDivulgada() {
+        return divulgada;
+    }
+
+    public void setDivulgada(boolean divulgada) {
+        this.divulgada = divulgada;
     }
 
     public int getVagas() {
@@ -188,19 +197,23 @@ public class Viagem {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + this.vagas;
-        hash = 17 * hash + Objects.hashCode(this.data);
-        hash = 17 * hash + Objects.hashCode(this.hora);
-        hash = 17 * hash + Float.floatToIntBits(this.valor);
-        hash = 17 * hash + Objects.hashCode(this.motorista);
-        hash = 17 * hash + Objects.hashCode(this.musica);
-        hash = 17 * hash + (this.animais ? 1 : 0);
-        hash = 17 * hash + (this.fumar ? 1 : 0);
-        hash = 17 * hash + Objects.hashCode(this.conversa);
-        hash = 17 * hash + Objects.hashCode(this.destino);
-        hash = 17 * hash + Objects.hashCode(this.partida);
-        hash = 17 * hash + this.codigo;
-        hash = 17 * hash + Objects.hashCode(this.carro);
+        hash = 89 * hash + this.vagas;
+        hash = 89 * hash + Objects.hashCode(this.data);
+        hash = 89 * hash + Objects.hashCode(this.hora);
+        hash = 89 * hash + Float.floatToIntBits(this.valor);
+        hash = 89 * hash + Objects.hashCode(this.motorista);
+        hash = 89 * hash + Objects.hashCode(this.musica);
+        hash = 89 * hash + (this.animais ? 1 : 0);
+        hash = 89 * hash + (this.fumar ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.conversa);
+        hash = 89 * hash + Objects.hashCode(this.destino);
+        hash = 89 * hash + Objects.hashCode(this.partida);
+        hash = 89 * hash + this.codigo;
+        hash = 89 * hash + Objects.hashCode(this.carro);
+        hash = 89 * hash + Objects.hashCode(this.situacao);
+        hash = 89 * hash + Objects.hashCode(this.solicitadores);
+        hash = 89 * hash + Objects.hashCode(this.passageiros);
+        hash = 89 * hash + (this.divulgada ? 1 : 0);
         return hash;
     }
 
@@ -231,6 +244,9 @@ public class Viagem {
         if (this.codigo != other.codigo) {
             return false;
         }
+        if (this.divulgada != other.divulgada) {
+            return false;
+        }
         if (!Objects.equals(this.hora, other.hora)) {
             return false;
         }
@@ -238,6 +254,9 @@ public class Viagem {
             return false;
         }
         if (!Objects.equals(this.conversa, other.conversa)) {
+            return false;
+        }
+        if (!Objects.equals(this.situacao, other.situacao)) {
             return false;
         }
         if (!Objects.equals(this.data, other.data)) {
@@ -255,12 +274,18 @@ public class Viagem {
         if (!Objects.equals(this.carro, other.carro)) {
             return false;
         }
+        if (!Objects.equals(this.solicitadores, other.solicitadores)) {
+            return false;
+        }
+        if (!Objects.equals(this.passageiros, other.passageiros)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codigo=" + codigo + ", carro=" + carro + '}';
+        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codigo=" + codigo + ", carro=" + carro + ", situacao=" + situacao + ", solicitadores=" + solicitadores + ", passageiros=" + passageiros + ", divulgada=" + divulgada + '}';
     }
 
 }

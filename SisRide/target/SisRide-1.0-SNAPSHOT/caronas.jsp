@@ -92,76 +92,80 @@
                 Você não cadastrou nenhuma carona
             </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
-            <minhasTags:imprimeCarona  viagem="${viagem}" />
-            
-            <br>
+                <minhasTags:imprimeCarona  viagem="${viagem}" />
 
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">screen_share</i>
-                        Recomendar para um amigo</div>
-                    <div class="collapsible-body">
+                <br>
+                <a href="front?command=DivulgarCarona&carona=${viagem.codigo}">Divulgar para todos os usuários</a><br>
+                
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">screen_share</i>
+                            Recomendar para um amigo</div>
+                        <div class="collapsible-body">
 
-                        <!-- Gerando lista com os amigos do usuário-->       
-                        <c:choose>
-                            <c:when test="${!empty amigos}">
-                                <c:forEach var="amigo" items="${amigos}">
-                                    <c:choose>
-                                        <c:when test="${amigo.foto2 != null}">
-                                            <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle recomendacao">        
+                            <!-- Gerando lista com os amigos do usuário-->       
+                            <c:choose>
+                                <c:when test="${!empty amigos}">
+                                    <c:forEach var="amigo" items="${amigos}">
+                                        <c:choose>
+                                            <c:when test="${amigo.foto2 != null}">
+                                                <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle recomendacao">        
 
-                                        </c:when>
-                                        <c:otherwise>
-                                            <img src="Imagens/user.png" class="circle recomendacao">
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <a href="front?command=RecomendarCarona&carona=${viagem.codigo}&passageiro=${amigo.email}"
-                                       class="recomendacao">${amigo.nome}</a>
-                                    <hr>
-                                </c:forEach>
-                            </c:when>
-                            <c:otherwise>
-                                Você não tem amigos
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </li>
-            </ul>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="Imagens/user.png" class="circle recomendacao">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <a href="front?command=RecomendarCarona&carona=${viagem.codigo}&passageiro=${amigo.email}"
+                                           class="recomendacao">${amigo.nome}</a>
+                                        <hr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    Você não tem amigos
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </li>
+                </ul>
+                <a  class="waves-effect waves-light btn s12 alinhado" href=""
+                    ><i class="material-icons right">update</i>Atualizar</a>
+                    
+                <a class="waves-effect waves-light btn s12 alinhado cancelar"
+                   href="front?command=CancelarCarona&codCarona=${viagem.codigo}"><i class="material-icons left">cancel</i>
+                    Cancelar</a>
 
-            <a class="waves-effect waves-light btn s12 alinhado cancelar"
-               href="front?command=CancelarCarona&codCarona=${viagem.codigo}"><i class="material-icons left">cancel</i>
-                Cancelar esta carona</a>
-            <hr>
-            </div>
+                    <hr>
+                </div>
 
-            <br>
-            <c:choose>
-                <c:when test="${!empty viagem.solicitadores}">
+                <br>
+                <c:choose>
+                    <c:when test="${!empty viagem.solicitadores}">
 
-                    <h5>Usuários que solicitaram vagas</h5>
-                    <br>
-                    <c:forEach var="solicitante" items="${viagem.solicitadores}">
-                        <div class="solicitacoes">
-                            <h5><b>${solicitante.nome}</b></h5>
+                        <h5>Usuários que solicitaram vagas</h5>
+                        <br>
+                        <c:forEach var="solicitante" items="${viagem.solicitadores}">
+                            <div class="solicitacoes">
+                                <h5><b>${solicitante.nome}</b></h5>
 
-                            <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
-                            <br>
-                            <a href="front?command=ConfirmaVaga&resposta=nao&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
-                               class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
-                            <a href="front?command=ConfirmaVaga&resposta=sim&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
-                               class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
-                            <hr>
-                        </div><br>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
-                    <h5>Não existem novas solicitações de vaga!</h5><br>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
+                                <a href="front?command=BuscaUsuario&buscado=${solicitante.nome}">Ver perfil</a>
+                                <br>
+                                <a href="front?command=ConfirmaVaga&resposta=nao&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                                   class="waves-effect waves-light btn s12 alinhado cancelar">Recusar</a>
+                                <a href="front?command=ConfirmaVaga&resposta=sim&codviagem=${viagem.codigo}&solicitante=${solicitante.email}"
+                                   class="waves-effect waves-light btn s12 alinhado ">Aceitar</a>
+                                <hr>
+                            </div><br>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <h5>Não existem novas solicitações de vaga!</h5><br>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
         </td>
-        </tr>
-    </table>
+    </tr>
+</table>
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -179,13 +183,13 @@
     switch (mensagem) {
         case "1":
         {
-            swal("OK!","Sua carona foi cadastrada!","success");
+            swal("OK!", "Sua carona foi cadastrada!", "success");
             break;
         }
         case "3":
         {
             swal("OK!", "Esta carona foi cancelada.", "success");
-            
+
             break;
         }
         case "4":
@@ -198,6 +202,14 @@
             swal("Ok!", "Seu amigo receberá a recomendação.", "success");
             break;
         }
+         case "6":
+        {
+            swal("Ok!", "Esta carona será divulgada para todos", "success");
+            break;
+        }
     }
+
+   
+
 </script>
 </html>

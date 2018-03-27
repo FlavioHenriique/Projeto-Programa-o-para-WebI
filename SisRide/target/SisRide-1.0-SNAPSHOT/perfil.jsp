@@ -56,9 +56,7 @@
                     Excluir conta</button></a>
             <a href="inicial.jsp"><button class="waves-effect waves-light btn s12 cancelar">Cancelar</button></a>
         </div>
-
     </center>
-
     <br><br>
 
 </body>

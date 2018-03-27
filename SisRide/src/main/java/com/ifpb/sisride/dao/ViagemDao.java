@@ -31,8 +31,8 @@ public class ViagemDao implements Dao<Viagem> {
         con = ConFactory.getConnection();
 
         String sql = "INSERT INTO Viagem (vagas,data,horario,valor,motorista,"
-                + "musica,animais,fumar,conversa,destino,partida,codcarro)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "musica,animais,fumar,conversa,destino,partida,codcarro, divulgada)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
         java.util.Date data;
@@ -51,6 +51,7 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(10, obj.getDestino().getIdentificacao());
             stmt.setInt(11, obj.getPartida().getIdentificacao());
             stmt.setInt(12, obj.getCarro().getCodigo());
+            stmt.setBoolean(13, false);
             stmt.execute();
             stmt.close();
             return true;
@@ -105,6 +106,7 @@ public class ViagemDao implements Dao<Viagem> {
                         destino, partida, carro, result.getInt("codigo"));
                 viagem.setSolicitadores(solicitadores);
                 viagem.setPassageiros(passageiros);
+                viagem.setDivulgada(result.getBoolean("divulgada"));
 
                 result.close();
                 stmt.close();
@@ -429,8 +431,8 @@ public class ViagemDao implements Dao<Viagem> {
         return lista;
 
     }
-    
-    public void cancelaSolicitacao(int viagem, String usuario) throws SQLException{
+
+    public void cancelaSolicitacao(int viagem, String usuario) throws SQLException {
         try {
             con = ConFactory.getConnection();
         } catch (ClassNotFoundException ex) {
@@ -442,11 +444,45 @@ public class ViagemDao implements Dao<Viagem> {
         stmt.setInt(1, viagem);
         stmt.setString(2, usuario);
         stmt.setInt(3, viagem);
-        
+
         stmt.execute();
         stmt.close();
         con.close();
+
+    }
+
+    public List<Viagem> buscarTodas() throws SQLException {
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "SELECT Codigo FROM Viagem";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+        List<Viagem> viagens = new ArrayList<>();
+
+        while (rs.next()) {
+            Viagem v = this.buscar(rs.getInt("codigo"));
+            viagens.add(v);
+        }
+        return viagens;
+    }
+
+    public void divulgarCarona(int codigo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        
+        String sql = "UPDATE Viagem SET divulgada = true WHERE codigo = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, codigo);
+        stmt.execute();
+        stmt.close();
+        con.close();
     }
 }

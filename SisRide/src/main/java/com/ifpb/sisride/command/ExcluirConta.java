@@ -20,12 +20,12 @@ public class ExcluirConta implements Command {
             GerenciadorUsuario g = new GerenciadorUsuario();
 
             HttpSession session = request.getSession();
-            
+
             Usuario atual = (Usuario) session.getAttribute("usuario");
             g.removeUsuario(atual.getEmail());
-            
+
             session.removeAttribute("usuario");
-            
+
             response.sendRedirect("index.jsp?mensagem=1");
 
         } catch (SQLException ex) {

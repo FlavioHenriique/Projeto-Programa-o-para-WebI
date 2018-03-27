@@ -76,8 +76,16 @@ public class GerenciadorViagem {
 
         return dao.getRecomendacoes(passageiro);
     }
+
+    public void cancelaSolicitacao(int viagem, String usuario) throws SQLException {
+        dao.cancelaSolicitacao(viagem, usuario);
+    }
     
-     public void cancelaSolicitacao(int viagem, String usuario) throws SQLException{
-         dao.cancelaSolicitacao(viagem, usuario);
-     }
+    public List<Viagem> buscarTodas() throws SQLException{
+        return dao.buscarTodas();
+    }
+    
+    public void divulgarCarona(int codigo) throws SQLException{
+        dao.divulgarCarona(codigo);
+    }
 }

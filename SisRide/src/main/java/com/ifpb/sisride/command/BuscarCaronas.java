@@ -4,6 +4,7 @@ import com.ifpb.sisride.controle.GerenciadorViagem;
 import com.ifpb.sisride.modelo.Viagem;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +20,15 @@ public class BuscarCaronas implements Command {
 
         try {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
-            List<Viagem> lista = gerenciador.buscaNome(request.getParameter("nomeLugar"));
+            List<Viagem> lista = new ArrayList<>();
 
+            String busca = request.getParameter("nomeLugar");
+            if (busca == "") {
+                lista = gerenciador.buscarTodas();
+            } else {
+
+                lista = gerenciador.buscaNome(request.getParameter("nomeLugar"));
+            }
             request.setAttribute("buscaViagens", lista);
             if (lista.isEmpty()) {
                 response.sendRedirect("solicitacoes.jsp?erroBuscaCarona=1");

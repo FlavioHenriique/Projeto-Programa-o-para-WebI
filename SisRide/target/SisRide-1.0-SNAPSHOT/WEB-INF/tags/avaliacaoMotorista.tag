@@ -21,7 +21,8 @@ utilizada posteriormente para fazer essa verificação-->
                   placeholder="Digite um comentário sobre este passageiro..."></textarea>
         <br>
         <center>
-            <button type="submit" class="waves-effect waves-light btn s12" >Avaliar motorista</button>
+            <button type="submit" class="waves-effect waves-light btn s12" >
+                <i class="material-icons right">send</i>Avaliar motorista</button>
         </center>
     </form>
 </c:if>
@@ -56,13 +57,15 @@ utilizada posteriormente para fazer essa verificação-->
                       placeholder="Digite um comentário sobre este passageiro...">${avaliacaoRealizada.comentario}
             </textarea>
             <center>
-                <button type="submit" class="waves-effect waves-light btn s12" >Atualizar avaliação</button>
+                <button type="submit" class="waves-effect waves-light btn s12" >
+                     <i class="material-icons right">update</i>Atualizar avaliação</button>
             </center>
 
         </form>
         <center>
             <a class="waves-effect waves-light btn s12 cancelar" 
-               href="front?command=CancelaAvaliacao&codigo=${avaliacaoRealizada.codigo}">Cancelar avaliação</a>
+               href="front?command=CancelaAvaliacao&codigo=${avaliacaoRealizada.codigo}">
+                <i class="material-icons right">cancel</i>Cancelar avaliação</a>
         </center>
     </c:when>
         <c:when test="${jaAvaliou eq 'false'&& vazio != 'true'}">
@@ -80,7 +83,8 @@ utilizada posteriormente para fazer essa verificação-->
                           placeholder="Digite um comentário sobre este passageiro..."></textarea>
                 <br>
                 <center>
-                    <button type="submit" class="waves-effect waves-light btn s12" >Avaliar motorista</button>
+                    <button type="submit" class="waves-effect waves-light btn s12" >
+                         <i class="material-icons right">send</i>Avaliar motorista</button>
                 </center>
             </form>
     </c:when>
