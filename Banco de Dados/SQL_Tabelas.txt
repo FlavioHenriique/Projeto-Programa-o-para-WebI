@@ -44,6 +44,7 @@ CREATE TABLE VIAGEM(
    Conversa varchar(20),
    Destino int,
    Partida int,
+   divulgada boolean,
    FOREIGN KEY (Motorista) REFERENCES Usuario(Email),
    FOREIGN KEY (Destino) REFERENCES Lugar(Identificacao),
    FOREIGN KEY (Partida) REFERENCES Lugar(Identificacao),
@@ -112,3 +113,4 @@ create table recomendacao(
 	foreign key (motorista) references usuario(email),
 	foreign key (passageiro) references usuario(email)
 );
+
