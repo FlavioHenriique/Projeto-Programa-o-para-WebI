@@ -21,9 +21,15 @@
                     <form method="get" action="front">
                         <input type="text" name="nomeLugar" placeholder="Para onde deseja ir?" class="validate">
                         <input type="hidden" name="command" value="BuscarCaronas">
-                        <button class="waves-effect waves-light btn s12"><i class="material-icons left">search</i>
+                        <button class="waves-effect waves-light btn s12"><i class="material-icons right">search</i>
                                  Buscar caronas</button>
                     </form>
+                    <c:if test="${usuario.sexo eq 'Feminino'}">
+                       <a class="waves-effect waves-light btn s12"
+                          href="front?command=SoElas"
+                          ><i class="material-icons right">search</i>Só elas</a>
+                    </c:if>
+                    
 
 
                     <c:if test="${buscaViagens != null}">

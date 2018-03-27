@@ -109,7 +109,7 @@ public class ViagemDao implements Dao<Viagem> {
                 viagem.setPassageiros(passageiros);
                 viagem.setDivulgada(result.getBoolean("divulgada"));
                 viagem.setSoelas(result.getBoolean("soelas"));
-                
+
                 result.close();
                 stmt.close();
                 con.close();
@@ -479,12 +479,32 @@ public class ViagemDao implements Dao<Viagem> {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String sql = "UPDATE Viagem SET divulgada = true WHERE codigo = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, codigo);
         stmt.execute();
         stmt.close();
         con.close();
+    }
+
+    public List<Viagem> soElas() throws SQLException {
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sql = "SELECT codigo FROM viagem WHERE soElas = true";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        List<Viagem> soElas = new ArrayList<>();
+        
+        while(rs.next()){
+            Viagem v = buscar(rs.getInt("codigo"));
+            soElas.add(v);
+        }
+        return soElas;
     }
 }

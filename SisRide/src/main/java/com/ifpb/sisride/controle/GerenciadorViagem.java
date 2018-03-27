@@ -89,4 +89,9 @@ public class GerenciadorViagem {
     public void divulgarCarona(int codigo) throws SQLException{
         dao.divulgarCarona(codigo);
     }
+    
+    public List<Viagem> soElas() throws SQLException{
+        
+        return dao.soElas();
+    }
 }
