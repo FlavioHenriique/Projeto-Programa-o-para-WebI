@@ -44,6 +44,7 @@ CREATE TABLE VIAGEM(
    Conversa varchar(20),
    Destino int,
    Partida int,
+   soelas boolean,
    divulgada boolean,
    FOREIGN KEY (Motorista) REFERENCES Usuario(Email),
    FOREIGN KEY (Destino) REFERENCES Lugar(Identificacao),

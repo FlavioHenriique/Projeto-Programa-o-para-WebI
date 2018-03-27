@@ -23,6 +23,7 @@ public class Viagem {
     private List<Usuario> solicitadores;
     private List<Usuario> passageiros;
     private boolean divulgada;
+    private boolean soelas;
 
     public Viagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
@@ -72,6 +73,14 @@ public class Viagem {
 
     public boolean isDivulgada() {
         return divulgada;
+    }
+
+    public boolean isSoelas() {
+        return soelas;
+    }
+
+    public void setSoelas(boolean soelas) {
+        this.soelas = soelas;
     }
 
     public void setDivulgada(boolean divulgada) {
@@ -196,24 +205,25 @@ public class Viagem {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + this.vagas;
-        hash = 89 * hash + Objects.hashCode(this.data);
-        hash = 89 * hash + Objects.hashCode(this.hora);
-        hash = 89 * hash + Float.floatToIntBits(this.valor);
-        hash = 89 * hash + Objects.hashCode(this.motorista);
-        hash = 89 * hash + Objects.hashCode(this.musica);
-        hash = 89 * hash + (this.animais ? 1 : 0);
-        hash = 89 * hash + (this.fumar ? 1 : 0);
-        hash = 89 * hash + Objects.hashCode(this.conversa);
-        hash = 89 * hash + Objects.hashCode(this.destino);
-        hash = 89 * hash + Objects.hashCode(this.partida);
-        hash = 89 * hash + this.codigo;
-        hash = 89 * hash + Objects.hashCode(this.carro);
-        hash = 89 * hash + Objects.hashCode(this.situacao);
-        hash = 89 * hash + Objects.hashCode(this.solicitadores);
-        hash = 89 * hash + Objects.hashCode(this.passageiros);
-        hash = 89 * hash + (this.divulgada ? 1 : 0);
+        int hash = 5;
+        hash = 73 * hash + this.vagas;
+        hash = 73 * hash + Objects.hashCode(this.data);
+        hash = 73 * hash + Objects.hashCode(this.hora);
+        hash = 73 * hash + Float.floatToIntBits(this.valor);
+        hash = 73 * hash + Objects.hashCode(this.motorista);
+        hash = 73 * hash + Objects.hashCode(this.musica);
+        hash = 73 * hash + (this.animais ? 1 : 0);
+        hash = 73 * hash + (this.fumar ? 1 : 0);
+        hash = 73 * hash + Objects.hashCode(this.conversa);
+        hash = 73 * hash + Objects.hashCode(this.destino);
+        hash = 73 * hash + Objects.hashCode(this.partida);
+        hash = 73 * hash + this.codigo;
+        hash = 73 * hash + Objects.hashCode(this.carro);
+        hash = 73 * hash + Objects.hashCode(this.situacao);
+        hash = 73 * hash + Objects.hashCode(this.solicitadores);
+        hash = 73 * hash + Objects.hashCode(this.passageiros);
+        hash = 73 * hash + (this.divulgada ? 1 : 0);
+        hash = 73 * hash + (this.soelas ? 1 : 0);
         return hash;
     }
 
@@ -245,6 +255,9 @@ public class Viagem {
             return false;
         }
         if (this.divulgada != other.divulgada) {
+            return false;
+        }
+        if (this.soelas != other.soelas) {
             return false;
         }
         if (!Objects.equals(this.hora, other.hora)) {
@@ -285,7 +298,7 @@ public class Viagem {
 
     @Override
     public String toString() {
-        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codigo=" + codigo + ", carro=" + carro + ", situacao=" + situacao + ", solicitadores=" + solicitadores + ", passageiros=" + passageiros + ", divulgada=" + divulgada + '}';
+        return "Viagem{" + "vagas=" + vagas + ", data=" + data + ", hora=" + hora + ", valor=" + valor + ", motorista=" + motorista + ", musica=" + musica + ", animais=" + animais + ", fumar=" + fumar + ", conversa=" + conversa + ", destino=" + destino + ", partida=" + partida + ", codigo=" + codigo + ", carro=" + carro + ", situacao=" + situacao + ", solicitadores=" + solicitadores + ", passageiros=" + passageiros + ", divulgada=" + divulgada + ", soelas=" + soelas + '}';
     }
 
 }

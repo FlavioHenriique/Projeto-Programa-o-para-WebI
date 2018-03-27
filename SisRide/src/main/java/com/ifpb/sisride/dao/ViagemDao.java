@@ -31,8 +31,8 @@ public class ViagemDao implements Dao<Viagem> {
         con = ConFactory.getConnection();
 
         String sql = "INSERT INTO Viagem (vagas,data,horario,valor,motorista,"
-                + "musica,animais,fumar,conversa,destino,partida,codcarro, divulgada)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?)";
+                + "musica,animais,fumar,conversa,destino,partida,codcarro, divulgada,soelas)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
         java.util.Date data;
@@ -52,6 +52,7 @@ public class ViagemDao implements Dao<Viagem> {
             stmt.setInt(11, obj.getPartida().getIdentificacao());
             stmt.setInt(12, obj.getCarro().getCodigo());
             stmt.setBoolean(13, false);
+            stmt.setBoolean(14, obj.isSoelas());
             stmt.execute();
             stmt.close();
             return true;
@@ -107,7 +108,8 @@ public class ViagemDao implements Dao<Viagem> {
                 viagem.setSolicitadores(solicitadores);
                 viagem.setPassageiros(passageiros);
                 viagem.setDivulgada(result.getBoolean("divulgada"));
-
+                viagem.setSoelas(result.getBoolean("soelas"));
+                
                 result.close();
                 stmt.close();
                 con.close();

@@ -23,9 +23,10 @@ public class GerenciadorViagem {
 
     public boolean adicionaViagem(int vagas, LocalDate data, String hora, float valor,
             Usuario motorista, String musica, boolean animais, boolean fumar,
-            String conversa, Lugar destino, Lugar partida, Carro carro) throws SQLException, ClassNotFoundException {
+            String conversa, Lugar destino, Lugar partida, Carro carro, boolean soelas) throws SQLException, ClassNotFoundException {
         Viagem v = new Viagem(vagas, data, hora, valor, motorista, musica,
                 animais, fumar, conversa, destino, partida, carro);
+        v.setSoelas(soelas);
         dao.salvar(v);
         return true;
     }

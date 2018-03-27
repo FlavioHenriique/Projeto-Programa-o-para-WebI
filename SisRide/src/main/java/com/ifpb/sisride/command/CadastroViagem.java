@@ -32,7 +32,7 @@ public class CadastroViagem implements Command {
                     || request.getParameter("fumar") == null || request.getParameter("conversa") == null
                     || request.getParameter("partida") == null || request.getParameter("destino") == null
                     || request.getParameter("ar") == null || request.getParameter("modelo") == null
-                    || request.getParameter("ano") == null) {
+                    || request.getParameter("ano") == null || request.getParameter("soelas") == null) {
 
                 response.sendRedirect("caronas.jsp?erroCadastroCarona=1");
             } else {
@@ -68,7 +68,7 @@ public class CadastroViagem implements Command {
                 g.adicionaViagem(Integer.parseInt(request.getParameter("vagas")), LocalDate.parse(request.getParameter("data"), formatter),
                         request.getParameter("hora"), Float.parseFloat(request.getParameter("valor")), u, request.getParameter("musica"),
                         Boolean.parseBoolean(request.getParameter("animais")), Boolean.parseBoolean(request.getParameter("fumar")), request.getParameter("conversa"),
-                        destino, partida, carro);
+                        destino, partida, carro,Boolean.parseBoolean(request.getParameter("soelas")));
 
                 response.sendRedirect("front?command=Caronas&mensagem=1");
             }
@@ -82,4 +82,3 @@ public class CadastroViagem implements Command {
         }
     }
 }
-

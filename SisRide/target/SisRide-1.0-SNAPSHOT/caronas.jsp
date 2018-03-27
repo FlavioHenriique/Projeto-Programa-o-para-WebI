@@ -75,7 +75,20 @@
                                 <label for="sim3">Sim</label>
 
                                 <input type="radio" name="ar" id="nao3"  value="false" />
-                                <label for="nao3">Não</label><br><br><br>
+                                <label for="nao3">Não</label><br>
+                                <br>
+                                <c:if test="${usuario.sexo eq 'Feminino'}">
+
+                                    Permitido apenas mulheres: 
+                                    <input type="radio" id="elasSim" value="true" name="soelas"/>
+                                    <label for="elasSim">Sim</label>
+
+                                    <input type="radio" id="elasNao" value="false" name="soelas" />
+                                    <label for="elasNao">Não</label>
+                                    <br>
+                                </c:if>
+
+                                <br>
                                 <button class="waves-effect waves-light btn s12">Cadastrar carona</button>
                             </fieldset>
                         </form>
@@ -92,11 +105,12 @@
                 Você não cadastrou nenhuma carona
             </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
+             
                 <minhasTags:imprimeCarona  viagem="${viagem}" />
 
                 <br>
                 <a href="front?command=DivulgarCarona&carona=${viagem.codigo}">Divulgar para todos os usuários</a><br>
-                
+
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
                         <div class="collapsible-header"><i class="material-icons">screen_share</i>
@@ -130,12 +144,12 @@
                 </ul>
                 <a  class="waves-effect waves-light btn s12 alinhado" href=""
                     ><i class="material-icons right">update</i>Atualizar</a>
-                    
+
                 <a class="waves-effect waves-light btn s12 alinhado cancelar"
                    href="front?command=CancelarCarona&codCarona=${viagem.codigo}"><i class="material-icons left">cancel</i>
                     Cancelar</a>
 
-                    <hr>
+                <hr>
                 </div>
 
                 <br>
@@ -202,14 +216,14 @@
             swal("Ok!", "Seu amigo receberá a recomendação.", "success");
             break;
         }
-         case "6":
+        case "6":
         {
             swal("Ok!", "Esta carona será divulgada para todos", "success");
             break;
         }
     }
 
-   
+
 
 </script>
 </html>

@@ -106,6 +106,7 @@
                 <h4>Recomendações de caronas</h4>
                 <br>
                 <c:forEach var="recomendacao" items="${recomendacoes}">
+                    
                     <minhasTags:imprimeCarona viagem="${recomendacao}" />
                     
                     <minhasTags:jaSolicitou viagem="${recomendacao}" /> 
@@ -119,7 +120,8 @@
 
         <c:forEach var="viagem" items="${divulgadas}">
             <c:if test="${(viagem.divulgada) && (viagem.motorista.email != usuario.email)}">
-
+                
+                Motorista: ${viagem.motorista.nome}
                 <minhasTags:imprimeCarona viagem="${viagem}" />
                 
                 <minhasTags:jaSolicitou viagem="${viagem}" />
