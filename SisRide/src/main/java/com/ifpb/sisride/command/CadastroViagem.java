@@ -70,14 +70,11 @@ public class CadastroViagem implements Command {
                 
                 if(request.getParameter("soelas") != null){
                     soElas = Boolean.parseBoolean(request.getParameter("soelas"));
-                    System.out.println("Nao nulo");
-                }else{
-                    System.out.println("nulo");
                 }
                 
                 g.adicionaViagem(Integer.parseInt(request.getParameter("vagas")), LocalDate.parse(request.getParameter("data"), formatter),
                         request.getParameter("hora"), Float.parseFloat(request.getParameter("valor")), u, request.getParameter("musica"),
-                        Boolean.parseBoolean(request.getParameter("animais")), Boolean.parseBoolean(request.getParameter("fumar")), request.getParameter("conversa"),
+                        Boolean.parseBoolean(request.getParameter("animal")), Boolean.parseBoolean(request.getParameter("fumar")), request.getParameter("conversa"),
                         destino, partida, carro, soElas);
 
                 response.sendRedirect("front?command=Caronas&mensagem=1");

@@ -125,13 +125,14 @@ public class ViagemDao implements Dao<Viagem> {
     @Override
     public boolean atualizar(Viagem obj) throws SQLException {
 
-        try {
-            con = ConFactory.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         if (buscar(obj.getCodigo()) != null) {
+
+            try {
+                con = ConFactory.getConnection();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String sql = "UPDATE  Viagem set vagas = ?, data = ?, horario = ?,"
                     + "valor = ?, motorista = ?, musica =?, animais = ?, "
                     + "fumar =?, conversa = ?, destino = ?, partida = ?, codcarro = ? WHERE codigo = ?";
@@ -498,10 +499,10 @@ public class ViagemDao implements Dao<Viagem> {
         String sql = "SELECT codigo FROM viagem WHERE soElas = true";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
-        
+
         List<Viagem> soElas = new ArrayList<>();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Viagem v = buscar(rs.getInt("codigo"));
             soElas.add(v);
         }

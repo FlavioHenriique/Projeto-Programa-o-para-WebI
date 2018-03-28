@@ -59,18 +59,28 @@
                                             <img src="Imagens/user.png" class="circle amizade">
                                         </c:otherwise>
                                     </c:choose>
-                                            <label>${amigo.nome}</label>
+                                    <label>${amigo.nome}</label>
                                     <hr>
                                 </div>
                                 <c:if test="${!empty mensagens}">
-                                    <div class="chat">
+                                    <div class="campo">
                                         <c:forEach var="mensagem" items="${mensagens}">
                                             <c:choose>
                                                 <c:when test="${mensagem.usuario eq usuario.email}">
                                                     <div id="mensagem_usuario">${mensagem.mensagem}</div>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <div id="mensagem_amigo">${mensagem.mensagem}</div>
+                                                    <c:choose>
+                                                        <c:when test="${amigo.foto2 != null}">
+                                                            <img src="front?command=ImprimeFoto&amigo=${mensagem.usuario}" class="circle mensagem">        
+
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <img src="Imagens/user.png" class="circle mensagem">
+                                                        </c:otherwise>
+                                                    </c:choose>  
+                                                    <label id="mensagem_amigo" class="mensagem">${mensagem.mensagem}</label>
+                                                    <br>
                                                 </c:otherwise>
                                             </c:choose>
                                             <br>
@@ -79,17 +89,16 @@
                                 </c:if>
 
                                 <br><br>
-                                <form method="post" action="front">
+                                <form method="post" action="front" class="row">
                                     <input type="hidden" name="command" value="EnviarMensagem" >
                                     <input type="hidden" name="amigo" value="${param.amigo}">
-                                    <textarea  class="materialize-textarea " name="mensagem" placeholder="Digite uma mensagem..."></textarea>
-                                    <br><br>
-                                    <button class="waves-effect waves-light btn s12">
-                                        <i class="material-icons right">send</i>Enviar</button>
+                                    <textarea  class="materialize-textarea input-field col s11" name="mensagem"
+                                               placeholder="Digite uma mensagem..."></textarea>
+                                  
+                                    <button class="waves-effect waves-light btn  input-field col s1">
+                                        <i class="material-icons">send</i></button>
                                 </form>    
                             </c:if>
-
-
                         </td>
                         <td width="5%"></td>
                     </tr>

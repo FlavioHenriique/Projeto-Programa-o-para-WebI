@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@attribute name="viagem" required="true"  type="com.ifpb.sisride.modelo.Viagem"%>
 
-<div class="solicitacoes">
+<div class="campo">
     <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
 
     <br>Data da viagem: ${viagem.data}, às ${viagem.hora} horas

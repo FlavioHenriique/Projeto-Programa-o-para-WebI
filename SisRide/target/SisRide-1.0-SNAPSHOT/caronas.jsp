@@ -19,81 +19,262 @@
                 <td width="35%">
             <center>
                 <h4>Cadastrar caronas</h4>
-                <div class="row">
-                    <div>
-                        <form method="post" action="front">
-                            <fieldset>
-                                <input type="hidden" name="command" value="CadastroViagem">
-                                <input type="text" class="datepicker" placeholder="Data da viagem" name="data"><br>
-                                <input type="text" class="validate" name="vagas" placeholder="vagas"><br>                     
-                                <input type="text" placeholder="Hora da viagem" name="hora" class="validate"><br>
-                                <input type="text" placeholder="Valor por passagem" name="valor" class="validate"><br>
-                                Permitido animais?
-                                <input  type="radio" id="sim" name="animal" value="true" />
-                                <label for="sim">Sim</label>
+                <c:if test="${param.caronaAtualizada != null}">
 
-                                <input type="radio" name="animal" id="nao"  value="false" />
-                                <label for="nao">Não</label>
-                                <br><br>
-                                Permitido fumar?
-                                <input  type="radio" id="sim2" name="fumar" value="true" />
-                                <label for="sim2">Sim</label>
+                    <c:set var="atualizacao" value="false" />
+                    <c:forEach var="viagem" items="${minhasCaronas}">
+                        <c:if test="${viagem.codigo eq param.caronaAtualizada}">
+                            <c:set var="atualizacao" value="true" />
+                            <c:set var="atualizada" value="${viagem}" />
+                        </c:if>
+                    </c:forEach>     
 
-                                <input type="radio" name="fumar" id="nao2"  value="false" />
-                                <label for="nao2">Não</label>
-                                <br><br>
-                                <div>
-                                    <select name="conversa">
-                                        <option value="" disabled selected>Selecione o nível de conversa...</option>
-                                        <option value="alto">Alto</option>
-                                        <option value="médio">Médio</option>
-                                        <option value="baixo">Baixo</option>
-                                        <option value="nenhum">Nenhum</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <input type="text" name="musica" class="validate" placeholder="Música desejada">
-                                <br>
-                                <select name="partida">
-                                    <option value="" disabled selected>Selecione o lugar de partida...</option>
-                                    <c:forEach var="lugar" items="${lugares}">
-                                        <option value="${lugar.identificacao}">${lugar.nome}</option>
-                                    </c:forEach>
-                                </select>
-                                <br>
-                                <select name="destino">
-                                    <option value="" disabled selected>Selecione o lugar de destino...</option>
-                                    <c:forEach var="lugar" items="${lugares}">
-                                        <option value="${lugar.identificacao}">${lugar.nome}</option>
-                                    </c:forEach>
-                                </select><br>
-                                <input type="text" class="validate" name="modelo" placeholder="Modelo do carro"><br>
-                                <br>
-                                <input type="text" class="validate" name="ano" placeholder="Ano do carro"><br>
-                                Seu carro possui ar-condicionado?
-                                <input  type="radio" id="sim3" name="ar" value="true" />
-                                <label for="sim3">Sim</label>
+                </c:if>
 
-                                <input type="radio" name="ar" id="nao3"  value="false" />
-                                <label for="nao3">Não</label><br>
-                                <br>
-                                <c:if test="${usuario.sexo eq 'Feminino'}">
+                <c:choose>
+                    <c:when test="${atualizacao eq 'true'}">
+                        <div class="row">
+                            <div>
+                                <form method="post" action="front">
+                                    <fieldset class="campo">
+                                        <input type="hidden" name="codigo" value="${atualizada.codigo}" />
+                                        <input type="hidden" name="command" value="AtualizaViagem">
+                                        <input type="text" class="datepicker" required placeholder="Data da viagem" name="data" value="${atualizada.data}"><br>
+                                        <input type="text" class="validate" name="vagas"  required placeholder="vagas" value="${atualizada.vagas}"><br>                     
+                                        <input type="text" placeholder="Hora da viagem" name="hora" required class="validate" value="${atualizada.hora}"><br>
+                                        <input type="text" placeholder="Valor por passagem" name="valor" required class="validate" value="${atualizada.valor}"><br>
+                                        Permitido animais?
+                                        <c:choose>
+                                            <c:when test="${atualizada.animais eq 'true'}">
 
-                                    Permitido apenas mulheres: 
-                                    <input type="radio" id="elasSim" value="true" name="soelas"/>
-                                    <label for="elasSim">Sim</label>
+                                                <input  type="radio" id="sim" name="animal" value="true" checked/>
+                                                <label for="sim">Sim</label>
 
-                                    <input type="radio" id="elasNao" value="false" name="soelas" />
-                                    <label for="elasNao">Não</label>
-                                    <br>
-                                </c:if>
+                                                <input type="radio" name="animal" id="nao"  value="false" />
+                                                <label for="nao">Não</label>
+                                            </c:when>
+                                            <c:otherwise>
 
-                                <br>
-                                <button class="waves-effect waves-light btn s12">Cadastrar carona</button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
+                                                <input  type="radio" id="sim" name="animal" value="true"/>
+                                                <label for="sim">Sim</label>
+
+                                                <input type="radio" name="animal" id="nao"  value="false" checked />
+                                                <label for="nao">Não</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <br><br>
+                                        Permitido fumar?
+                                        <c:choose>
+                                            <c:when test="${atualizada.fumar eq 'true'}">
+                                                <input  type="radio" id="sim2" name="fumar" value="true" checked/>
+                                                <label for="sim2">Sim</label>
+
+                                                <input type="radio" name="fumar" id="nao2"  value="false" />
+                                                <label for="nao2">Não</label>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input  type="radio" id="sim2" name="fumar" value="true" />
+                                                <label for="sim2">Sim</label>
+
+                                                <input type="radio" name="fumar" id="nao2"  value="false" checked/>
+                                                <label for="nao2">Não</label>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <br><br>
+                                        <div>
+                                            <select name="conversa" required> 
+                                                <option value="" disabled selected>Selecione o nível de conversa...
+                                                </option>
+                                                <c:choose>
+                                                    <c:when test="${atualizada.conversa eq 'alto'}">
+                                                        <option value="alto" selected>Alto</option>   
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="alto">Alto</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${atualizada.conversa eq 'médio'}">
+                                                        <option value="médio" selected>Médio</option>   
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="médio">Médio</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${atualizada.conversa eq 'baixo'}">
+                                                        <option value="baixo" selected>Baixo</option>   
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="baixo">Baixo</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${atualizada.conversa eq 'nenhum'}">
+                                                        <option value="nenhum" selected>Nenhum</option>   
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="nenhum">Nenhum</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <input type="text" name="musica" class="validate" placeholder="Música desejada"
+                                               value="${atualizada.musica}" required>
+                                        <br>
+                                        <select name="partida" required> 
+                                            <option value="" disabled selected>Selecione o lugar de partida...</option>
+                                            <c:forEach var="lugar" items="${lugares}">
+                                                <c:choose>
+                                                    <c:when test="${atualizada.partida.identificacao eq lugar.identificacao}">
+                                                        <option value="${lugar.identificacao}" selected>${lugar.nome}</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="${lugar.identificacao}">${lugar.nome}</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </c:forEach>
+                                        </select>
+                                        <br>
+                                        <select name="destino" required>
+                                            <option value="" disabled selected>Selecione o lugar de destino...</option>
+                                            <c:forEach var="lugar" items="${lugares}">
+                                                <c:choose>
+                                                    <c:when test="${atualizada.destino.identificacao eq lugar.identificacao}">
+                                                        <option value="${lugar.identificacao}" selected>${lugar.nome}</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="${lugar.identificacao}">${lugar.nome}</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </c:forEach>
+                                        </select><br>
+                                        <input type="text" class="validate" name="modelo" placeholder="Modelo do carro" 
+                                               value="${atualizada.carro.modelo}" required><br>
+                                        <br>
+                                        <input type="text" class="validate" name="ano" placeholder="Ano do carro"
+                                               value="${atualizada.carro.ano}" required><br>
+                                        
+                                        Seu carro possui ar-condicionado?
+                                        <c:choose>
+                                            <c:when test="${atualizada.carro.ar_condicionado eq 'true'}">
+                                                <input  type="radio" id="sim3" name="ar" value="true" checked/>
+                                                <label for="sim3">Sim</label>
+
+                                                <input type="radio" name="ar" id="nao3"  value="false" />
+                                                <label for="nao3">Não</label><br>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input  type="radio" id="sim3" name="ar" value="true" />
+                                                <label for="sim3">Sim</label>
+
+                                                <input type="radio" name="ar" id="nao3"  value="false" checked/>
+                                                <label for="nao3">Não</label><br>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                        <c:if test="${usuario.sexo eq 'Feminino'}">
+
+                                            Permitido apenas mulheres: 
+
+                                            
+                                            <input type="radio" id="elasSim" value="true" name="soelas"/>
+                                            <label for="elasSim">Sim</label>
+
+                                            <input type="radio" id="elasNao" value="false" name="soelas" />
+                                            <label for="elasNao">Não</label>
+                                            <br>
+                                        </c:if>
+
+                                        <br>
+                                        <button class="waves-effect waves-light btn s12">Atualizar</button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>        
+                    </c:when>
+                    <c:otherwise>
+                        <div class="row">
+                            <div>
+                                <form method="post" action="front">
+                                    <fieldset class="campo">
+                                        <input type="hidden" name="command" value="CadastroViagem">
+                                        <input type="text" class="datepicker" placeholder="Data da viagem" name="data"><br>
+                                        <input type="text" class="validate" name="vagas" placeholder="vagas"><br>                     
+                                        <input type="text" placeholder="Hora da viagem" name="hora" class="validate"><br>
+                                        <input type="text" placeholder="Valor por passagem" name="valor" class="validate"><br>
+                                        Permitido animais?
+                                        <input  type="radio" id="sim" name="animal" value="true" />
+                                        <label for="sim">Sim</label>
+
+                                        <input type="radio" name="animal" id="nao"  value="false" />
+                                        <label for="nao">Não</label>
+                                        <br><br>
+                                        Permitido fumar?
+                                        <input  type="radio" id="sim2" name="fumar" value="true" />
+                                        <label for="sim2">Sim</label>
+
+                                        <input type="radio" name="fumar" id="nao2"  value="false" />
+                                        <label for="nao2">Não</label>
+                                        <br><br>
+                                        <div>
+                                            <select name="conversa">
+                                                <option value="" disabled selected>Selecione o nível de conversa...</option>
+                                                <option value="alto">Alto</option>
+                                                <option value="médio">Médio</option>
+                                                <option value="baixo">Baixo</option>
+                                                <option value="nenhum">Nenhum</option>
+                                            </select>
+                                        </div>
+                                        <br>
+                                        <input type="text" name="musica" class="validate" placeholder="Música desejada">
+                                        <br>
+                                        <select name="partida">
+                                            <option value="" disabled selected>Selecione o lugar de partida...</option>
+                                            <c:forEach var="lugar" items="${lugares}">
+                                                <option value="${lugar.identificacao}">${lugar.nome}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <br>
+                                        <select name="destino">
+                                            <option value="" disabled selected>Selecione o lugar de destino...</option>
+                                            <c:forEach var="lugar" items="${lugares}">
+                                                <option value="${lugar.identificacao}">${lugar.nome}</option>
+                                            </c:forEach>
+                                        </select><br>
+                                        <input type="text" class="validate" name="modelo" placeholder="Modelo do carro"><br>
+                                        <br>
+                                        <input type="text" class="validate" name="ano" placeholder="Ano do carro"><br>
+                                        Seu carro possui ar-condicionado?
+                                        <input  type="radio" id="sim3" name="ar" value="true" />
+                                        <label for="sim3">Sim</label>
+
+                                        <input type="radio" name="ar" id="nao3"  value="false" />
+                                        <label for="nao3">Não</label><br>
+                                        <br>
+                                        <c:if test="${usuario.sexo eq 'Feminino'}">
+
+                                            Permitido apenas mulheres: 
+                                            <input type="radio" id="elasSim" value="true" name="soelas"/>
+                                            <label for="elasSim">Sim</label>
+
+                                            <input type="radio" id="elasNao" value="false" name="soelas" />
+                                            <label for="elasNao">Não</label>
+                                            <br>
+                                        </c:if>
+
+                                        <br>
+                                        <button class="waves-effect waves-light btn s12">Cadastrar carona</button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
             </center>
         </td>
         <td width="5%"></td>
@@ -105,7 +286,7 @@
                 Você não cadastrou nenhuma carona
             </c:if>
             <c:forEach var="viagem" items="${minhasCaronas}">
-             
+
                 <minhasTags:imprimeCarona  viagem="${viagem}" />
 
                 <br>
@@ -142,7 +323,7 @@
                         </div>
                     </li>
                 </ul>
-                <a  class="waves-effect waves-light btn s12 alinhado" href=""
+                <a  class="waves-effect waves-light btn s12 alinhado" href="front?command=Caronas&caronaAtualizada=${viagem.codigo}"
                     ><i class="material-icons right">update</i>Atualizar</a>
 
                 <a class="waves-effect waves-light btn s12 alinhado cancelar"
@@ -221,9 +402,12 @@
             swal("Ok!", "Esta carona será divulgada para todos", "success");
             break;
         }
+           case "7":
+        {
+            swal("Ok!", "Esta carona foi atualizada", "success");
+            break;
+        }
     }
-
-
 
 </script>
 </html>

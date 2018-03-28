@@ -90,7 +90,6 @@ CREATE TABLE MENSAGEM(
 	EmailAmigo VARCHAR(50),
 	Mensagem VARCHAR(200),
 	momento timestamp,
-	PRIMARY KEY (EmailUsuario,EmailAmigo),
 	FOREIGN KEY (EmailUsuario) REFERENCES USUARIO(Email),
 	FOREIGN KEY (EmailAmigo) REFERENCES Usuario(Email)
 	);
