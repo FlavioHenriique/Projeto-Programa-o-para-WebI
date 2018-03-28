@@ -22,14 +22,14 @@
                         <input type="text" name="nomeLugar" placeholder="Para onde deseja ir?" class="validate">
                         <input type="hidden" name="command" value="BuscarCaronas">
                         <button class="waves-effect waves-light btn s12"><i class="material-icons right">search</i>
-                                 Buscar caronas</button>
+                            Buscar caronas</button>
                     </form>
                     <c:if test="${usuario.sexo eq 'Feminino'}">
-                       <a class="waves-effect waves-light btn s12"
-                          href="front?command=SoElas"
-                          ><i class="material-icons right">search</i>Só elas</a>
+                        <a class="waves-effect waves-light btn s12"
+                           href="front?command=SoElas"
+                           ><i class="material-icons right">search</i>Só elas</a>
                     </c:if>
-                    
+
 
 
                     <c:if test="${buscaViagens != null}">
@@ -69,25 +69,34 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <br><br>
-                                    <c:set var="jaSolicitou" value="false" />
-                                    <c:forEach  var="solicitador" items="${viagem.solicitadores}">
+                                    <c:choose>
+                                        <c:when test="${viagem.soelas eq true && usuario.sexo eq 'Masculino'}">
+                                            <h5 id="soelas">Permitido apenas mulheres</h5>
+                                        </c:when>
+                                        <c:otherwise>
 
-                                        <c:if test="${solicitador.email eq usuario.email}">
-                                            <c:set  var="jaSolicitou" value="true" />
-                                        </c:if>
-                                    </c:forEach>
-                                    
-                                    <c:forEach var="passageiro" items="${viagem.passageiros}">
-                                        <c:if test="${passageiro.email eq usuario.email}">
-                                            <c:set value="true" var="jaSolicitou" />
-                                        </c:if>
-                                    </c:forEach>
-                                    
-                                    <c:if test="${jaSolicitou eq 'false'}">
-                                        <a class="waves-effect waves-light btn s12 alinhado"
-                                           href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>
-                                        <hr>
-                                    </c:if>
+                                            <c:set var="jaSolicitou" value="false" />
+                                            <c:forEach  var="solicitador" items="${viagem.solicitadores}">
+
+                                                <c:if test="${solicitador.email eq usuario.email}">
+                                                    <c:set  var="jaSolicitou" value="true" />
+                                                </c:if>
+                                            </c:forEach>
+
+                                            <c:forEach var="passageiro" items="${viagem.passageiros}">
+                                                <c:if test="${passageiro.email eq usuario.email}">
+                                                    <c:set value="true" var="jaSolicitou" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:if test="${jaSolicitou eq 'false'}">
+
+                                                <a class="waves-effect waves-light btn s12 alinhado"
+                                                   href="front?command=SolicitaVaga&codViagem=${viagem.codigo}">Solicitar vaga</a>
+                                                <hr>
+                                            </c:if> 
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </c:if>
                         </c:forEach>
@@ -154,9 +163,9 @@
 
         var mensagem = "${param.mensagem}";
         if (mensagem == "1") {
-             swal("Parabéns!", "A solicitação foi realizada", "success");
-         
+            swal("Parabéns!", "A solicitação foi realizada", "success");
+
         }
-        
+
     </script>
 </html>

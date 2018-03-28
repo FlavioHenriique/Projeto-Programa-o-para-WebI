@@ -459,7 +459,7 @@ public class ViagemDao implements Dao<Viagem> {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "SELECT Codigo FROM Viagem";
+        String sql = "SELECT Codigo FROM Viagem ";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 
