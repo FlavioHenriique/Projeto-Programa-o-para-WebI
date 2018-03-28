@@ -38,15 +38,60 @@
                                             <img src="Imagens/user.png" class="circle amizade">
                                         </c:otherwise>
                                     </c:choose>
-                                    <label class="amizade">${amigo.nome}</label>
+                                    <a  href="front?command=ListarAmigos&amigo=${amigo.email}" class="amizade">
+                                        ${amigo.nome}</a>
                                     <hr>
                                 </div>
                             </c:forEach>
                         </td>
                         <td width="5%"></td>
-                        <td width="65%">
+                        <td width="60%">
+                            <br><br>
+
+                            <c:if test="${param.amigo != null}">
+                                <div class="solicitacoes">
+                                    <c:choose>
+                                        <c:when test="${amigo.foto2 != null}">
+                                            <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle amizade">        
+
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="Imagens/user.png" class="circle amizade">
+                                        </c:otherwise>
+                                    </c:choose>
+                                            <label>${amigo.nome}</label>
+                                    <hr>
+                                </div>
+                                <c:if test="${!empty mensagens}">
+                                    <div class="chat">
+                                        <c:forEach var="mensagem" items="${mensagens}">
+                                            <c:choose>
+                                                <c:when test="${mensagem.usuario eq usuario.email}">
+                                                    <div id="mensagem_usuario">${mensagem.mensagem}</div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div id="mensagem_amigo">${mensagem.mensagem}</div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <br>
+                                        </c:forEach>
+                                    </div>    
+                                </c:if>
+
+                                <br><br>
+                                <form method="post" action="front">
+                                    <input type="hidden" name="command" value="EnviarMensagem" >
+                                    <input type="hidden" name="amigo" value="${param.amigo}">
+                                    <textarea  class="materialize-textarea " name="mensagem" placeholder="Digite uma mensagem..."></textarea>
+                                    <br><br>
+                                    <button class="waves-effect waves-light btn s12">
+                                        <i class="material-icons right">send</i>Enviar</button>
+                                </form>    
+                            </c:if>
+
 
                         </td>
+                        <td width="5%"></td>
                     </tr>
                 </table>
             </c:otherwise>

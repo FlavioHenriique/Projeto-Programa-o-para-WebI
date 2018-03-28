@@ -1,6 +1,7 @@
 package com.ifpb.sisride.dao;
 
 import com.ifpb.sisride.factory.ConFactory;
+import com.ifpb.sisride.modelo.Mensagem;
 import com.ifpb.sisride.modelo.Solicitacao;
 import com.ifpb.sisride.modelo.Usuario;
 import java.sql.Connection;
@@ -9,16 +10,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SolicitacaoDao {
 
-    private final Connection con;
+    private Connection con;
 
     public SolicitacaoDao() throws ClassNotFoundException, SQLException {
-        con = ConFactory.getConnection();
+
     }
 
     public List<Solicitacao> listarSolicitacoes(Usuario usuario) throws SQLException, ClassNotFoundException {
+
+        con = ConFactory.getConnection();
 
         String sql = "SELECT * FROM SOLICITACAO WHERE emailUsuario = ? OR emailamigo = ?";
 
@@ -38,11 +43,18 @@ public class SolicitacaoDao {
         }
         result.close();
         stmt.close();
+        con.close();
 
         return solicitacoes;
     }
 
     public void aceitaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "update solicitacao set situacao = 'aceita' where emailamigo = ?  and "
                 + "emailusuario = ? and tipo = ?;"
@@ -59,10 +71,16 @@ public class SolicitacaoDao {
         stmt.setString(7, "pendente");
         stmt.executeUpdate();
         stmt.close();
-
+        con.close();
     }
 
     public void recusaSolicitacao(String solicitador, String requisitado, String tipo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "DELETE FROM Solicitacao WHERE emailUsuario = ? AND"
                 + " emailAmigo = ? AND tipo = ? ;"
@@ -79,9 +97,16 @@ public class SolicitacaoDao {
         stmt.setString(7, "pendente");
         stmt.execute();
         stmt.close();
+        con.close();
     }
 
     public void DesfazerRelacionamento(String usuario1, String usuario2, String tipo) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "DELETE  FROM SOLICITACAO WHERE emailUsuario = ? AND emailAMigo = ? and tipo = ?; "
                 + "DELETE FROM SOLICITACAO WHERE emailUsuario = ? AND emailAmigo = ? and tipo = ?";
@@ -95,9 +120,16 @@ public class SolicitacaoDao {
         stmt.setString(6, tipo);
         stmt.execute();
         stmt.close();
+        con.close();
     }
 
     public List<Usuario> listarAmigos(String email) throws SQLException, ClassNotFoundException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT emailusuario, emailamigo FROM SOLICITACAO WHERE (emailusuario = ? "
                 + "or emailamigo = ?) and tipo = 'amizade' and situacao = 'aceita'";
@@ -125,7 +157,62 @@ public class SolicitacaoDao {
         }
         rs.close();
         stmt.close();
+        con.close();
 
         return amigos;
+    }
+
+    public void enviarMensagem(String usuario, String amigo, String mensagem) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "INSERT INTO Mensagem (emailUsuario, emailAmigo, mensagem, momento) VALUES"
+                + " (?,?,?, current_timestamp)";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, usuario);
+        stmt.setString(2, amigo);
+        stmt.setString(3, mensagem);
+
+        stmt.execute();
+        stmt.close();
+        con.close();
+
+    }
+    
+    public List<Mensagem> getMensagens(String usuario, String amigo) throws SQLException{
+    
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitacaoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(usuario + amigo);
+        String sql = "SELECT * FROM Mensagem WHERE (emailUsuario = ? AND emailAmigo = ?)"
+                + " OR (emailUsuario = ? AND emailAMigo = ?) ORDER BY momento asc";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, usuario);
+        stmt.setString(2, amigo);
+        stmt.setString(3, amigo);
+        stmt.setString(4, usuario);
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        List<Mensagem> mensagens = new ArrayList<>();
+        
+        while(rs.next()){
+            Mensagem m = new Mensagem();
+            m.setAmigo(rs.getString("emailamigo"));
+            m.setMensagem(rs.getString("mensagem"));
+            m.setUsuario(rs.getString("emailusuario"));
+            
+            mensagens.add(m);
+        }
+        
+        return mensagens;
+        
     }
 }

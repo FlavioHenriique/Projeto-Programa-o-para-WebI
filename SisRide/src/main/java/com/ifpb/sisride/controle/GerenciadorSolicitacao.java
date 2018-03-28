@@ -3,6 +3,7 @@ package com.ifpb.sisride.controle;
 import com.ifpb.sisride.dao.SolicitacaoDao;
 import com.ifpb.sisride.factory.DaoFactory;
 import com.ifpb.sisride.factory.DaoFactoryIF;
+import com.ifpb.sisride.modelo.Mensagem;
 import com.ifpb.sisride.modelo.Solicitacao;
 import com.ifpb.sisride.modelo.Usuario;
 import java.sql.SQLException;
@@ -37,5 +38,14 @@ public class GerenciadorSolicitacao {
 
     public List<Usuario> listarAmigos(String email) throws SQLException, ClassNotFoundException {
         return dao.listarAmigos(email);
+    }
+
+    public void enviarMensagem(String usuario, String amigo, String mensagem) throws SQLException {
+
+        dao.enviarMensagem(usuario, amigo, mensagem);
+    }
+
+    public List<Mensagem> getMensagens(String usuario, String amigo) throws SQLException {
+        return dao.getMensagens(usuario, amigo);
     }
 }

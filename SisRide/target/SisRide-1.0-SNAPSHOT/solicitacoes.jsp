@@ -96,8 +96,8 @@
                                             </c:if> 
                                         </c:otherwise>
                                     </c:choose>
-
                                 </div>
+                                    <br>    
                             </c:if>
                         </c:forEach>
                     </c:if>
