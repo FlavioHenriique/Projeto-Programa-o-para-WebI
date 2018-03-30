@@ -22,7 +22,22 @@
             <tr>
                 <td>
                     <div class="row">
-                        <minhasTags:informacoesUsuario usuario="${buscado}" />
+                        <c:choose>
+                            <c:when test="${buscado.foto2 != null}">
+                                <img src="front?command=ImprimeFoto&avaliador=${buscado.email}" class="circle">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="Imagens/buscado.png" class="circle">
+                            </c:otherwise>
+                        </c:choose>
+                        <label id="nome">${buscado.nome}</label><br><br>
+
+                        <label>É ${buscado.profissao}</label>
+                        <br><label>Nasceu em ${buscado.nascimento}</label>
+                        <br><label>Mora em ${buscado.cidade}</label>
+                        <br><br>
+                        <h5>Nota como motorista: ${buscado.nota_motorista}</h5>
+                        <h5>Nota como passageiro: ${buscado.nota_passageiro}</h5>
                     </div>
                 </td>
                 <td>

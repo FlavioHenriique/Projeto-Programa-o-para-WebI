@@ -22,7 +22,7 @@
                     <div class="row">
                         
                         <br>
-                        <minhasTags:informacoesUsuario usuario="${usuario}" /><br><br>
+                        <minhasTags:informacoesUsuario user="${usuario}" /><br><br>
                         <a href="perfil.jsp"><button class="waves-effect waves-light btn s12">
                                 <i class="material-icons left">settings</i>Editar perfil</button>
                         </a><br>

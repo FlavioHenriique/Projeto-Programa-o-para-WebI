@@ -315,8 +315,7 @@
                 <a class="waves-effect waves-light btn s12 alinhado cancelar"
                    href="front?command=CancelarCarona&codCarona=${viagem.codigo}"><i class="material-icons left">cancel</i>
                     Cancelar</a>
-
-                <hr>
+                    <br>
                 </div>
 
                 <br>
@@ -343,6 +342,7 @@
                         <h5>Não existem novas solicitações de vaga!</h5><br>
                     </c:otherwise>
                 </c:choose>
+                        <br><hr> <br>
             </c:forEach>
         </td>
     </tr>

@@ -20,7 +20,7 @@ public class ImprimeFoto implements Command {
         HttpSession session = request.getSession();
         List<Usuario> amigos = (List<Usuario>) session.getAttribute("amigos");
 
-        if (request.getParameter("avaliador") != "" && request.getParameter("avaliador") != null) {
+        if ((request.getParameter("avaliador") != "" && request.getParameter("avaliador") != null)) {
             try {
                 imprimir(request.getParameter("avaliador"), response);
             } catch (SQLException ex) {
@@ -34,7 +34,6 @@ public class ImprimeFoto implements Command {
                 if (u.getEmail().equals(request.getParameter("amigo"))) {
                     try {
                         response.getOutputStream().write(u.getFoto2());
-                        System.out.println(" aqui");
                     } catch (IOException ex) {
                         Logger.getLogger(ImprimeFoto.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -44,10 +43,10 @@ public class ImprimeFoto implements Command {
     }
 
     public void imprimir(String usuario, HttpServletResponse response) throws SQLException, ClassNotFoundException {
-        
+
         GerenciadorUsuario g = new GerenciadorUsuario();
         Usuario u = g.buscaUsuario(usuario);
-
+        System.out.println(u.getNome());
         try {
             response.getOutputStream().write(u.getFoto2());
         } catch (IOException ex) {

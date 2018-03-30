@@ -32,12 +32,12 @@
                                     <c:choose>
                                         <c:when test="${amigo.foto2 != null}">
                                             <img src="front?command=ImprimeFoto&amigo=${amigo.email}" class="circle amizade">        
-
                                         </c:when>
                                         <c:otherwise>
                                             <img src="Imagens/user.png" class="circle amizade">
                                         </c:otherwise>
                                     </c:choose>
+                                            
                                     <a  href="front?command=ListarAmigos&amigo=${amigo.email}" class="amizade">
                                         ${amigo.nome}</a>
                                     <hr>
@@ -62,12 +62,14 @@
                                     <label>${amigo.nome}</label>
                                     <hr>
                                 </div>
+                                    
+                                    <!-- Imprimindo as mensagens trocadas entre os dois usuários-->
                                 <c:if test="${!empty mensagens}">
-                                    <div class="campo div_chat">
+                                    <div class=" campo div_chat">
                                         <c:forEach var="mensagem" items="${mensagens}">
                                             <c:choose>
                                                 <c:when test="${mensagem.usuario eq usuario.email}">
-                                                    <div id="mensagem_usuario">${mensagem.mensagem}</div>
+                                                    <label id="mensagem_usuario">${mensagem.mensagem}</label>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <c:choose>
