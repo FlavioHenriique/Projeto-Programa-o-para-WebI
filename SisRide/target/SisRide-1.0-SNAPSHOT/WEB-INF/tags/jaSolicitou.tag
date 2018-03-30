@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@attribute name="viagem" required="true"  type="com.ifpb.sisride.modelo.Viagem"%>
-
+<%@attribute name="pagina" required="false" %>
 <c:set var="jaSolicitou" value="false" />
 <c:forEach  var="solicitador" items="${viagem.solicitadores}">
 
@@ -20,5 +20,5 @@
 
 
     <a class="waves-effect waves-light btn s12 alinhado"
-       href="front?command=SolicitaVaga&codViagem=${viagem.codigo}&pagina=inicial">Solicitar vaga</a>
+       href="front?command=SolicitaVaga&codViagem=${viagem.codigo}&pagina=${pagina}">Solicitar vaga</a>
 </c:if>

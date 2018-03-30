@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <link rel="stylesheet" href="CSS/app.css">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
 
         <title>${buscado.nome}</title>
@@ -21,21 +22,8 @@
             <tr>
                 <td>
                     <div class="row">
-                        <c:choose>
-                            <c:when test="${buscado.foto2 != null}">
-
-                                <img src="front?command=FotoBuscado" class="circle">
-
-                            </c:when>
-                            <c:otherwise>
-                                <img src="Imagens/user.png" class="circle">
-                            </c:otherwise>
-                        </c:choose>
-
-                        <label id="nome">${buscado.nome}</label><br><br>
                         <minhasTags:informacoesUsuario usuario="${buscado}" />
                     </div>
-
                 </td>
                 <td>
             <center>
@@ -110,7 +98,38 @@
         <td></td>
     </tr>
 </table>
+<!--Imprimindo as caronas cadastradas pelo usuário buscado -->
+<table width="100%">
+    <tr>
+        <td width="20%"></td>
+        <td width="60%">
+            <c:if test="${!empty caronasBuscado}">
+
+        <center>
+            <h4>Caronas cadastradas por ${buscado.nome}</h4>
+        </center>
+
+        <c:forEach var="viagem" items="${caronasBuscado}">
+            <minhasTags:imprimeCarona viagem="${viagem}" />
+            <minhasTags:jaSolicitou viagem="${viagem}" pagina="usuario" />
+        </div>
+        <br><br>
+    </c:forEach>
+</c:if>
+</td>
+<td width="20%"></td>
+</tr>
+</table>
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>
+<script>
+    var mensagem = "${param.mensagem}";
+    switch (mensagem) {
+    case "1":
+    {
+    swal("OK!", "Sua solicitação foi realizada!", "success");
+            break;
+    }
+</script>

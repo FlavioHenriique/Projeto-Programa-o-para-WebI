@@ -183,17 +183,17 @@ public class UsuarioDao implements Dao<Usuario> {
         con.close();
     }
 
-    public Usuario buscaNome(String email) throws SQLException {
+    public Usuario buscaNome(String nome) throws SQLException {
 
         try {
             con = ConFactory.getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "SELECT email FROM Usuario WHERE nome ilike ?";
+        String sql = "SELECT email FROM Usuario WHERE nome ilike ? or nome ilike '"+nome+"%' or nome ilike '%"+nome+"'";
 
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, email);
+        stmt.setString(1, nome);
 
         ResultSet result = stmt.executeQuery();
 

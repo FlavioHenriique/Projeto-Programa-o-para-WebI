@@ -32,6 +32,8 @@ public class DadosUsuario implements Command {
 
             request.setAttribute("avaliacoesUsuario", gAvaliacao.avaliacoesUsuario(request.getParameter("email")));
             
+            session.setAttribute("divulgadas", gerenciador.buscarTodas());
+            
             session.setAttribute("caronasSolicitadas", gerenciador.caronasSolicitadas(request.getParameter("email")));
             RequestDispatcher dispatcher = request.getRequestDispatcher("inicial.jsp");
             dispatcher.forward(request, response);

@@ -19,25 +19,32 @@ public class SolicitaVaga implements Command {
 
         HttpSession session = request.getSession();
         Usuario atual = (Usuario) session.getAttribute("usuario");
+        Usuario buscado = (Usuario) session.getAttribute("buscado");
         try {
             GerenciadorViagem gerenciador = new GerenciadorViagem();
             gerenciador.solicitaVaga(atual.getEmail(), Integer.parseInt(request.getParameter("codViagem")));
             if (request.getParameter("pagina") != null && request.getParameter("pagina").equals("inicial")) {
-            
-                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=DadosUsuario&email="+atual.getEmail()+"&mensagem=2");
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=DadosUsuario&email=" + atual.getEmail() + "&mensagem=2");
                 dispatcher.forward(request, response);
+
+            } else if (request.getParameter("pagina") != null && request.getParameter("pagina").equals("usuario")) {
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=BuscaUsuario&mensagem=1&buscado="+buscado.getNome());
+                dispatcher.forward(request, response);
+
             } else {
-            
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("solicitacoes.jsp?mensagem=1");
                 dispatcher.forward(request, response);
             }
+
+        } catch (IOException ex) {
+            Logger.getLogger(SolicitaVaga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(SolicitaVaga.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SolicitaVaga.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SolicitaVaga.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

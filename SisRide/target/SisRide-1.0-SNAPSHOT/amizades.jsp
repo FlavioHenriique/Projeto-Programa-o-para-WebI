@@ -63,7 +63,7 @@
                                     <hr>
                                 </div>
                                 <c:if test="${!empty mensagens}">
-                                    <div class="campo">
+                                    <div class="campo div_chat">
                                         <c:forEach var="mensagem" items="${mensagens}">
                                             <c:choose>
                                                 <c:when test="${mensagem.usuario eq usuario.email}">
@@ -92,8 +92,8 @@
                                 <form method="post" action="front" class="row">
                                     <input type="hidden" name="command" value="EnviarMensagem" >
                                     <input type="hidden" name="amigo" value="${param.amigo}">
-                                    <textarea  class="materialize-textarea input-field col s11" name="mensagem"
-                                               placeholder="Digite uma mensagem..."></textarea>
+                                    <textarea  class="materialize-textarea input-field col s11 mensagem" name="mensagem"
+                                               placeholder="Digite uma mensagem..." maxlength="70"></textarea>
                                   
                                     <button class="waves-effect waves-light btn  input-field col s1">
                                         <i class="material-icons">send</i></button>

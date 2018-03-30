@@ -1,6 +1,7 @@
 package com.ifpb.sisride.command;
 
 import com.ifpb.sisride.controle.GerenciadorUsuario;
+import com.ifpb.sisride.controle.GerenciadorViagem;
 import com.ifpb.sisride.modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +22,6 @@ public class BuscaUsuario implements Command {
             GerenciadorUsuario gerenciador = new GerenciadorUsuario();
 
             Usuario buscado = gerenciador.buscarNome(request.getParameter("buscado"));
-
             HttpSession session = request.getSession();
             session.setAttribute("buscado", buscado);
 
@@ -33,7 +33,11 @@ public class BuscaUsuario implements Command {
                 dispatcher.forward(request, response);
 
             } else {
-
+                GerenciadorViagem gViagem = new GerenciadorViagem();
+                
+                request.setAttribute("caronasBuscado",gViagem.minhasCaronas(buscado.getEmail()));
+                
+                
                 ListarSolicitacoes listar = new ListarSolicitacoes();
                 listar.listar(session, (Usuario) session.getAttribute("usuario"));
                 

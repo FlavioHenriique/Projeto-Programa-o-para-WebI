@@ -157,7 +157,7 @@
                                         <br>
                                         <input type="text" class="validate" name="ano" placeholder="Ano do carro"
                                                value="${atualizada.carro.ano}" required><br>
-                                        
+
                                         Seu carro possui ar-condicionado?
                                         <c:choose>
                                             <c:when test="${atualizada.carro.ar_condicionado eq 'true'}">
@@ -175,20 +175,6 @@
                                                 <label for="nao3">Não</label><br>
                                             </c:otherwise>
                                         </c:choose>
-
-                                        <c:if test="${usuario.sexo eq 'Feminino'}">
-
-                                            Permitido apenas mulheres: 
-
-                                            
-                                            <input type="radio" id="elasSim" value="true" name="soelas"/>
-                                            <label for="elasSim">Sim</label>
-
-                                            <input type="radio" id="elasNao" value="false" name="soelas" />
-                                            <label for="elasNao">Não</label>
-                                            <br>
-                                        </c:if>
-
                                         <br>
                                         <button class="waves-effect waves-light btn s12">Atualizar</button>
                                     </fieldset>
@@ -402,7 +388,7 @@
             swal("Ok!", "Esta carona será divulgada para todos", "success");
             break;
         }
-           case "7":
+        case "7":
         {
             swal("Ok!", "Esta carona foi atualizada", "success");
             break;
