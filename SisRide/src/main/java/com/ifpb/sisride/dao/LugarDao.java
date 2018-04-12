@@ -88,7 +88,7 @@ public class LugarDao implements Dao<Lugar> {
 
     public List<Lugar> buscarMeusLugares(String email) throws SQLException {
 
-        String sql = "SELECT * FROM lugar WHERE emailUsuario = ?";
+        String sql = "SELECT * FROM lugar WHERE emailUsuario = ? ORDER BY nome";
 
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
@@ -118,7 +118,7 @@ public class LugarDao implements Dao<Lugar> {
 
     public List<Lugar> buscaLugares(String email) throws SQLException {
 
-        String sql = "SELECT * FROM Lugar WHERE EmailUsuario = ?";
+        String sql = "SELECT * FROM Lugar WHERE EmailUsuario = ? ORDER BY nome";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
         ResultSet result = stmt.executeQuery();
