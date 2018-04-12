@@ -69,7 +69,7 @@
                                         <c:forEach var="mensagem" items="${mensagens}">
                                             <c:choose>
                                                 <c:when test="${mensagem.usuario eq usuario.email}">
-                                                    <label id="mensagem_usuario">${mensagem.mensagem}</label>
+                                                    <label id="mensagem_usuario"><label>${mensagem.mensagem}</label></label>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <c:choose>
@@ -81,7 +81,7 @@
                                                             <img src="Imagens/user.png" class="circle mensagem">
                                                         </c:otherwise>
                                                     </c:choose>  
-                                                    <label id="mensagem_amigo" class="mensagem">${mensagem.mensagem}</label>
+                                                    <label id="mensagem_amigo">${mensagem.mensagem}</label>
                                                     <br>
                                                 </c:otherwise>
                                             </c:choose>

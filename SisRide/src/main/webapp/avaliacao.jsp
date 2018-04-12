@@ -20,7 +20,11 @@
         <!-- Imprimindo as viagens em que o usuário foi motorista -->
 
         <table width="100%">
-            <h4>Minhas caronas (motorista)</h4>
+
+            <h4><b>Minhas caronas (motorista)</b></h4>
+            <c:if test="${empty avaliacao_motorista}" >
+                <h5>Nenhuma carona disponível para avaliação</h5>
+            </c:if>
             <c:forEach var="viagem" items="${avaliacao_motorista}">
 
                 <tr>
@@ -54,14 +58,14 @@
                             <br>
                             <center>
                                 <button type="submit" class="waves-effect waves-light btn s12">
-                                     <i class="material-icons right">send</i>Avaliar passageiro</button>
+                                    <i class="material-icons right">send</i>Avaliar passageiro</button>
                                 <br><br>
 
                             </center>
                         </form><center>
                     <button class="waves-effect waves-light btn s12 cancelar"
                             onclick="cancela('${usuario.email}', '${viagem.codigo}')">
-                         <i class="material-icons right">cancel</i>
+                        <i class="material-icons right">cancel</i>
                         Cancelar avaliação</button>
                 </center>
             </td>
@@ -74,9 +78,15 @@
 
             <!-- Imprimindo as caronas em que o usuário foi passageiro-->
 
-            <h4>Minhas caronas (passageiro)</h4>
+            <h4><b>Minhas caronas (passageiro)</b></h4>
+
+            <c:if test="${empty avaliacao_passageiro}">
+                <h5>Nenhuma carona disponível para avaliação</h5>
+            </c:if>
         </td>
     </tr>
+
+
     <c:forEach var="viagem" items="${avaliacao_passageiro}">
 
         <tr>

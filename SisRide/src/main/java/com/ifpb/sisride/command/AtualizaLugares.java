@@ -10,14 +10,15 @@ import javax.servlet.http.HttpSession;
 
 public class AtualizaLugares {
 
-    public static void execute(HttpServletRequest request, String email) throws ServletException, SQLException,
+    public static void execute(HttpServletRequest request, String email) throws
+            ServletException, SQLException,
             ClassNotFoundException {
         HttpSession session = request.getSession();
 
         GerenciadorLugar gLugar = new GerenciadorLugar();
-
+        
+      
         List<Lugar> lugares = gLugar.buscaLugares(email);
         session.setAttribute("MeusLugares", lugares);
-        
     }
 }

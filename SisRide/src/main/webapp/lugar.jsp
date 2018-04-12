@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="CSS/app.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"/>
 
-        <title>SisRIde - Lugares</title>
+        <title>SisRide - Lugares</title>
     </head>
     <body>
 
@@ -22,52 +22,88 @@
 
         <table>
             <tr>
-                <td width="50%">
-            <center>    
-                <form method="post" action="front"  class="col s12 l4">
-                    <h4>Cadastrar lugar</h4><br>
-                    <div class="row">
-                        <div  class="input-field col l4  offset-l4">
+                <td width="40%">
+            <center>
+                <c:set value="false" var="atualizar" />
 
-                            <input type="text" name="nome" placeholder="Nome do lugar" class="validate"><br>
-                            <input type="number" name="numero" placeholder="Número" class="validate" min="0"><br>
-                            <input type="text" name="rua" placeholder="Rua" class="validate"><br>
-                            <input type="text" name="cidade" placeholder="Cidade" class="validate"><br>
-                            <input type="hidden" name="command" value="CadastroLugar"/>
-                            <input type="text" name="estado" placeholder="Estado" class="validate"><br>
-                            <textarea placeholder="Descrição do lugar" name="descricao" 
-                                      rows="5" class="validate materialize-textarea""></textarea><br><br>
-                            <button type="submit" class="waves-effect waves-light btn s12">Cadastrar</button>
+                <c:if test="${param.lugarAtualizado != null}">
+                    <c:forEach var="lugar" items="${MeusLugares}">
+                        <c:if test="${param.lugarAtualizado == lugar.identificacao}">
+                            <c:set var="atualizado" value="${lugar}" scope="page" />
+                            <c:set value="true" var="atualizar" />
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+
+                <c:choose>
+                    <c:when test="${atualizar eq 'true'}">
+                        <h4>Atualizar lugar</h4>
+                        <form method="post" action="front" class="col s12 l4">
+                            <fieldset class="campo">
+                                <div>
+                                    <input type="text" name="nome" placeholder="Nome do lugar" class="validate" value="${atualizado.nome}"><br>
+                                    <input type="number" name="numero" placeholder="Número" class="validate" min="0" value="${atualizado.numero}"><br>
+                                    <input type="text" name="rua" placeholder="Rua" class="validate" value="${atualizado.rua}"><br>
+                                    <input type="text" name="cidade" placeholder="Cidade" class="validate" value="${atualizado.cidade}"><br>
+                                    <input type="hidden" name="command" value="AtualizaLugar"/>
+                                    <input type="text" name="estado" placeholder="Estado" class="validate" value="${atualizado.estado}"><br>
+                                    <input type="hidden" name="email" value="${atualizado.emailUsuario}">
+                                    <input type="hidden" name="id" value="${atualizado.identificacao}"> 
+                                    <textarea placeholder="Descrição do lugar" name="descricao" 
+                                              rows="5" class="validate materialize-textarea">${atualizado.descricao}</textarea><br><br>
+                                    <button type="submit" class="waves-effect waves-light btn s12">Atualizar</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <div>
+                            <h4>Cadastrar lugar</h4><br>
+                            <form method="post" action="front"  class="col s12 l4">
+                                <fieldset class="campo">
+                                    <div>
+                                        <input type="text" name="nome" placeholder="Nome do lugar" class="validate"><br>
+                                        <input type="number" name="numero" placeholder="Número" class="validate" min="0"><br>
+                                        <input type="text" name="rua" placeholder="Rua" class="validate"><br>
+                                        <input type="text" name="cidade" placeholder="Cidade" class="validate"><br>
+                                        <input type="hidden" name="command" value="CadastroLugar"/>
+                                        <input type="text" name="estado" placeholder="Estado" class="validate"><br>
+                                        <textarea placeholder="Descrição do lugar" name="descricao" 
+                                                  rows="5" class="validate materialize-textarea""></textarea><br><br>
+                                        <button type="submit" class="waves-effect waves-light btn s12">Cadastrar</button>
+                                    </div>
+                                </fieldset>
+                            </form>
+
                         </div>
-                    </div>
-                </form>
+
+                    </c:otherwise>
+                </c:choose>
+
+
             </center>
         </td>
-        <td width="50%">
+        <td width="5%"></td>
+        <td width="45%">
             <h4 align="top">Lugares cadastrados por mim </h4>
             <br>
-            <table class="highlight bordered centered responsive-table">
-                <tr>
-                    <td><b>Nome</b></td>
-                    <td><b>Descrição</b></td>
-                </tr>
-                <c:forEach var="lugar" items="${MeusLugares}">
-                    <tr onclick="armazenarId(this.id)" id="${lugar.identificacao}"> 
-                        <td> ${lugar.nome}</td>
-                        <td>${lugar.descricao}</td>
-                    </tr>
-                </c:forEach>
-            </table><br>
-        <center>
-            <div>
+            <c:if test="${empty MeusLugares}">
+                Você não cadastrou nenhum lugar
+            </c:if>
+            <c:forEach var="lugar" items="${MeusLugares}">
+                <div class="campo">
+                    <h5><b>${lugar.nome}</b></h5>
+                    ${lugar.descricao}<br>
+                    Rua ${lugar.rua}, ${lugar.cidade}, ${lugar.estado}
+                    <br>
+                    <a href="front?command=MeusLugares&lugarAtualizado=${lugar.identificacao}"
+                       class="waves-effect waves-light btn s12 alinhado">Atualizar</a>
+                </div>
+                <br>
+            </c:forEach>
 
-                <button class="waves-effect waves-light btn s12">Atualizar um lugar</button>
-                <label>       </label>
-                <button class="waves-effect waves-light btn s12" onclick="deletarLugar()">Deletar lugar</button>
-            </div>
-        </center>
-    </td>
-</tr>
+        </td>
+    </tr>
 </table>
 </body>
 
@@ -78,16 +114,19 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     var erro = "${param.erroCadastroLugar}";
-    if(erro == "1"){
-        swal("Erro!","Preencha todos os campos","error");
+    if (erro == "1") {
+        swal("Erro!", "Preencha todos os campos", "error");
     }
-    
+
     var mensagem = "${param.mensagem}";
-    if(mensagem == "1"){
-        swal("Parabéns!","O lugar foi cadastrado com sucesso","success");
+    if (mensagem == "1") {
+        swal("Parabéns!", "O lugar foi cadastrado com sucesso", "success");
     }
-    if(mensagem == "2"){
-        swal("OK!","O lugar foi deletado com sucesso","success");
+    if (mensagem == "2") {
+        swal("OK!", "O lugar foi deletado com sucesso", "success");
+    }
+    if(mensagem == "3"){
+        swal("OK!","O lugar foi atualizado com sucesso","success");
     }
 </script>
 </html>

@@ -75,9 +75,12 @@ public class LugarDao implements Dao<Lugar> {
 
     @Override
     public boolean deletar(Object obj) throws SQLException {
-        String sql = "DELETE FROM lugar WHERE identificacao = ?";
+        String sql = "DELETE FROM Viagem WHERE partida = ? OR destino = ?;"
+                + "DELETE FROM lugar WHERE identificacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, (int) obj);
+        stmt.setInt(2, (int) obj);
+        stmt.setInt(3, (int) obj);
         stmt.execute();
         stmt.close();
         return true;
@@ -109,7 +112,7 @@ public class LugarDao implements Dao<Lugar> {
         }
         result.close();
         stmt.close();
-        
+
         return lugares;
     }
 
@@ -136,7 +139,7 @@ public class LugarDao implements Dao<Lugar> {
         }
         result.close();
         stmt.close();
-        
+
         return lista;
     }
 
@@ -158,10 +161,10 @@ public class LugarDao implements Dao<Lugar> {
             l.setNome(result.getString("nome"));
             l.setNumero(result.getInt("numero"));
             l.setRua(result.getString("rua"));
-            
+
             result.close();
             stmt.close();
-            
+
             return l;
         }
         return null;

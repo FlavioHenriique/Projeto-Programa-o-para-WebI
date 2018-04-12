@@ -8,6 +8,8 @@ com/ifpb/sisride/factory/ConFactory.class
 com/ifpb/sisride/factory/DaoFactory.class
 com/ifpb/sisride/command/MeusLugares.class
 com/ifpb/sisride/command/Login.class
+com/ifpb/sisride/modelo/Mensagem.class
+com/ifpb/sisride/command/DivulgarCarona.class
 com/ifpb/sisride/command/AtualizaUsuario.class
 com/ifpb/sisride/command/DeletaLugar.class
 com/ifpb/sisride/dao/Dao.class
@@ -15,6 +17,7 @@ com/ifpb/sisride/exception/AutenticacaoException.class
 com/ifpb/sisride/command/SolicitaVaga.class
 com/ifpb/sisride/controle/GerenciadorSolicitacao.class
 com/ifpb/sisride/command/AtualizarAvaliacao.class
+com/ifpb/sisride/command/AtualizaLugar.class
 com/ifpb/sisride/modelo/Solicitacao.class
 com/ifpb/sisride/command/ImprimeFoto.class
 com/ifpb/sisride/command/Avaliacoes.class
@@ -23,10 +26,13 @@ com/ifpb/sisride/command/Sair.class
 com/ifpb/sisride/exception/CadastroException.class
 com/ifpb/sisride/command/FotoUsuario.class
 com/ifpb/sisride/command/RecusarSolicitacao.class
+com/ifpb/sisride/command/EnviarMensagem.class
 com/ifpb/sisride/command/CancelaSolicitacao.class
 com/ifpb/sisride/command/FotoSolicitacoes.class
+com/ifpb/sisride/command/SoElas.class
 com/ifpb/sisride/controle/GerenciadorUsuario.class
 com/ifpb/sisride/command/CadastroUsuario.class
+com/ifpb/sisride/command/AtualizaViagem.class
 com/ifpb/sisride/command/ListarSolicitacoes.class
 com/ifpb/sisride/controle/GerenciadorViagem.class
 com/ifpb/sisride/command/CancelaAvaliacaoPassageiro.class
