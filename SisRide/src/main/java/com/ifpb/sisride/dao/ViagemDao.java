@@ -496,7 +496,7 @@ public class ViagemDao implements Dao<Viagem> {
             Logger.getLogger(ViagemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT codigo FROM viagem WHERE soElas = true";
+        String sql = "SELECT codigo FROM viagem WHERE soElas = true ORDER BY partida";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 

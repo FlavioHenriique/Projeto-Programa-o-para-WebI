@@ -98,6 +98,8 @@
                     <br>
                     <a href="front?command=MeusLugares&lugarAtualizado=${lugar.identificacao}"
                        class="waves-effect waves-light btn s12 alinhado">Atualizar</a>
+                         <a href="front?command=DeletaLugar&lugar=${lugar.identificacao}"
+                       class="waves-effect waves-light btn s12 alinhado cancelar">Deletar</a>
                 </div>
                 <br>
             </c:forEach>

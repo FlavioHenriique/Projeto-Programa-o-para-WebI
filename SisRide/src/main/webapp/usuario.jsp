@@ -27,7 +27,7 @@
                                 <img src="front?command=ImprimeFoto&avaliador=${buscado.email}" class="circle">
                             </c:when>
                             <c:otherwise>
-                                <img src="Imagens/buscado.png" class="circle">
+                                <img src="Imagens/user.png" class="circle">
                             </c:otherwise>
                         </c:choose>
                         <label id="nome">${buscado.nome}</label><br><br>

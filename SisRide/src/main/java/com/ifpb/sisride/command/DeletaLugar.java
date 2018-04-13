@@ -18,7 +18,7 @@ public class DeletaLugar implements Command{
         
         try {
             GerenciadorLugar gerenciador = new GerenciadorLugar();
-            gerenciador.removeLugar(Integer.parseInt(request.getParameter("IdLugar")));
+            gerenciador.removeLugar(Integer.parseInt(request.getParameter("lugar")));
             HttpSession session = request.getSession();
             Usuario u = (Usuario) session.getAttribute("usuario");
             AtualizaLugares.execute(request,u.getEmail());

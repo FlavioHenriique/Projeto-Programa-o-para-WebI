@@ -8,17 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LugarDao implements Dao<Lugar> {
 
-    private final Connection con;
+    private Connection con;
 
     public LugarDao() throws ClassNotFoundException, SQLException {
-        con = ConFactory.getConnection();
+
     }
 
     @Override
     public boolean salvar(Lugar obj) throws SQLException {
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "INSERT INTO LUGAR (descricao,nome,rua,cidade,estado,"
                 + "numero,emailUsuario) values (?,?,?,?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -29,10 +37,20 @@ public class LugarDao implements Dao<Lugar> {
         stmt.setString(5, obj.getEstado());
         stmt.setInt(6, obj.getNumero());
         stmt.setString(7, obj.getEmailUsuario());
-        return stmt.execute();
+        stmt.execute();
+        stmt.close();
+        con.close();
+        return true;
     }
 
     public List<Lugar> buscarLugares() throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "SELECT * FROM LUGAR ";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet resultado = stmt.executeQuery();
@@ -49,12 +67,19 @@ public class LugarDao implements Dao<Lugar> {
 
         resultado.close();
         stmt.close();
+        con.close();
 
         return lista;
     }
 
     @Override
     public boolean atualizar(Lugar obj) throws SQLException {
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         if (buscar(obj.getIdentificacao()) != null) {
             String sql = "UPDATE LUGAR set descricao= ?, nome = ?, rua = ?, "
                     + "cidade=?,estado=?,numero = ?, emailusuario = ? WHERE identificacao=?";
@@ -67,14 +92,24 @@ public class LugarDao implements Dao<Lugar> {
             stmt.setInt(6, obj.getNumero());
             stmt.setString(7, obj.getEmailUsuario());
             stmt.setInt(8, obj.getIdentificacao());
-            return stmt.execute();
+            stmt.execute();
+            stmt.close();
+            con.close();
+            return true;
         } else {
+
             return false;
         }
     }
 
     @Override
     public boolean deletar(Object obj) throws SQLException {
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql = "DELETE FROM Viagem WHERE partida = ? OR destino = ?;"
                 + "DELETE FROM lugar WHERE identificacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -83,10 +118,18 @@ public class LugarDao implements Dao<Lugar> {
         stmt.setInt(3, (int) obj);
         stmt.execute();
         stmt.close();
+        con.close();
+
         return true;
     }
 
     public List<Lugar> buscarMeusLugares(String email) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT * FROM lugar WHERE emailUsuario = ? ORDER BY nome";
 
@@ -112,11 +155,18 @@ public class LugarDao implements Dao<Lugar> {
         }
         result.close();
         stmt.close();
+        con.close();
 
         return lugares;
     }
 
     public List<Lugar> buscaLugares(String email) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT * FROM Lugar WHERE EmailUsuario = ? ORDER BY nome";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -139,12 +189,19 @@ public class LugarDao implements Dao<Lugar> {
         }
         result.close();
         stmt.close();
+        con.close();
 
         return lista;
     }
 
     @Override
     public Lugar buscar(Object obj) throws SQLException {
+
+        try {
+            con = ConFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String sql = "SELECT * FROM Lugar WHERE identificacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
@@ -164,9 +221,13 @@ public class LugarDao implements Dao<Lugar> {
 
             result.close();
             stmt.close();
+            con.close();
 
             return l;
         }
+        stmt.close();
+        con.close();
+
         return null;
     }
 

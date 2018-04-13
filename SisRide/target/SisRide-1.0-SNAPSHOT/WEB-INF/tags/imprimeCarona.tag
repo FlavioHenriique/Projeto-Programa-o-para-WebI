@@ -5,7 +5,7 @@
     <h5><b>${viagem.partida.nome} - ${viagem.destino.nome}</b></h5>
 
     <br>Data da viagem: ${viagem.data}, às ${viagem.hora} horas
-    <br> Há <b>${viagem.vagas} vagas</b> disponíveis
+    <br> Há <b>${viagem.vagas} vagas</b> disponíveis com o valor de R$ ${viagem.valor}
     <br>O nível de conversa desejado é ${viagem.conversa},
     a música desejada é ${viagem.musica},
     <c:choose>
@@ -33,5 +33,4 @@
             sem ar-condicionado.
         </c:otherwise>
     </c:choose>
-    
        <br>
