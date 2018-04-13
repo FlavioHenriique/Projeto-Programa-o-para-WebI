@@ -46,9 +46,10 @@ CREATE TABLE VIAGEM(
    Partida int,
    soelas boolean,
    divulgada boolean,
+	codcarro int,
    FOREIGN KEY (Motorista) REFERENCES Usuario(Email),
-   FOREIGN KEY (Destino) REFERENCES Lugar(Identificacao),
-   FOREIGN KEY (Partida) REFERENCES Lugar(Identificacao),
+   FOREIGN KEY (Destino) REFERENCES Lugar(Identificacao) ON DELETE CASCADE,
+   FOREIGN KEY (Partida) REFERENCES Lugar(Identificacao) ON DELETE CASCADE,
    FOREIGN KEY (CodCarro) REFERENCES Carro(Codigo)
 );
 
