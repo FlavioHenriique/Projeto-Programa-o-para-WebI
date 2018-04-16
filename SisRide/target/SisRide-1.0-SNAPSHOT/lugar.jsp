@@ -100,6 +100,7 @@
                        class="waves-effect waves-light btn s12 alinhado">Atualizar</a>
                          <a href="front?command=DeletaLugar&lugar=${lugar.identificacao}"
                        class="waves-effect waves-light btn s12 alinhado cancelar">Deletar</a>
+                       <br>
                 </div>
                 <br>
             </c:forEach>

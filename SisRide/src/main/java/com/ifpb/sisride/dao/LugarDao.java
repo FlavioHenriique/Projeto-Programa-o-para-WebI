@@ -74,13 +74,15 @@ public class LugarDao implements Dao<Lugar> {
 
     @Override
     public boolean atualizar(Lugar obj) throws SQLException {
-        try {
-            con = ConFactory.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         if (buscar(obj.getIdentificacao()) != null) {
+
+            try {
+                con = ConFactory.getConnection();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LugarDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String sql = "UPDATE LUGAR set descricao= ?, nome = ?, rua = ?, "
                     + "cidade=?,estado=?,numero = ?, emailusuario = ? WHERE identificacao=?";
             PreparedStatement stmt = con.prepareStatement(sql);

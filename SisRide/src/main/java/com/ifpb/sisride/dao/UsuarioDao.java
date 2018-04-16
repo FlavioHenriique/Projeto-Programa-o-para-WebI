@@ -40,7 +40,7 @@ public class UsuarioDao implements Dao<Usuario> {
         stmt.setString(6, obj.getCidade());
         stmt.setString(7, obj.getSexo());
 
-        if (obj.getFoto() != null) {
+        if (obj.getFoto() instanceof FileInputStream) {
            this.setFoto(obj.getEmail(), obj.getFoto());
         }
 
